@@ -77,7 +77,7 @@ for p in pages:
     if 'data-lightbox' in text:assert 'class="lightbox-original"' in text,f'{p}: missing full-size image action'
 assert not list(ROOT.rglob('*.docx')) and not list(ROOT.rglob('*.pdf')),'CV/reference documents should not be committed'
 manifest=json.loads((ROOT/'assets/manifest.json').read_text())
-assert len(manifest)==29
+assert len(manifest)==32
 assert len({a['id'] for a in manifest})==len(manifest)
 for asset in manifest:
     image=ROOT/asset['file']
@@ -88,7 +88,7 @@ for asset in manifest:
     assert hashlib.sha256(image.read_bytes()).hexdigest()==asset['sha256'],f'Asset checksum mismatch: {asset["id"]}'
     assert len(asset['pixel_sha256'])==64 and len(asset['source_sha256'])==64
     assert any(asset['file'] in page.path.read_text(encoding='utf-8') for page in pages.values()),f'Unused asset: {asset["id"]}'
-assert sum(a['bytes'] for a in manifest)<12_000_000
+assert sum(a['bytes'] for a in manifest)<16_000_000
 assert {p.relative_to(ROOT).as_posix() for p in (ROOT/'assets/projects').iterdir()}=={a['file'] for a in manifest},'Unexpected or obsolete image derivative remains'
 print(f'Asset manifest: {len(manifest)} WebP files; {sum(a["bytes"] for a in manifest):,} bytes; image dimensions, paths, budget and usage passed.')
 def luminance(hex):

@@ -12,6 +12,8 @@ root=Path(__file__).resolve().parent
 manifest=json.loads((root/'assets/manifest.json').read_text())
 def digest(data):return hashlib.sha256(data).hexdigest()
 with zipfile.ZipFile(args.source_zip) as archive:
+    supplied_images={name for name in archive.namelist() if name.lower().endswith(('.png','.jpg','.jpeg'))}
+    assert supplied_images=={item['source'] for item in manifest if '#page=' not in item['source']},'A supplied ZIP image is missing'
     for item in manifest:
         source=item['source']
         if '#page=11;embedded=' in source:
@@ -28,4 +30,4 @@ with zipfile.ZipFile(args.source_zip) as archive:
         assert digest(data)==item['source_sha256']
         assert digest(original.tobytes())==item['pixel_sha256']
         assert digest(current_path.read_bytes())==item['sha256']
-print(f'PASS: {len(manifest)}/29 originals match native dimensions and every decoded pixel; 25 distinct original sources; no masks, blur, crops or reconstruction.')
+print(f'PASS: {len(manifest)} original asset slots match native dimensions and every decoded pixel; all {len(supplied_images)} ZIP images represented, plus the PDF AI image; no masks, blur, crops or reconstruction.')

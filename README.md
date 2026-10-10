@@ -29,7 +29,7 @@ Existing branch-based GitHub Pages publishing remains unchanged.
 - `ui.js`: menu, project filters and keyboard-operable native image lightbox, independent of the globe/CDN.
 - `projects.html`: twenty distinct product areas and examples.
 - `case-studies/`: twenty directly addressable pages, preserving all twelve original routes.
-- `assets/`: twenty-nine owner-approved original screenshots, losslessly encoded as WebP with a provenance manifest.
+- `assets/`: thirty-two owner-approved original screenshots, losslessly encoded as WebP with a provenance manifest.
 - `ASSET-MAPPING.json`: project/image assignments and excluded sources.
 - `CONTENT-REVIEW.md`: source decisions, unresolved evidence and privacy treatment.
 
@@ -49,4 +49,6 @@ PR #1 is for review only. Do not merge or deploy until the owner approves. The c
 
 ## Original image verification (Phase 3)
 
-`python verify_original_assets.py --source-zip "PATH/portfolio_v2_complete_inputs.zip"` verifies all 29 asset slots against the original ZIP, including the page-11 embedded PDF image. This optional local provenance check needs Pillow and pypdf; the source ZIP remains outside the repository. The standard CI check uses only Python's standard library and verifies asset checksums, native dimensions, metadata and links. Full-resolution lossless images total about 9.13 MB; image loading is lazy except the case-study lead image. Shared SJI composites account for repeated sources, with explicit contextual captions. The current tree contains no masked derivative.
+`python verify_original_assets.py --source-zip "PATH/portfolio_v2_complete_inputs.zip"` verifies all 32 asset slots against the original ZIP, including the page-11 embedded PDF image. This optional local provenance check needs Pillow and pypdf; the source ZIP remains outside the repository. The standard CI check uses only Python's standard library and verifies asset checksums, native dimensions, metadata and links. Full-resolution lossless images total about 12.28 MB; image loading is lazy except the case-study lead image. Shared SJI composites account for repeated sources, with explicit contextual captions. The current tree contains no masked derivative.
+
+All 27 raster images in the original ZIP are now represented without masking, plus the original page-11 AI image. There are 32 asset slots because original SJI composites are reused across related product contexts. The extra DeltaFX homepage joins its website gallery; the two wallet/Finanpay samples remain a separate supplementary gallery.
