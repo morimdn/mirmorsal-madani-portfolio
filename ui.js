@@ -28,6 +28,12 @@ if (nav && typeof requestAnimationFrame === 'function' && document.querySelector
     sections.forEach((section, index) => {
       if (section && section.getBoundingClientRect().top <= 140) current = index;
     });
+    // The last section may be too short to reach the header at the page bottom.
+    const scroller = document.scrollingElement;
+    if (scroller && scroller.scrollHeight > scroller.clientHeight &&
+        scroller.scrollTop + scroller.clientHeight >= scroller.scrollHeight - 2) {
+      current = sections.length - 1;
+    }
     if (current === activeIndex) return;
     activeIndex = current;
     links.forEach((link, index) => {

@@ -751,7 +751,7 @@ p {
   gap: var(--space-6);
 }
 
-.mobile-gallery .gallery-item img {
+.mobile-gallery .gallery-item.portrait img {
   height: 520px;
 }
 
@@ -1420,7 +1420,7 @@ p {
     grid-template-columns: 1fr;
   }
 
-  .mobile-gallery .gallery-item img {
+  .mobile-gallery .gallery-item.portrait img {
     height: min(70dvh, 640px);
   }
   .project-grid,.services-grid,.cap-grid {
