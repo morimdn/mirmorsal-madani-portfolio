@@ -5,7 +5,7 @@ HTML structure, factual copy, metadata, routes, contacts, original assets and Th
 
 ## Findings before implementation
 
-- High: collection-page gallery notes/captions inherited pale dark-theme text against the light background. Explicit light-theme text now fixes contrast.
+- High: no confirmed route, approved-content or original-asset blocker in the baseline checks.
 - Medium: navigation was approximately 13px; project descriptions approximately 14px; several category, role and image labels were 10–12px. Shared readable type tokens now govern these components.
 - Medium: Contact appeared active regardless of reading position. Homepage section navigation now identifies the current section and supports hover/focus feedback.
 - Medium: small card actions, inconsistent heading sizes and weak interactive outlines. Main controls now have 44px minimum heights, consistent card headings and contrasting boundaries/focus indicators.
@@ -17,7 +17,7 @@ HTML structure, factual copy, metadata, routes, contacts, original assets and Th
 - Inter remains the preferred typeface. Hero H1 retains its original desktop/mobile sizing. Section headings use a 32–52px fluid scale; card/service headings 22–28px; body 16–18px; card copy 15.5px; navigation 14px; supporting labels 12–14px.
 - Reusable 4/8px spacing steps, fluid gutters, consistent card/grid padding, calmer section rhythm and readable metadata.
 - Native screenshots remain unchanged and uncropped, with scale-down/contain presentation and intrinsic dimensions. Portrait/composite galleries and full-size viewing remain available.
-- Navy, off-white, blue and restrained gold remain. Light-section captions use dark muted text. Focus colors account for both light cards and dark gallery surfaces. Reduced motion, pause control and native dialog semantics remain.
+- Navy, off-white, blue and restrained gold remain. Contextual tokens support captions in light sections. Browser inspection confirmed that the existing collection-page supplemental gallery is on the dark body background and correctly retains pale text; this was not a baseline contrast failure. Focus colors account for both light cards and dark gallery surfaces. Reduced motion, pause control and native dialog semantics remain; explicit Tab/Shift+Tab boundary wrapping supplements the dialog.
 - Mobile navigation begins at 900px to prevent the enlarged desktop navigation colliding with the brand at tablet widths. Its overlay is positioned below the actual header height.
 - No framework, dependency, image conversion, content rewrite, route change or additional publication directory.
 
