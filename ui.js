@@ -12,8 +12,31 @@ if (menu && nav) {
   nav.addEventListener('click', event => { if (event.target.closest('a')) closeMenu(); });
   document.addEventListener('keydown', event => { if (event.key === 'Escape' && nav.classList.contains('is-open')) { closeMenu(); menu.focus(); } });
   document.addEventListener('click', event => { if (!event.target.closest('.site-header')) closeMenu(); });
-  const desktop = matchMedia('(min-width: 761px)');
+  const desktop = matchMedia('(min-width: 901px)');
   desktop.addEventListener('change', () => { if (desktop.matches) closeMenu(); });
+}
+
+// Indicate the section being read without making a non-current Contact link active.
+// Keep ordinary anchor navigation working when IntersectionObserver is unavailable.
+if (nav && typeof IntersectionObserver === 'function' && document.querySelector('.hero')) {
+  const links = [...nav.querySelectorAll('a[href^="#"]')];
+  const sections = links.map(link => document.querySelector(link.getAttribute('href')));
+  const markCurrent = () => {
+    let current = 0;
+    sections.forEach((section, index) => {
+      if (section && section.getBoundingClientRect().top <= 140) current = index;
+    });
+    links.forEach((link, index) => {
+      if (index === current) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  };
+  const observer = new IntersectionObserver(markCurrent, {rootMargin: '-100px 0px -65% 0px'});
+  // The body (#home) spans the entire document; observe the hero for its boundaries.
+  sections.forEach((section, index) => {
+    if (section) observer.observe(index === 0 ? document.querySelector('.hero') : section);
+  });
+  markCurrent();
 }
 const filters = document.querySelector('.filters');
 if (filters) {

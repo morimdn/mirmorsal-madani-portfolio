@@ -11,7 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Validate content, metadata and local links
-        run: python3 check_site.py
+        run: |
+          python3 check_site.py
+          python3 check_ui.py
       - name: Check JavaScript syntax and UI interactions
         run: |
           node --check main.js

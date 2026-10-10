@@ -35,6 +35,26 @@ for (const button of buttons){
 }
 console.log('PASS: menu open/close, Escape + focus return, navigation close, outside close, breakpoint close; all six project filters and live result count.');
 
+// Scrollspy updates exactly one current section and excludes cross-page navigation.
+const navLinks = ['#home','#about','#projects','#contact'].map(href => new Element({href}));
+navLinks.forEach(link => {link.removeAttribute=key=>delete link.attrs[key];});
+nav.querySelectorAll=()=>navLinks;
+const hero=new Element();
+const sections=navLinks.map((link,index)=>({top:index*1000,getBoundingClientRect(){return {top:this.top};}}));
+let updateSection;
+const observer=function(callback){updateSection=callback;this.observe=()=>{};};
+const scrollDocument={...document,querySelector:selector=>selector==='.hero'?hero:selector.startsWith('#')?sections[navLinks.findIndex(link=>link.getAttribute('href')===selector)]:nodes[selector]};
+vm.runInNewContext(fs.readFileSync(__dirname+'/ui.js','utf8'),{document:scrollDocument,matchMedia:()=>desktop,IntersectionObserver:observer});
+assert.equal(navLinks[0].getAttribute('aria-current'),'location');
+sections[1].top=-10;sections[2].top=100;
+updateSection();
+assert.equal(navLinks[2].getAttribute('aria-current'),'location');
+assert.equal(navLinks.filter(link=>link.getAttribute('aria-current')).length,1);
+sections[3].top=120;updateSection();
+assert.equal(navLinks[3].getAttribute('aria-current'),'location');
+assert.equal(navLinks.filter(link=>link.getAttribute('aria-current')).length,1);
+console.log('PASS: navigation current-section state follows reading position without multiple active links.');
+
 // Check image selection, keyboard cycling, close controls and opener focus.
 // Native browser focus containment and Escape behavior require browser QA.
 for (const numberOfImages of [1,3]) {
