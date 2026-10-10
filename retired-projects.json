@@ -1,0 +1,48 @@
+[
+  {
+    "slug": "sales-crm",
+    "title": "Sales CRM",
+    "category": "Enterprise",
+    "cover": null,
+    "role": "Product Management",
+    "summary": "Sales relationship management within TopFast’s enterprise product work.",
+    "images": [],
+    "company": "Top Fast Technology"
+  },
+  {
+    "slug": "trading-plugins",
+    "title": "MT4/MT5 Trading Plugins",
+    "category": "FinTech",
+    "cover": null,
+    "role": "Product Strategy & Roadmap Prioritization",
+    "summary": "Trading-platform tools for brokerage execution rules and operational control.",
+    "images": [],
+    "company": "Top Fast Technology"
+  },
+  {
+    "slug": "sji-portals",
+    "title": "MySJI & Internal Portals",
+    "category": "Enterprise",
+    "cover": "sji-onboarding",
+    "role": "SJI Enterprise Product Context",
+    "summary": "Internal service portals connecting employees with organizational tools and workflows.",
+    "images": [
+      "sji-onboarding",
+      "sji-internal-portal",
+      "mysji-portal"
+    ],
+    "company": "Shokouhejavid Iranian (SJI)"
+  },
+  {
+    "slug": "culture-knowledge",
+    "title": "Culture & Knowledge",
+    "category": "Enterprise",
+    "cover": "culture-knowledge",
+    "role": "Internal Digital Product Work",
+    "summary": "An internal product for cultural content, learning and knowledge-sharing.",
+    "images": [
+      "culture-knowledge"
+    ],
+    "company": "SJI Team Project"
+  }
+]

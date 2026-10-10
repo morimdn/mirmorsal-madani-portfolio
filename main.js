@@ -12,6 +12,8 @@ let activeTime = 0;
 let lastTime = 0;
 let pointerX = 0;
 let pointerY = 0;
+// Tablets and coarse pointers retain the sphere with a smaller rendering budget.
+const compactGlobe = innerWidth < 1050 || matchMedia('(pointer: coarse)').matches;
 
 async function initGlobe() {
   const THREE = await import('https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js');
@@ -21,7 +23,7 @@ async function initGlobe() {
   renderer = new THREE.WebGLRenderer({canvas, antialias: true, alpha: true});
   const group = new THREE.Group();
   scene.add(group);
-  const geometry = new THREE.IcosahedronGeometry(1.8, innerWidth < 761 ? 4 : 7);
+  const geometry = new THREE.IcosahedronGeometry(1.8, compactGlobe ? 4 : 7);
   const material = new THREE.MeshStandardMaterial({color:0x2f7fd3,roughness:0.42,metalness:0.7,emissive:0x65d8c2,emissiveIntensity:0.12,wireframe:true});
   group.add(new THREE.Mesh(geometry, material));
   const ringMaterial = new THREE.MeshBasicMaterial({color:0xC8A96B,transparent:true,opacity:0.38});
@@ -32,7 +34,7 @@ async function initGlobe() {
     group.add(ring);
   }
   const particleGeometry = new THREE.BufferGeometry();
-  const particleCount = innerWidth < 761 ? 120 : 320;
+  const particleCount = compactGlobe ? 120 : 320;
   const positions = new Float32Array(particleCount*3);
   for(let i=0;i<particleCount;i+=1){positions[i*3]=(Math.random()-0.5)*18;positions[i*3+1]=(Math.random()-0.5)*12;positions[i*3+2]=(Math.random()-0.5)*12;}
   particleGeometry.setAttribute('position',new THREE.BufferAttribute(positions,3));
@@ -50,7 +52,7 @@ async function initGlobe() {
   function resize(){
     const {width,height}=container.getBoundingClientRect();
     camera.aspect=width/height;camera.updateProjectionMatrix();
-    renderer.setPixelRatio(Math.min(devicePixelRatio,innerWidth<761?1.25:1.5));
+    renderer.setPixelRatio(Math.min(devicePixelRatio,compactGlobe?1.25:1.5));
     renderer.setSize(width,height,false);draw();
   }
   function animate(time){
@@ -71,7 +73,7 @@ async function initGlobe() {
   toggle.addEventListener('click',()=>{paused=!paused;sync();});
   reducedMotion.addEventListener('change',event=>{paused=event.matches;pointerX=0;pointerY=0;sync();});
   container.addEventListener('pointermove',event=>{
-    if(paused||reducedMotion.matches)return;
+    if(paused||reducedMotion.matches||event.pointerType==='touch')return;
     const rect=container.getBoundingClientRect();
     pointerX=((event.clientX-rect.left)/rect.width-0.5)*2;
     pointerY=((event.clientY-rect.top)/rect.height-0.5)*2;

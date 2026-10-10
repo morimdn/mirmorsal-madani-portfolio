@@ -28,8 +28,8 @@ The source documents are not published in the repository.
 ## Site structure
 
 - `index.html`: positioning, experience, six selected products, expertise, research, education and contact.
-- `projects.html`: seventeen product areas with category filters.
-- `case-studies/`: seventeen case routes; substantial cases for documented major products and shorter factual overviews for less-documented work.
+- `projects.html`: thirteen product areas with category filters.
+- `case-studies/`: thirteen case routes; substantial cases for documented major products and shorter factual overviews for less-documented work.
 - `styles.css`: the approved navy/light gallery design and responsive layouts.
 - `main.js`: the unchanged Three.js globe and motion controls.
 - `ui.js`: navigation, filters and accessible native image dialogs with full-size links.
