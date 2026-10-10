@@ -17,25 +17,29 @@ if (menu && nav) {
 }
 
 // Indicate the section being read without making a non-current Contact link active.
-// Keep ordinary anchor navigation working when IntersectionObserver is unavailable.
-if (nav && typeof IntersectionObserver === 'function' && document.querySelector('.hero')) {
+// Track the sticky-header reading position, including the end of smooth scrolling.
+if (nav && typeof requestAnimationFrame === 'function' && document.querySelector('.hero')) {
   const links = [...nav.querySelectorAll('a[href^="#"]')];
   const sections = links.map(link => document.querySelector(link.getAttribute('href')));
+  let activeIndex = -1;
+  let pending = false;
   const markCurrent = () => {
     let current = 0;
     sections.forEach((section, index) => {
       if (section && section.getBoundingClientRect().top <= 140) current = index;
     });
+    if (current === activeIndex) return;
+    activeIndex = current;
     links.forEach((link, index) => {
       if (index === current) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
     });
   };
-  const observer = new IntersectionObserver(markCurrent, {rootMargin: '-100px 0px -65% 0px'});
-  // The body (#home) spans the entire document; observe the hero for its boundaries.
-  sections.forEach((section, index) => {
-    if (section) observer.observe(index === 0 ? document.querySelector('.hero') : section);
-  });
+  document.addEventListener('scroll', () => {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(() => { markCurrent(); pending = false; });
+  }, {passive: true});
   markCurrent();
 }
 const filters = document.querySelector('.filters');

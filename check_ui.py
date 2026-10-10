@@ -51,7 +51,7 @@ assert ('base', '.filter:not([aria-pressed=true]):hover') in rules
 root = Path(__file__).parent
 for page in [root/'index.html', root/'projects.html', *sorted((root/'case-studies').glob('*.html'))]:
     html = page.read_text(encoding='utf-8')
-    assert 'styles.css?v=4-20261010.1' in html and 'ui.js?v=4-20261010.1' in html, page
+    assert 'styles.css?v=4-20261010.2' in html and 'ui.js?v=4-20261010.2' in html, page
 
 def luminance(color):
     rgb = [int(color[i:i+2],16)/255 for i in (1,3,5)]
