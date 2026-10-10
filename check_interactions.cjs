@@ -11,8 +11,9 @@ class Element {
   get classList(){return {add:key=>this.classes.add(key),remove:key=>this.classes.delete(key),contains:key=>this.classes.has(key),toggle:(key,on)=>on?this.classes.add(key):this.classes.delete(key)};}
 }
 const menu=new Element({'aria-expanded':'false'}),nav=new Element(),filters=new Element(),count=new Element();
-const buttons=['All','FinTech','Enterprise','AI'].map(category=>{const element=new Element();element.dataset.filter=category;return element;});
-const cards=['FinTech','FinTech','FinTech','FinTech','FinTech','Enterprise','AI','FinTech','Enterprise','Enterprise','FinTech','FinTech'].map(category=>{const element=new Element();element.dataset.category=category;return element;});
+const categories=['All','FinTech','Enterprise','AI','Consumer','Websites'];
+const buttons=categories.map(category=>{const element=new Element();element.dataset.filter=category;return element;});
+const cards=['FinTech','FinTech','FinTech','FinTech','FinTech','Enterprise','AI','FinTech','Enterprise','Enterprise','FinTech','FinTech','Enterprise','Enterprise','Enterprise','Enterprise','Consumer','Enterprise','Websites','Websites'].map(category=>{const element=new Element();element.dataset.category=category;return element;});
 filters.querySelectorAll=()=>buttons;
 const nodes={'.menu-toggle':menu,'.nav-links':nav,'.filters':filters,'.project-count':count,'.site-header':new Element()};
 const document={listeners:{},querySelector:selector=>nodes[selector],querySelectorAll:()=>cards,addEventListener(type,fn){this.listeners[type]=fn;}};
@@ -32,4 +33,43 @@ for (const button of buttons){
   assert.equal(button.getAttribute('aria-pressed'),'true');
   assert.equal(buttons.filter(item=>item.getAttribute('aria-pressed')==='true').length,1);
 }
-console.log('PASS: menu open/close, Escape + focus return, navigation close, outside close, breakpoint close; all four project filters and live result count.');
+console.log('PASS: menu open/close, Escape + focus return, navigation close, outside close, breakpoint close; all six project filters and live result count.');
+
+// Check image selection, keyboard cycling, close controls and opener focus.
+// Native browser focus containment and Escape behavior require browser QA.
+for (const numberOfImages of [1,3]) {
+  const modal=new Element();
+  const children=Object.fromEntries(['image','caption','count','close','prev','next'].map(key=>['.lightbox-'+key,new Element()]));
+  children['.lightbox-image'].removeAttribute=function(key){delete this[key];};
+  modal.querySelector=key=>children[key];
+  modal.showModal=()=>{modal.open=true;};
+  modal.close=()=>{modal.open=false;modal.listeners.close();};
+  modal.getBoundingClientRect=()=>({left:10,right:100,top:10,bottom:100});
+  const links=Array.from({length:numberOfImages},(_,index)=>{
+    const link=new Element({href:`image-${index}.webp`});
+    link.dataset.caption=`Caption ${index}`;
+    link.querySelector=()=>({alt:`Alt ${index}`});return link;
+  });
+  const galleryDocument={querySelector:key=>key==='#image-lightbox'?modal:null,querySelectorAll:()=>links};
+  vm.runInNewContext(fs.readFileSync(__dirname+'/ui.js','utf8'),{document:galleryDocument});
+  let prevented=false;
+  links[0].listeners.click({preventDefault:()=>{prevented=true;}});
+  assert(prevented && modal.open && children['.lightbox-close'].focused);
+  assert.equal(children['.lightbox-image'].src,'image-0.webp');
+  assert.equal(children['.lightbox-image'].alt,'Alt 0');
+  assert.equal(children['.lightbox-caption'].textContent,'Caption 0');
+  assert.equal(children['.lightbox-prev'].hidden,numberOfImages===1);
+  modal.listeners.keydown({key:'ArrowLeft',preventDefault(){}});
+  assert.equal(children['.lightbox-image'].src,`image-${numberOfImages-1}.webp`);
+  children['.lightbox-next'].listeners.click();
+  assert.equal(children['.lightbox-count'].textContent,`1 / ${numberOfImages}`);
+  children['.lightbox-close'].listeners.click();
+  assert(!modal.open && links[0].focused);
+  assert.equal(children['.lightbox-image'].src,undefined);
+  links[numberOfImages-1].listeners.click({preventDefault(){}});
+  children['.lightbox-prev'].listeners.click();
+  modal.listeners.click({target:modal,clientX:50,clientY:50});assert(modal.open);
+  modal.listeners.click({target:modal,clientX:0,clientY:0});assert(!modal.open);
+  assert(links[numberOfImages-1].focused);
+}
+console.log('PASS: single/multiple-image lightboxes, captions, alt text, arrow wrapping, next/previous, close/backdrop and opener focus restoration.');

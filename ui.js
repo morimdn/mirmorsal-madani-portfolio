@@ -28,3 +28,57 @@ if (filters) {
     document.querySelector('.project-count').textContent = `${count} product ${count === 1 ? 'area' : 'areas'} · case-study overviews`;
   });
 }
+
+// Native modal semantics provide focus containment and Escape closing.
+// Without JavaScript/support, every thumbnail still links to the real image.
+const lightbox = document.querySelector('#image-lightbox');
+if (lightbox && typeof lightbox.showModal === 'function') {
+  const imageLinks = [...document.querySelectorAll('[data-lightbox]')];
+  const image = lightbox.querySelector('.lightbox-image');
+  const caption = lightbox.querySelector('.lightbox-caption');
+  const count = lightbox.querySelector('.lightbox-count');
+  const close = lightbox.querySelector('.lightbox-close');
+  const prev = lightbox.querySelector('.lightbox-prev');
+  const next = lightbox.querySelector('.lightbox-next');
+  let current = 0;
+  let opener;
+  const renderImage = () => {
+    const link = imageLinks[current];
+    image.src = link.getAttribute('href');
+    image.alt = link.querySelector('img').alt;
+    caption.textContent = link.dataset.caption;
+    count.textContent = `${current + 1} / ${imageLinks.length}`;
+    prev.hidden = next.hidden = imageLinks.length < 2;
+  };
+  const move = direction => {
+    current = (current + direction + imageLinks.length) % imageLinks.length;
+    renderImage();
+  };
+  imageLinks.forEach((link, index) => link.addEventListener('click', event => {
+    event.preventDefault();
+    current = index;
+    opener = link;
+    renderImage();
+    lightbox.showModal();
+    close.focus();
+  }));
+  close.addEventListener('click', () => lightbox.close());
+  prev.addEventListener('click', () => move(-1));
+  next.addEventListener('click', () => move(1));
+  lightbox.addEventListener('keydown', event => {
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      event.preventDefault();
+      move(event.key === 'ArrowLeft' ? -1 : 1);
+    }
+  });
+  lightbox.addEventListener('click', event => {
+    if (event.target === lightbox) {
+      const box = lightbox.getBoundingClientRect();
+      if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) lightbox.close();
+    }
+  });
+  lightbox.addEventListener('close', () => {
+    image.removeAttribute('src');
+    opener?.focus();
+  });
+}

@@ -26,13 +26,16 @@ Existing branch-based GitHub Pages publishing remains unchanged.
 - `index.html`: hero, navigation, experience, product gallery, capabilities, research and contact.
 - `styles.css`: responsive design tokens, light product gallery, dark sections and reduced-motion styles.
 - `main.js`: original Three.js sphere, rings and particles, adapted to the hero with reduced rendering cost and pause controls.
-- `ui.js`: menu and project filters, independent of the globe/CDN.
-- `case-studies/`: twelve static, directly addressable product overview pages.
-- `CONTENT-REVIEW.md`: content provenance, outstanding review and image-slot instructions.
+- `ui.js`: menu, project filters and keyboard-operable native image lightbox, independent of the globe/CDN.
+- `projects.html`: twenty distinct product areas and examples.
+- `case-studies/`: twenty directly addressable pages, preserving all twelve original routes.
+- `assets/`: twenty-nine privacy-masked WebP images with a provenance manifest.
+- `ASSET-MAPPING.json`: project/image assignments and excluded sources.
+- `CONTENT-REVIEW.md`: source decisions, unresolved evidence and privacy treatment.
 
 ## Intentional limitations
 
-Case-study overviews document product context, not verified feature-level ownership or outcome claims. Product art is explicitly decorative. No CV or LinkedIn action appears until a real PDF or exact verified profile URL is supplied. A carousel was omitted to keep the hero focused and avoid duplicating the product gallery.
+Phase 2 uses the supplied CV and genuine product artifacts. The homepage selects six products; collection and case pages contain detailed material. Supplied designs are labeled and masked; source-supported outcomes are attributed to the CV, and missing outcomes are not invented. LinkedIn uses the exact supplied profile. The CV is DOCX only, so no PDF download action appears. The globe code is unchanged in this phase.
 
 Three.js remains pinned to the original CDN version. Inter is loaded through Google Fonts with system fallbacks. No analytics, visitor-data storage or contact backend has been introduced.
 
@@ -42,4 +45,4 @@ The development environment's in-app browser could inspect the existing live sit
 
 Before merging, preview the branch locally and inspect 375px, 768px and 1440px widths; verify no horizontal overflow, mobile menu, project filters, direct case-study links, contact channels, keyboard Tab/Enter/Escape behavior, reduced motion and globe pause/resume. Check the browser console and confirm that the sphere renders and rotates without text overlap. Try WebGL/CDN failure and JavaScript disabled: content and product links must remain available.
 
-After merge, wait for the existing “pages build and deployment” workflow to succeed. Open the public URL, verify the new hero and a case-study page, and repeat the essential interaction checks. Static validation and DOM-level regression checks do not replace these browser checks.
+PR #1 is for review only. Do not merge or deploy until the owner approves. The current public URL shows the previously deployed site, not Phase 2. Static validation and DOM-level checks do not replace browser checks.

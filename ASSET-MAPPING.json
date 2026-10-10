@@ -1,0 +1,242 @@
+{
+  "primary_source": "Supplied CV; October 2026 Phase 2 brief; supplied artifacts and presentation (capabilities only).",
+  "projects": [
+    {
+      "slug": "brokerage-crm",
+      "title": "Brokerage CRM Ecosystem",
+      "category": "FinTech",
+      "cover": "crm-trader-room",
+      "role": "Product Manager → Chief Product Officer",
+      "summary": "Discovery, redesign and delivery across admin, trader-room and native mobile experiences.",
+      "images": [
+        "crm-trader-room",
+        "crm-admin",
+        "crm-native-mobile"
+      ]
+    },
+    {
+      "slug": "risk-management",
+      "title": "Risk Management / Riskotik",
+      "category": "FinTech",
+      "cover": "risk-overview",
+      "role": "Product Manager / BI · portfolio leadership",
+      "summary": "Exposure analysis, behavioral monitoring and operational decision support.",
+      "images": [
+        "risk-overview",
+        "risk-geography",
+        "risk-exposure",
+        "risk-report"
+      ]
+    },
+    {
+      "slug": "loyalty-club",
+      "title": "Loyalty Club",
+      "category": "FinTech",
+      "cover": "loyalty-home",
+      "role": "Chief Product Officer · portfolio leadership",
+      "summary": "Behavioral segmentation, quests, progression and governed rewards.",
+      "images": [
+        "loyalty-home",
+        "loyalty-missions",
+        "loyalty-admin",
+        "loyalty-quest-builder"
+      ]
+    },
+    {
+      "slug": "ib-referral",
+      "title": "IB & Referral Platform",
+      "category": "FinTech",
+      "cover": "ib-dashboard",
+      "role": "Chief Product Officer · portfolio leadership",
+      "summary": "Partner networks, customer analytics, commission visibility and referral workflows.",
+      "images": [
+        "ib-dashboard",
+        "ib-insights",
+        "ib-profile-sharing",
+        "ib-wallet-transfer"
+      ]
+    },
+    {
+      "slug": "social-trading",
+      "title": "Social Trading",
+      "category": "FinTech",
+      "cover": "social-discovery",
+      "role": "Chief Product Officer · portfolio leadership",
+      "summary": "ProTrader discovery, subscriptions, investor controls and performance transparency.",
+      "images": [
+        "social-discovery",
+        "social-performance",
+        "social-follow"
+      ]
+    },
+    {
+      "slug": "ai-market-analyst",
+      "title": "AI Market Analyst",
+      "category": "AI",
+      "cover": "ai-market-analysis",
+      "role": "Top Fast Technology · product portfolio",
+      "summary": "Chart-context analysis and trader-controlled decision support.",
+      "images": [
+        "ai-market-analysis"
+      ]
+    },
+    {
+      "slug": "sales-crm",
+      "title": "Sales CRM",
+      "category": "Enterprise",
+      "cover": null,
+      "role": "Top Fast Technology · product context",
+      "summary": "Sales relationship management as a distinct product area.",
+      "images": []
+    },
+    {
+      "slug": "trading-plugins",
+      "title": "MT4/MT5 Trading Plugins",
+      "category": "FinTech",
+      "cover": null,
+      "role": "Chief Product Officer · portfolio leadership",
+      "summary": "Trading-platform integrations and execution-control product work.",
+      "images": []
+    },
+    {
+      "slug": "mobile-crm",
+      "title": "Native CRM Mobile App",
+      "category": "Enterprise",
+      "cover": "crm-native-mobile",
+      "role": "Hands-on Product Manager · Flutter collaboration",
+      "summary": "Mobile scope, UX and build iteration with a Flutter developer.",
+      "images": [
+        "crm-native-mobile"
+      ]
+    },
+    {
+      "slug": "saman-shahr",
+      "title": "Saman Shahr",
+      "category": "Enterprise",
+      "cover": null,
+      "role": "Earlier portfolio · product strategy",
+      "summary": "Municipal smart-city platform work preserved from the earlier portfolio.",
+      "images": []
+    },
+    {
+      "slug": "smart-feeder",
+      "title": "Smart Feeder Tools",
+      "category": "FinTech",
+      "cover": null,
+      "role": "Earlier financial-market portfolio",
+      "summary": "Financial technology tooling preserved as a separate product area.",
+      "images": []
+    },
+    {
+      "slug": "payments",
+      "title": "Multi-platform Payments",
+      "category": "FinTech",
+      "cover": null,
+      "role": "Earlier financial-market portfolio",
+      "summary": "Payment-related initiatives preserved from the original work.",
+      "images": []
+    },
+    {
+      "slug": "kiakooshyar",
+      "title": "Kiakooshyar HR PWA",
+      "category": "Enterprise",
+      "cover": null,
+      "role": "Contract Product Lead & Hands-on Builder",
+      "summary": "An independently discovered, designed and built HR PWA MVP.",
+      "images": []
+    },
+    {
+      "slug": "enterprise-onboarding",
+      "title": "Organizational Onboarding",
+      "category": "Enterprise",
+      "cover": null,
+      "role": "Product Owner · SJI",
+      "summary": "Enterprise onboarding requirements, workflows and stakeholder collaboration.",
+      "images": []
+    },
+    {
+      "slug": "enterprise-performance",
+      "title": "Performance & 360° Evaluation",
+      "category": "Enterprise",
+      "cover": "sji-performance",
+      "role": "Product Owner · SJI",
+      "summary": "Performance evaluation, feedback, scoring and employee leaderboards.",
+      "images": [
+        "sji-performance",
+        "sji-evaluation-workflow"
+      ]
+    },
+    {
+      "slug": "sji-portals",
+      "title": "MySJI & Internal Portals",
+      "category": "Enterprise",
+      "cover": "sji-internal-portal",
+      "role": "Product Owner · SJI / supplied work samples",
+      "summary": "Organizational services and internal workflow touchpoints.",
+      "images": [
+        "sji-internal-portal",
+        "mysji-portal"
+      ]
+    },
+    {
+      "slug": "plan-chin",
+      "title": "Plan Chin",
+      "category": "Consumer",
+      "cover": "plan-chin",
+      "role": "SJI team work · contribution details pending",
+      "summary": "A Persian consumer app for trip and event cost splitting.",
+      "images": [
+        "plan-chin"
+      ]
+    },
+    {
+      "slug": "culture-knowledge",
+      "title": "Culture & Knowledge",
+      "category": "Enterprise",
+      "cover": "culture-knowledge",
+      "role": "SJI team work · contribution details pending",
+      "summary": "An internal digital product supporting culture and knowledge-sharing.",
+      "images": [
+        "culture-knowledge"
+      ]
+    },
+    {
+      "slug": "deltafx-website",
+      "title": "DeltaFX Website",
+      "category": "Websites",
+      "cover": "deltafx-website-home",
+      "role": "Company website example · role scope pending",
+      "summary": "Brokerage website examples, distinct from the CRM and risk applications.",
+      "images": [
+        "deltafx-website-home",
+        "deltafx-website-trading"
+      ]
+    },
+    {
+      "slug": "topfast-website",
+      "title": "TopFast Website",
+      "category": "Websites",
+      "cover": "topfast-website-home",
+      "role": "Company website example · role scope pending",
+      "summary": "Technology ecosystem and partnership website examples.",
+      "images": [
+        "topfast-website-home",
+        "topfast-website-partners"
+      ]
+    }
+  ],
+  "excluded": [
+    "01_Brokerage_CRM/image 39.png: wallet/finance provenance not confirmed",
+    "01_Brokerage_CRM/image 47 (1).png: Innerpay-branded finance mockup; relationship to CRM not confirmed",
+    "06_Company_Websites/2.png: redundant alternate homepage",
+    "08_SJI_Enterprise/SJI_portals_and_evaluation.png top-right Academic Match AI tile: unrelated/mislabeled; excluded"
+  ],
+  "privacy": "Owner chose redacted derivatives. Originals and CV are not committed.",
+  "pending": [
+    "No CV PDF (DOCX only)",
+    "Riskotik vs earlier DeltaFX implementation boundary",
+    "Plan Chin / Culture & Knowledge / portal dates and individual roles",
+    "Website-specific role scope",
+    "Publication/book citations and earlier degree years/ranks"
+  ]
+}
