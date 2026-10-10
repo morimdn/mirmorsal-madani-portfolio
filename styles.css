@@ -848,7 +848,7 @@ p {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  min-height: 32px;
+  min-height: 44px;
   font-size: var(--type-small);
   color: var(--muted);
   margin-bottom: var(--space-2);
@@ -1209,6 +1209,11 @@ p {
   justify-content: space-between;
   gap: var(--space-3) var(--space-4);
   flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--bg);
+  padding-bottom: var(--space-3);
 }
 
 .lightbox-toolbar h2 {
@@ -1626,6 +1631,16 @@ p {
   .intro-pending .wordmark .monogram,.intro-pending .wordmark .brand-name { opacity: 0; }
 }
 .menu-icon { flex-shrink: 0; }
+.footer-inner a,.case-block a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.image-lightbox.tall-image .lightbox-image {
+  width: min(100%,480px);
+  height: auto;
+  margin-inline: auto;
+}
 .native-screen-preview:focus-visible {
   outline: 2.4px solid #2456b7;
   outline-offset: -4px;

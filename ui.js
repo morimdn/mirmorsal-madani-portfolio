@@ -82,6 +82,10 @@ if (lightbox && typeof lightbox.showModal === 'function') {
     fullSize.href = image.src;
     fullSize.hidden = false;
     image.alt = link.querySelector('img').alt;
+    const thumbnail = link.querySelector('img');
+    image.width = Number(thumbnail.getAttribute('width'));
+    image.height = Number(thumbnail.getAttribute('height'));
+    lightbox.classList.toggle('tall-image', image.height > image.width * 2);
     caption.textContent = link.dataset.caption;
     count.textContent = `${current + 1} / ${imageLinks.length}`;
     prev.hidden = next.hidden = imageLinks.length < 2;

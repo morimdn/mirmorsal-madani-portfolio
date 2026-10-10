@@ -79,7 +79,7 @@ for (const numberOfImages of [1,3]) {
   const links=Array.from({length:numberOfImages},(_,index)=>{
     const link=new Element({href:`image-${index}.webp`});
     link.dataset.caption=`Caption ${index}`;
-    link.querySelector=()=>({alt:`Alt ${index}`});return link;
+    link.querySelector=()=>({alt:`Alt ${index}`,getAttribute:key=>key==='width'?'786':index===0?'3562':'500'});return link;
   });
   const galleryDocument={querySelector:key=>key==='#image-lightbox'?modal:null,querySelectorAll:()=>links};
   vm.runInNewContext(fs.readFileSync(__dirname+'/ui.js','utf8'),{document:galleryDocument});
@@ -90,6 +90,9 @@ for (const numberOfImages of [1,3]) {
   assert.equal(children['.lightbox-original'].href,'image-0.webp');
   assert.equal(children['.lightbox-original'].hidden,false);
   assert.equal(children['.lightbox-image'].alt,'Alt 0');
+  assert.equal(children['.lightbox-image'].width,786);
+  assert.equal(children['.lightbox-image'].height,3562);
+  assert(modal.classes.has('tall-image'));
   assert.equal(children['.lightbox-caption'].textContent,'Caption 0');
   assert.equal(children['.lightbox-prev'].hidden,numberOfImages===1);
   modal.querySelectorAll=()=>['original','close','prev','next'].map(key=>children['.lightbox-'+key]);
@@ -105,6 +108,7 @@ for (const numberOfImages of [1,3]) {
   modal.listeners.keydown({key:'ArrowLeft',preventDefault(){}});
   assert.equal(children['.lightbox-image'].src,`image-${numberOfImages-1}.webp`);
   assert.equal(children['.lightbox-original'].href,`image-${numberOfImages-1}.webp`);
+  assert.equal(modal.classes.has('tall-image'),numberOfImages===1);
   children['.lightbox-next'].listeners.click();
   assert.equal(children['.lightbox-count'].textContent,`1 / ${numberOfImages}`);
   children['.lightbox-close'].listeners.click();
