@@ -21,7 +21,7 @@ SJI composites retain their full original composition. Captions identify the por
 
 ## Open questions
 
-- Confirm the boundary between the CV's DeltaFX risk product and the supplied TopFast Riskotik designs; the pages distinguish these sources rather than equating their implementations.
+- Owner-provided Riskotik copy confirms Top Fast Technology and the Product Owner role, including concept initiation and end-to-end development. The case now uses this direct account; no quantitative outcome is added.
 - Per-product dates, launch status, customer evidence, KPIs and individual contribution remain incomplete for several modules, websites and older initiatives. No unsupported ownership, technical stack or outcome is added.
 - The wallet and Finanpay work samples are now included unmodified in a separate supplementary gallery on All Projects, per the owner’s explicit instruction to include every ZIP image. Their relationship to specific implementations and personal contribution remain unconfirmed. No product-specific screenshot is supplied for Kiakooshyar, onboarding, Sales CRM, plugins, Saman Shahr, Smart Feeder or payments.
 - SJI selected-work composites do not establish personal contribution to each application; these examples remain qualified.

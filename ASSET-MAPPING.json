@@ -16,7 +16,7 @@
     },
     {
       "slug": "risk-management",
-      "title": "Risk Management / Riskotik",
+      "title": "Riskotik — Brokerage Risk Management Platform",
       "category": "FinTech",
       "cover": "risk-overview",
       "role": "Product Manager / BI · portfolio leadership",
@@ -230,7 +230,6 @@
   "privacy": "Phase 3: owner explicitly approves originals for the public portfolio; this supersedes the Phase 2 masking request. All 32 current assets preserve full original pixels and composition via lossless WebP conversion. CV DOCX and reference PDF are not committed.",
   "pending": [
     "No CV PDF (DOCX only)",
-    "Riskotik vs earlier DeltaFX implementation boundary",
     "Plan Chin / Culture & Knowledge / portal dates and individual roles",
     "Website-specific role scope",
     "Publication/book citations and earlier degree years/ranks"
