@@ -228,15 +228,22 @@
   "excluded": [
     "01_Brokerage_CRM/image 39.png: wallet/finance provenance not confirmed",
     "01_Brokerage_CRM/image 47 (1).png: Innerpay-branded finance mockup; relationship to CRM not confirmed",
-    "06_Company_Websites/2.png: redundant alternate homepage",
-    "08_SJI_Enterprise/SJI_portals_and_evaluation.png top-right Academic Match AI tile: unrelated/mislabeled; excluded"
+    "06_Company_Websites/2.png: redundant alternate homepage"
   ],
-  "privacy": "Owner chose redacted derivatives. Originals and CV are not committed.",
+  "privacy": "Phase 3: owner explicitly approves originals for the public portfolio; this supersedes the Phase 2 masking request. All 29 current assets preserve full original pixels and composition via lossless WebP conversion. CV DOCX and reference PDF are not committed.",
   "pending": [
     "No CV PDF (DOCX only)",
     "Riskotik vs earlier DeltaFX implementation boundary",
     "Plan Chin / Culture & Knowledge / portal dates and individual roles",
     "Website-specific role scope",
     "Publication/book citations and earlier degree years/ranks"
-  ]
+  ],
+  "composite_context": "SJI composites are now shown intact as supplied. Captions identify the relevant tile. The Academic Match AI tile remains visible in the original composite but is not attributed to SJI portal work or used for AI Market Analyst.",
+  "restoration": {
+    "slots": 29,
+    "unique_sources": 25,
+    "encoding": "Lossless WebP at native dimensions",
+    "ai_source": "TopFast presentation page 11, original embedded Image89.jpg",
+    "masked_assets_remaining": 0
+  }
 }

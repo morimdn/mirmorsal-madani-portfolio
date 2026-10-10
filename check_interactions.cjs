@@ -39,7 +39,8 @@ console.log('PASS: menu open/close, Escape + focus return, navigation close, out
 // Native browser focus containment and Escape behavior require browser QA.
 for (const numberOfImages of [1,3]) {
   const modal=new Element();
-  const children=Object.fromEntries(['image','caption','count','close','prev','next'].map(key=>['.lightbox-'+key,new Element()]));
+  const children=Object.fromEntries(['image','caption','count','close','prev','next','original'].map(key=>['.lightbox-'+key,new Element()]));
+  children['.lightbox-original'].removeAttribute=function(key){delete this[key];};
   children['.lightbox-image'].removeAttribute=function(key){delete this[key];};
   modal.querySelector=key=>children[key];
   modal.showModal=()=>{modal.open=true;};
@@ -56,16 +57,21 @@ for (const numberOfImages of [1,3]) {
   links[0].listeners.click({preventDefault:()=>{prevented=true;}});
   assert(prevented && modal.open && children['.lightbox-close'].focused);
   assert.equal(children['.lightbox-image'].src,'image-0.webp');
+  assert.equal(children['.lightbox-original'].href,'image-0.webp');
+  assert.equal(children['.lightbox-original'].hidden,false);
   assert.equal(children['.lightbox-image'].alt,'Alt 0');
   assert.equal(children['.lightbox-caption'].textContent,'Caption 0');
   assert.equal(children['.lightbox-prev'].hidden,numberOfImages===1);
   modal.listeners.keydown({key:'ArrowLeft',preventDefault(){}});
   assert.equal(children['.lightbox-image'].src,`image-${numberOfImages-1}.webp`);
+  assert.equal(children['.lightbox-original'].href,`image-${numberOfImages-1}.webp`);
   children['.lightbox-next'].listeners.click();
   assert.equal(children['.lightbox-count'].textContent,`1 / ${numberOfImages}`);
   children['.lightbox-close'].listeners.click();
   assert(!modal.open && links[0].focused);
   assert.equal(children['.lightbox-image'].src,undefined);
+  assert.equal(children['.lightbox-original'].href,undefined);
+  assert.equal(children['.lightbox-original'].hidden,true);
   links[numberOfImages-1].listeners.click({preventDefault(){}});
   children['.lightbox-prev'].listeners.click();
   modal.listeners.click({target:modal,clientX:50,clientY:50});assert(modal.open);

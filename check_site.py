@@ -4,9 +4,11 @@ from html.parser import HTMLParser
 from urllib.parse import urlsplit, unquote
 import xml.etree.ElementTree as ET
 import json
+import hashlib
 
 ROOT = Path(__file__).resolve().parent
 BASE = 'https://morimdn.github.io/mirmorsal-madani-portfolio/'
+MANIFEST=json.loads((ROOT/'assets/manifest.json').read_text())
 class Page(HTMLParser):
     def __init__(self, path):
         super().__init__(convert_charrefs=True)
@@ -29,6 +31,9 @@ class Page(HTMLParser):
                 assert a.get('alt'),f'{self.path}: empty product alt'
                 assert a.get('width') and a.get('height'),f'{self.path}: missing intrinsic image dimensions'
                 assert a.get('loading') in ('lazy','eager'),f'{self.path}: missing image loading strategy'
+                asset=next((x for x in MANIFEST if a['src'].endswith(x['file'])),None)
+                assert asset and int(a['width'])==asset['width'] and int(a['height'])==asset['height'],f'{self.path}: incorrect native image dimensions'
+                assert a['alt']==asset['alt'],f'{self.path}: image alt differs from provenance manifest'
         if a.get('target')=='_blank':assert 'noopener' in a.get('rel',''),f'{self.path}: unsafe new tab'
 
 pages={}
@@ -53,7 +58,7 @@ assert len(pages)==22
 home=(ROOT/'index.html').read_text(encoding='utf-8')
 for contact in ('mailto:mirmorsal.madani1361@gmail.com','tel:+48452984012','https://wa.me/48452984012','https://t.me/mirmorsal','https://github.com/morimdn','https://www.linkedin.com/in/mirmorsal-madani/'):
     assert contact in home
-for slug in ('brokerage-crm','risk-management','ib-referral','social-trading','loyalty-club','sales-crm','ai-market-analyst','trading-plugins','mobile-crm'):
+for slug in ('brokerage-crm','risk-management','ib-referral','social-trading','loyalty-club','sales-crm','ai-market-analyst','trading-plugins','mobile-crm','saman-shahr','smart-feeder','payments','enterprise-onboarding','enterprise-performance','kiakooshyar','sji-portals','plan-chin','culture-knowledge','deltafx-website','topfast-website'):
     assert (ROOT/'case-studies'/f'{slug}.html').exists()
 sitemap=ET.parse(ROOT/'sitemap.xml')
 assert len(sitemap.getroot())==22
@@ -62,17 +67,29 @@ for date in ('May 2023–May 2024','May 2024–Present','August 2020 — March 2
     assert date in home,f'Missing corrected CV date: {date}'
 assert home.count('class="project-card"')==6
 assert './projects.html' in home
-assert not list(ROOT.rglob('*.docx')) and not list(ROOT.rglob('*.pdf')),'Private originals/CV should not be committed'
+assert 'https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C5&amp;q=mirmorsal+madani&amp;oq=' in home
+collection=(ROOT/'projects.html').read_text(encoding='utf-8')
+assert collection.count('class="project-card"')==20
+assert './case-studies/ai-market-analyst.html' in collection and 'AI Market Analyst' in collection
+for p in pages:
+    text=p.read_text(encoding='utf-8')
+    assert not any(word in text.lower() for word in ('redacted','privacy edited','data redacted')),f'{p}: stale redaction description'
+    if 'data-lightbox' in text:assert 'class="lightbox-original"' in text,f'{p}: missing full-size image action'
+assert not list(ROOT.rglob('*.docx')) and not list(ROOT.rglob('*.pdf')),'CV/reference documents should not be committed'
 manifest=json.loads((ROOT/'assets/manifest.json').read_text())
 assert len(manifest)==29
 assert len({a['id'] for a in manifest})==len(manifest)
 for asset in manifest:
     image=ROOT/asset['file']
     assert image.is_file() and image.stat().st_size==asset['bytes']
-    assert image.suffix=='.webp' and asset['width']<=1600 and asset['height']<=2200
-    assert asset['alt'] and asset['caption'] and asset['bytes']<200_000
+    assert image.suffix=='.webp' and 0<asset['width']<=4096 and 0<asset['height']<=4096
+    assert asset['alt'] and asset['caption'] and asset['bytes']<2_000_000
+    assert asset['redacted'] is False and asset['lossless'] is True
+    assert hashlib.sha256(image.read_bytes()).hexdigest()==asset['sha256'],f'Asset checksum mismatch: {asset["id"]}'
+    assert len(asset['pixel_sha256'])==64 and len(asset['source_sha256'])==64
     assert any(asset['file'] in page.path.read_text(encoding='utf-8') for page in pages.values()),f'Unused asset: {asset["id"]}'
-assert sum(a['bytes'] for a in manifest)<2_000_000
+assert sum(a['bytes'] for a in manifest)<12_000_000
+assert {p.relative_to(ROOT).as_posix() for p in (ROOT/'assets/projects').iterdir()}=={a['file'] for a in manifest},'Unexpected or obsolete image derivative remains'
 print(f'Asset manifest: {len(manifest)} WebP files; {sum(a["bytes"] for a in manifest):,} bytes; image dimensions, paths, budget and usage passed.')
 def luminance(hex):
     values=[int(hex[i:i+2],16)/255 for i in (1,3,5)]

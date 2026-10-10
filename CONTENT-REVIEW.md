@@ -1,6 +1,6 @@
 # Content provenance and pending review
 
-Phase 2 uses the owner-supplied CV DOCX, product image archive, TopFast reference PDF and brief. CV employment dates supersede Phase 1. The archive README says no CV was included, but a DOCX is present; that README statement is stale. No private CV, PDF, original image or account record is published.
+Phases 2 and 3 use the owner-supplied CV DOCX, product image archive, TopFast reference PDF and brief. CV employment dates supersede Phase 1. The archive README says no CV was included, but a DOCX is present; that README statement is stale. The owner explicitly approved the original screenshots for public portfolio use in Phase 3. The CV DOCX and reference PDF remain excluded from site assets.
 
 ## Established by the supplied CV
 
@@ -13,9 +13,11 @@ Phase 2 uses the owner-supplied CV DOCX, product image archive, TopFast referenc
 
 ## Visual provenance and privacy
 
-The owner explicitly requested masked versions. Twenty-nine optimized WebP derivatives remove account identities, avatars, employee records and financial values with opaque masks. Source paths, captions, dimensions and bytes are in `assets/manifest.json`; project assignments and exclusions are in `ASSET-MAPPING.json`. Designs and presentation artifacts are labeled as such. Screenshots do not establish production deployment, ownership of every component, or measured outcomes.
+Phase 3 explicitly supersedes the earlier masking instruction: the owner prepared and approved the original screenshots for their personal portfolio. All 29 asset slots have been restored directly from the ZIP (24 distinct raster sources) and the PDF's original embedded page-11 image (one further source). Each lossless WebP preserves the native dimensions and decoded pixels exactly. No masking, blurring, repainting, cropping, upscaling or generative replacement is applied. Pixel equality was checked before replacing the Phase 2 derivatives; no masked derivatives remain in the current site tree. Historical Phase 2 versions remain in Git history.
 
-The SJI composite's tile captioned “SJI Management Portal” actually shows Academic Match AI; it was excluded. SJI portal, evaluation and workflow tiles are cropped individually. Plan Chin, Culture & Knowledge and MySJI remain distinct examples. Culture event photographs are masked. Low-resolution enterprise crops are not enlarged in their containers; higher-resolution originals would improve review.
+Source checksums, pixel hashes, dimensions, format treatment and captions are in `assets/manifest.json`; product assignments are in `ASSET-MAPPING.json`. Supplied design screenshots do not prove production deployment or personal ownership of every component.
+
+SJI composites retain their full original composition. Captions identify the portal/evaluation/workflow tiles and distinguish Plan Chin, Culture & Knowledge and MySJI. The composite's upper-right tile labeled “SJI Management Portal” actually shows Academic Match AI; it is visible in the intact original but is not attributed to portal work or used as AI Market Analyst imagery. The latter uses the real page-11 embedded image at its native 665×648 resolution. Higher-resolution AI imagery would improve legibility; it is not artificially enlarged.
 
 ## Open questions
 
@@ -29,4 +31,4 @@ The SJI composite's tile captioned “SJI Management Portal” actually shows Ac
 
 ## Review boundary
 
-All twelve original case routes remain. Fifteen pages now have expanded source-aware case content; five older overviews remain concise where evidence is missing. The original Three.js `main.js` is unchanged in Phase 2. PR #1 stays open and unmerged; no Phase 2 deployment is authorized.
+All twelve original case routes remain. Fifteen pages now have expanded source-aware case content; five older overviews remain concise where evidence is missing. The original Three.js `main.js` is unchanged in Phases 2 and 3. PR #1 stays open and unmerged; no deployment is authorized.

@@ -40,11 +40,14 @@ if (lightbox && typeof lightbox.showModal === 'function') {
   const close = lightbox.querySelector('.lightbox-close');
   const prev = lightbox.querySelector('.lightbox-prev');
   const next = lightbox.querySelector('.lightbox-next');
+  const fullSize = lightbox.querySelector('.lightbox-original');
   let current = 0;
   let opener;
   const renderImage = () => {
     const link = imageLinks[current];
     image.src = link.getAttribute('href');
+    fullSize.href = image.src;
+    fullSize.hidden = false;
     image.alt = link.querySelector('img').alt;
     caption.textContent = link.dataset.caption;
     count.textContent = `${current + 1} / ${imageLinks.length}`;
@@ -79,6 +82,8 @@ if (lightbox && typeof lightbox.showModal === 'function') {
   });
   lightbox.addEventListener('close', () => {
     image.removeAttribute('src');
+    fullSize.removeAttribute('href');
+    fullSize.hidden = true;
     opener?.focus();
   });
 }
