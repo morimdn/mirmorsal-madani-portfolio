@@ -1,0 +1,21 @@
+name: Validate static portfolio
+on:
+  pull_request:
+  push:
+    branches: [main, feat/portfolio-v2]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate content, metadata and local links
+        run: python3 check_site.py
+      - name: Check JavaScript syntax and UI interactions
+        run: |
+          node --check main.js
+          node --check ui.js
+          node check_interactions.cjs
+      - name: Check whitespace
+        run: git diff --check

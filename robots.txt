@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://morimdn.github.io/mirmorsal-madani-portfolio/sitemap.xml
