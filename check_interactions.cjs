@@ -82,6 +82,16 @@ for (const numberOfImages of [1,3]) {
   assert.equal(children['.lightbox-image'].alt,'Alt 0');
   assert.equal(children['.lightbox-caption'].textContent,'Caption 0');
   assert.equal(children['.lightbox-prev'].hidden,numberOfImages===1);
+  modal.querySelectorAll=()=>['original','close','prev','next'].map(key=>children['.lightbox-'+key]);
+  const lastControl=numberOfImages===1?children['.lightbox-close']:children['.lightbox-next'];
+  galleryDocument.activeElement=lastControl;
+  let tabPrevented=false;
+  modal.listeners.keydown({key:'Tab',preventDefault(){tabPrevented=true;}});
+  assert(tabPrevented && children['.lightbox-original'].focused);
+  galleryDocument.activeElement=children['.lightbox-original'];
+  lastControl.focused=false;
+  modal.listeners.keydown({key:'Tab',shiftKey:true,preventDefault(){}});
+  assert(lastControl.focused);
   modal.listeners.keydown({key:'ArrowLeft',preventDefault(){}});
   assert.equal(children['.lightbox-image'].src,`image-${numberOfImages-1}.webp`);
   assert.equal(children['.lightbox-original'].href,`image-${numberOfImages-1}.webp`);

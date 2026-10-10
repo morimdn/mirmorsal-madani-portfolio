@@ -92,6 +92,18 @@ if (lightbox && typeof lightbox.showModal === 'function') {
   prev.addEventListener('click', () => move(-1));
   next.addEventListener('click', () => move(1));
   lightbox.addEventListener('keydown', event => {
+    if (event.key === 'Tab') {
+      const controls = [...lightbox.querySelectorAll('a[href],button:not([disabled])')].filter(control => !control.hidden);
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
     if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
       event.preventDefault();
       move(event.key === 'ArrowLeft' ? -1 : 1);

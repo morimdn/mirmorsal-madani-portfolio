@@ -1106,7 +1106,7 @@ p {
   min-width: 0;
 }
 
-.filter:hover {
+.filter:not([aria-pressed=true]):hover {
   background: #e9edf3;
   border-color: #2456b7;
 }
