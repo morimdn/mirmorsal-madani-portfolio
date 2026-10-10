@@ -1,9 +1,9 @@
 {
-  "primary_source": "Master CV; owner-provided V3 corrections; TopFast product presentation; existing portfolio and product images. Research citations checked against publisher records. Owner V5 corrections and portfolio_final_images_for_codex.zip (ASSET_MAP_README.txt).",
+  "primary_source": "Master CV; owner-provided V3 corrections; TopFast product presentation; existing portfolio and product images. Research citations checked against publisher records. Owner V5 corrections and portfolio_final_images_for_codex.zip (ASSET_MAP_README.txt). Owner V9 positioning, experience, project naming and role corrections.",
   "projects": [
     {
       "slug": "brokerage-crm",
-      "title": "Brokerage CRM Ecosystem",
+      "title": "Brokerage CRM",
       "category": "FinTech",
       "cover": "crm-trader-room",
       "role": "Product Manager — Discovery, Redesign & Delivery",
@@ -17,7 +17,7 @@
     },
     {
       "slug": "risk-management",
-      "title": "Riskotik — Brokerage Risk Management Platform",
+      "title": "Risk Management Platform",
       "category": "FinTech",
       "cover": "risk-overview",
       "role": "Product Owner — End-to-End Product Ownership",
@@ -50,7 +50,7 @@
       "title": "IB & Referral Platform",
       "category": "FinTech",
       "cover": "ib-insights",
-      "role": "Product Roadmaps, Partner Workflows & Team Leadership",
+      "role": "Product Owner",
       "summary": "Partner networks, multi-level IB structures, commissions and performance analytics.",
       "images": [
         "ib-insights",
@@ -62,10 +62,10 @@
     },
     {
       "slug": "social-trading",
-      "title": "Social Trading",
+      "title": "Social Trading Platform",
       "category": "FinTech",
       "cover": "social-discovery",
-      "role": "Product Direction, Prioritization & Team Leadership",
+      "role": "Product Owner",
       "summary": "ProTrader discovery, transparent performance, subscriptions and follower risk controls.",
       "images": [
         "social-discovery",
@@ -91,7 +91,7 @@
       "title": "Native CRM Mobile App",
       "category": "Enterprise",
       "cover": "crm-native-mobile",
-      "role": "Hands-on Product Manager — Native Mobile CRM",
+      "role": "Hands-on Product Manager",
       "summary": "Native brokerage workflows shaped through close product collaboration with a Flutter developer.",
       "images": [
         "crm-native-mobile"

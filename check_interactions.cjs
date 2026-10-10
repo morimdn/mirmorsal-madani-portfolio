@@ -2,6 +2,22 @@
 const fs = require('node:fs');
 const vm = require('node:vm');
 const assert = require('node:assert/strict');
+// Entry reveals never observe reduced-motion users and stop observing after entry.
+for (const reduced of [false, true]) {
+  let callback, disconnected = false, observed = false;
+  const diagram = { dataset: {}, listeners: {}, classList: { add(value) { this.value=value; } }, addEventListener(name, fn) { this.listeners[name]=fn; } };
+  const doc = { querySelector: selector => selector === '.leadership-diagram' ? diagram : null, querySelectorAll: () => [], addEventListener() {} };
+  class Observer { constructor(fn) { callback=fn; } observe() { observed=true; } disconnect() { disconnected=true; } }
+  vm.runInNewContext(fs.readFileSync(__dirname+'/ui.js','utf8'), { document: doc, matchMedia: () => ({matches:reduced}), IntersectionObserver: Observer });
+  assert.equal(observed, !reduced);
+  if (!reduced) {
+    callback([{isIntersecting:false}]); assert.equal(diagram.classList.value, undefined);
+    callback([{isIntersecting:true}]); assert(disconnected); assert.equal(diagram.classList.value, 'is-visible');
+    diagram.listeners.animationend({animationName:'capability-reveal',target:{style:{getPropertyValue:()=> '7'}}});
+    assert.equal(diagram.dataset.motionState,'complete');
+  }
+}
+console.log('PASS: capability-map entry, observer cleanup and reduced-motion fallback.');
 class Element {
   constructor(attrs={}) { this.attrs=attrs; this.listeners={}; this.hidden=false; this.dataset={}; this.classes=new Set(); this.focused=false; }
   getAttribute(key){return this.attrs[key];}

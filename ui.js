@@ -1,4 +1,21 @@
 // Navigation and filters stay independent of WebGL and the external Three.js module.
+// A short, one-time map reveal. Static content is the fallback for reduced motion
+// and browsers without IntersectionObserver; no continuous animation runs.
+const leadershipDiagram = document.querySelector('.leadership-diagram');
+if (leadershipDiagram && typeof IntersectionObserver === 'function' && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  leadershipDiagram.addEventListener('animationstart', () => { leadershipDiagram.dataset.motionState = 'running'; });
+  leadershipDiagram.addEventListener('animationend', event => {
+    if (event.animationName === 'capability-reveal' && event.target.style.getPropertyValue('--order') === '7') leadershipDiagram.dataset.motionState = 'complete';
+  });
+  const observer = new IntersectionObserver(entries => {
+    if (entries.some(entry => entry.isIntersecting)) {
+      leadershipDiagram.classList.add('is-visible');
+      observer.disconnect();
+    }
+  }, { threshold: .2 });
+  observer.observe(leadershipDiagram);
+}
+
 const menu = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.nav-links');
 if (menu && nav) {

@@ -242,28 +242,29 @@ p {
 
 .location {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
   font-size: var(--type-small);
   color: var(--muted);
-  margin-bottom: 24px;
+  margin: 16px 0 0;
+  max-width: 560px;
 }
 
-.location::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--gold);
+.location svg {
+  flex-shrink: 0;
+  color: var(--gold);
+  margin-top: 3px;
 }
 
 .positioning {
-  font-size: clamp(1.1rem,1.7vw,1.4rem);
+  font-size: clamp(1.25rem,1.85vw,1.55rem);
   color: #e6edf8;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.5;
   max-width: 570px;
 }
+
+.hero h1 { font-size: clamp(2.7rem,5.58vw,4.86rem); }
 
 .lead {
   color: var(--muted);
@@ -388,7 +389,8 @@ p {
 }
 
 .snapshot .label {
-  font-size: .75rem;
+  font-size: var(--type-label);
+  line-height: 1.5;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--muted);
@@ -432,7 +434,23 @@ p {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 64px;
+  align-items: center;
 }
+
+/* The capability map stays fully visible without JavaScript or animation. */
+.leadership-diagram { position: relative; min-width: 0; padding: 12px; }
+.leadership-connections { position: absolute; inset: 12px; width: calc(100% - 24px); height: calc(100% - 24px); pointer-events: none; }
+.leadership-connections path { stroke: var(--line); stroke-width: 1.5; vector-effect: non-scaling-stroke; stroke-dasharray: 1; }
+.capability-grid { position: relative; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); grid-template-rows: repeat(3,110px); gap: 12px; grid-template-areas: "strategy discovery roadmap" "design center technical" "ai data team"; }
+.capability-grid li { align-self: center; justify-self: center; text-align: center; }
+.capability-center { grid-area: center; display: grid; place-items: center; width: 110px; height: 110px; max-width: 100%; border: 1px solid var(--gold); border-radius: 50%; background: var(--surface); color: var(--ink); font-size: var(--type-small); line-height: 1.5; }
+.capability-center strong { font-weight: 600; }
+.capability-node { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 100%; max-width: 142px; min-height: 72px; padding: 8px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); color: var(--muted); font-size: var(--type-small); line-height: 1.5; }
+.capability-dot { width: 8px; height: 8px; border-radius: 50%; background: #91b2ff; }
+.leadership-diagram.is-visible .capability-node { animation: capability-reveal 650ms ease-out calc(var(--order) * 60ms) backwards; }
+.leadership-diagram.is-visible .leadership-connections path { animation: connection-reveal 1100ms ease-out backwards; }
+@keyframes capability-reveal { from { opacity: .6; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes connection-reveal { from { stroke-dashoffset: 1; opacity: .2; } to { stroke-dashoffset: 0; opacity: 1; } }
 
 .about-copy {
   font-size: var(--type-body);
@@ -1388,6 +1406,7 @@ p {
 }
 
 @media(max-width:1050px) {
+  .snapshot { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .screenshot-gallery.mobile-gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1477,7 +1496,7 @@ p {
   }
 
   .hero h1 {
-    font-size: clamp(3rem,10vw,4.5rem);
+    font-size: clamp(2.7rem,9vw,4.05rem);
   }
 
   .hero-visual {
@@ -1681,6 +1700,12 @@ p {
 }
 .native-gallery .gallery-item.portrait img { height: auto; }
 @media(max-width:639px) {
+  .snapshot { grid-template-columns: 1fr; }
+  .leadership-diagram { padding: 0; }
+  .leadership-connections { display: none; }
+  .capability-grid { grid-template-columns: repeat(2,minmax(0,1fr)); grid-template-rows: 110px repeat(4,minmax(72px,auto)); gap: 12px; grid-template-areas: "center center" "strategy discovery" "roadmap design" "technical ai" "data team"; }
+  .capability-node { max-width: none; height: 100%; }
+
   .project-grid,.selected-grid { grid-template-columns: minmax(0,1fr); }
   .hero { padding-top: var(--space-8); }
   .hero-visual { height: clamp(220px,60vw,280px); margin-top: var(--space-4); }

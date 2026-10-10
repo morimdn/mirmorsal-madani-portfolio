@@ -9,6 +9,23 @@ import re
 from html import unescape
 
 ROOT = Path(__file__).resolve().parent
+home_v9 = (ROOT/'index.html').read_text(encoding='utf-8')
+about_v9 = re.search(r'<section[^>]+id="about".*?</section>', home_v9, re.S).group()
+assert all(company not in about_v9 for company in ('Top Fast','DeltaFX','SJI'))
+assert home_v9.count('class="capability-node"') == 8
+assert 'Product Manager &amp; Product Leader' in home_v9
+assert 'Wrocław, Poland — Open to product opportunities across Europe' in home_v9
+for slug, title, role in [
+    ('risk-management','Risk Management Platform','Product Owner — End-to-End Product Ownership'),
+    ('brokerage-crm','Brokerage CRM','Product Manager — Discovery, Redesign & Delivery'),
+    ('ib-referral','IB & Referral Platform','Product Owner'),
+    ('social-trading','Social Trading Platform','Product Owner'),
+    ('mobile-crm','Native CRM Mobile App','Hands-on Product Manager'),
+]:
+    case = unescape((ROOT/'case-studies'/f'{slug}.html').read_text(encoding='utf-8'))
+    assert f'<h1>{title}</h1>' in case and f'<strong>{role}</strong>' in case, slug
+for page_v9 in [ROOT/'index.html',ROOT/'projects.html',*(ROOT/'case-studies').glob('*.html')]:
+    assert 'Riskotik' not in page_v9.read_text(encoding='utf-8'), page_v9
 BASE = 'https://morimdn.github.io/mirmorsal-madani-portfolio/'
 MANIFEST=json.loads((ROOT/'assets/manifest.json').read_text())
 PUBLISHERS=json.loads((ROOT/'assets/publishers.json').read_text())
@@ -117,7 +134,7 @@ assert 'A research foundation.<br>An applied perspective.' in research
 assert home.count('class="service')==6  # service grid and five offerings
 assert 'AI-Augmented<br>Product Management' in home and 'End-to-End B2B<br>Product Delivery' in home
 assert 'while keeping product decisions and quality under human control.' in home
-assert 'lead Product Owners and Product Designers' in home and 'Product Manager for the native Flutter CRM' in home
+assert 'Helped establish and develop the Product Management function' in home and 'native Flutter CRM' in home
 print('V6: eight topics, three groups, decorative icons, three publisher logos, single research Scholar CTA, B2B/AI offerings and hands-on leadership passed.')
 print('Content consistency: 13 company/context and role mappings, 9 major cases, correct Riskotik ownership, delivery milestones and publication links passed.')
 assert not list(ROOT.rglob('*.docx')) and not list(ROOT.rglob('*.pdf')),'CV/reference documents should not be committed'
