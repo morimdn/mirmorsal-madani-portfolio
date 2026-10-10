@@ -5,6 +5,8 @@ from urllib.parse import urlsplit, unquote
 import xml.etree.ElementTree as ET
 import json
 import hashlib
+import re
+from html import unescape
 
 ROOT = Path(__file__).resolve().parent
 BASE = 'https://morimdn.github.io/mirmorsal-madani-portfolio/'
@@ -74,7 +76,35 @@ assert './case-studies/ai-market-analyst.html' in collection and 'AI Market Anal
 for p in pages:
     text=p.read_text(encoding='utf-8')
     assert not any(word in text.lower() for word in ('redacted','privacy edited','data redacted')),f'{p}: stale redaction description'
+    public=unescape(re.sub(r'<[^>]*>',' ',text)).lower()
+    editorial=('pending confirmation','coming soon','pending verification','the cv establishes','the cv reports','the supplied brief','supplied artifact','portfolio leadership','edited for privacy','visuals pending','product visuals are pending','evidence unavailable','original portfolio states')
+    assert not any(word in public for word in editorial),f'{p}: internal editorial or obsolete placeholder text'
     if 'data-lightbox' in text:assert 'class="lightbox-original"' in text,f'{p}: missing full-size image action'
+
+# Guard against the previously incorrect Riskotik employer and role mapping.
+mapping=json.loads((ROOT/'ASSET-MAPPING.json').read_text(encoding='utf-8'))
+for project in mapping['projects']:
+    case=(ROOT/'case-studies'/f'{project["slug"]}.html').read_text(encoding='utf-8')
+    assert project['company'] in unescape(case),f'{project["slug"]}: employer/context inconsistent with mapping'
+    assert project['role'] in unescape(case),f'{project["slug"]}: role inconsistent with mapping'
+    assert project['summary'] in unescape(case),f'{project["slug"]}: summary inconsistent with mapping'
+    for listing in (home,collection):
+        cards=re.findall(r'<article class="project-card".*?</article>',listing,re.S)
+        card=next((c for c in cards if f'case-studies/{project["slug"]}.html' in c),None)
+        if card:assert project['role'] in unescape(card) and project['summary'] in unescape(card),f'{project["slug"]}: stale project card'
+major=('brokerage-crm','risk-management','mobile-crm','loyalty-club','ib-referral','social-trading','ai-market-analyst','trading-plugins','enterprise-onboarding','enterprise-performance','kiakooshyar')
+for slug in major:
+    case=pages[ROOT/'case-studies'/f'{slug}.html']
+    assert {'product-overview','business-problem','target-users','role','discovery','workflows','delivery','evidence'}.issubset(case.ids),f'{slug}: incomplete major case'
+risk=(ROOT/'case-studies/risk-management.html').read_text(encoding='utf-8')
+assert 'Top Fast Technology' in risk and 'Product Owner — End-to-End Product Ownership' in risk
+assert 'I initiated the product concept' in risk and 'prioritized backlog' in risk
+assert 'Product Manager / BI' not in risk
+assert 'under eight months' in home and 'under eight months' in (ROOT/'case-studies/brokerage-crm.html').read_text(encoding='utf-8')
+ai=(ROOT/'case-studies/ai-market-analyst.html').read_text(encoding='utf-8')
+assert 'without automated trade execution' in ai and 'Top Fast Technology' in ai
+assert 'https://doi.org/10.1002/spy2.264' in home and 'https://doi.org/10.1007/s11227-022-04851-3' in home
+print('Content consistency: 20 company/context and role mappings, 11 major cases, correct Riskotik ownership, delivery milestones and publication links passed.')
 assert not list(ROOT.rglob('*.docx')) and not list(ROOT.rglob('*.pdf')),'CV/reference documents should not be committed'
 manifest=json.loads((ROOT/'assets/manifest.json').read_text())
 assert len(manifest)==32

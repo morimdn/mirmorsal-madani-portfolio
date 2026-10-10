@@ -1,140 +1,152 @@
 {
-  "primary_source": "Supplied CV; October 2026 Phase 2 brief; supplied artifacts and presentation (capabilities only).",
+  "primary_source": "Master CV; owner-provided V3 corrections; TopFast product presentation; existing portfolio and product images. Research citations checked against publisher records.",
   "projects": [
     {
       "slug": "brokerage-crm",
       "title": "Brokerage CRM Ecosystem",
       "category": "FinTech",
       "cover": "crm-trader-room",
-      "role": "Product Manager → Chief Product Officer",
-      "summary": "Discovery, redesign and delivery across admin, trader-room and native mobile experiences.",
+      "role": "Product Manager — Discovery, Redesign & Delivery",
+      "summary": "A replacement brokerage CRM delivered in under eight months with the existing engineering and QA teams.",
       "images": [
         "crm-trader-room",
         "crm-admin",
         "crm-native-mobile"
-      ]
+      ],
+      "company": "Top Fast Technology"
     },
     {
       "slug": "risk-management",
       "title": "Riskotik — Brokerage Risk Management Platform",
       "category": "FinTech",
       "cover": "risk-overview",
-      "role": "Product Manager / BI · portfolio leadership",
-      "summary": "Exposure analysis, behavioral monitoring and operational decision support.",
+      "role": "Product Owner — End-to-End Product Ownership",
+      "summary": "End-to-end product ownership of a brokerage platform for exposure analysis, behavior monitoring and operational risk decisions.",
       "images": [
         "risk-overview",
         "risk-geography",
         "risk-exposure",
         "risk-report"
-      ]
+      ],
+      "company": "Top Fast Technology"
     },
     {
       "slug": "loyalty-club",
       "title": "Loyalty Club",
       "category": "FinTech",
       "cover": "loyalty-home",
-      "role": "Chief Product Officer · portfolio leadership",
-      "summary": "Behavioral segmentation, quests, progression and governed rewards.",
+      "role": "Product Strategy, Prioritization & Team Leadership",
+      "summary": "Customer engagement through behavioral segments, quests, levels and governed rewards.",
       "images": [
         "loyalty-home",
         "loyalty-missions",
         "loyalty-admin",
         "loyalty-quest-builder"
-      ]
+      ],
+      "company": "Top Fast Technology"
     },
     {
       "slug": "ib-referral",
       "title": "IB & Referral Platform",
       "category": "FinTech",
       "cover": "ib-dashboard",
-      "role": "Chief Product Officer · portfolio leadership",
-      "summary": "Partner networks, customer analytics, commission visibility and referral workflows.",
+      "role": "Product Roadmaps, Partner Workflows & Team Leadership",
+      "summary": "Partner networks, multi-level IB structures, commissions and performance analytics.",
       "images": [
         "ib-dashboard",
         "ib-insights",
         "ib-profile-sharing",
         "ib-wallet-transfer"
-      ]
+      ],
+      "company": "Top Fast Technology"
     },
     {
       "slug": "social-trading",
       "title": "Social Trading",
       "category": "FinTech",
       "cover": "social-discovery",
-      "role": "Chief Product Officer · portfolio leadership",
-      "summary": "ProTrader discovery, subscriptions, investor controls and performance transparency.",
+      "role": "Product Direction, Prioritization & Team Leadership",
+      "summary": "ProTrader discovery, transparent performance, subscriptions and follower risk controls.",
       "images": [
         "social-discovery",
         "social-performance",
         "social-follow"
-      ]
+      ],
+      "company": "Top Fast Technology"
     },
     {
       "slug": "ai-market-analyst",
       "title": "AI Market Analyst",
       "category": "AI",
       "cover": "ai-market-analysis",
-      "role": "Top Fast Technology · product portfolio",
-      "summary": "Chart-context analysis and trader-controlled decision support.",
+      "role": "Product Leadership — AI-assisted Decision Support",
+      "summary": "AI-assisted chart analysis with symbol and timeframe context, keeping trading decisions with the user.",
       "images": [
         "ai-market-analysis"
-      ]
+      ],
+      "company": "Top Fast Technology"
     },
     {
       "slug": "sales-crm",
       "title": "Sales CRM",
       "category": "Enterprise",
       "cover": null,
-      "role": "Top Fast Technology · product context",
-      "summary": "Sales relationship management as a distinct product area.",
-      "images": []
+      "role": "Product Management",
+      "summary": "Sales relationship management within TopFast’s enterprise product work.",
+      "images": [],
+      "company": "Top Fast Technology"
     },
     {
       "slug": "trading-plugins",
       "title": "MT4/MT5 Trading Plugins",
       "category": "FinTech",
       "cover": null,
-      "role": "Chief Product Officer · portfolio leadership",
-      "summary": "Trading-platform integrations and execution-control product work.",
-      "images": []
+      "role": "Product Strategy & Roadmap Prioritization",
+      "summary": "Trading-platform tools for brokerage execution rules and operational control.",
+      "images": [],
+      "company": "Top Fast Technology"
     },
     {
       "slug": "mobile-crm",
       "title": "Native CRM Mobile App",
       "category": "Enterprise",
       "cover": "crm-native-mobile",
-      "role": "Hands-on Product Manager · Flutter collaboration",
-      "summary": "Mobile scope, UX and build iteration with a Flutter developer.",
+      "role": "Hands-on Product Manager — Native Mobile CRM",
+      "summary": "Native brokerage workflows shaped through close product collaboration with a Flutter developer.",
       "images": [
         "crm-native-mobile"
-      ]
+      ],
+      "company": "Top Fast Technology"
     },
     {
       "slug": "saman-shahr",
       "title": "Saman Shahr",
       "category": "Enterprise",
       "cover": null,
-      "role": "Earlier portfolio · product strategy",
-      "summary": "Municipal smart-city platform work preserved from the earlier portfolio.",
-      "images": []
+      "role": "Product Roadmaps & Platform Strategy",
+      "summary": "Municipal smart-city services shaped around customer needs and platform priorities.",
+      "images": [],
+      "company": "SJI Holding"
     },
     {
       "slug": "smart-feeder",
       "title": "Smart Feeder Tools",
       "category": "FinTech",
       "cover": null,
-      "role": "Earlier financial-market portfolio",
-      "summary": "Financial technology tooling preserved as a separate product area.",
-      "images": []
+      "role": "Product & Development Initiatives",
+      "summary": "Smart feeder tooling within my financial-market product work.",
+      "images": [],
+      "company": "Financial-market Product Work"
     },
     {
       "slug": "payments",
       "title": "Multi-platform Payments",
       "category": "FinTech",
       "cover": null,
-      "role": "Earlier financial-market portfolio",
-      "summary": "Payment-related initiatives preserved from the original work.",
-      "images": []
+      "role": "Product & Development Initiatives",
+      "summary": "Payment-related product and development work across financial-market platforms.",
+      "images": [],
+      "company": "Financial-market Product Work"
     },
     {
       "slug": "kiakooshyar",
@@ -142,97 +154,107 @@
       "category": "Enterprise",
       "cover": null,
       "role": "Contract Product Lead & Hands-on Builder",
-      "summary": "An independently discovered, designed and built HR PWA MVP.",
-      "images": []
+      "summary": "An independently designed and built HR PWA, with an MVP delivered and in use by the client HR team.",
+      "images": [],
+      "company": "Independent Contract Product"
     },
     {
       "slug": "enterprise-onboarding",
       "title": "Organizational Onboarding",
       "category": "Enterprise",
       "cover": null,
-      "role": "Product Owner · SJI",
-      "summary": "Enterprise onboarding requirements, workflows and stakeholder collaboration.",
-      "images": []
+      "role": "Product Owner — Enterprise Onboarding",
+      "summary": "Employee onboarding workflows defined with HR stakeholders and users.",
+      "images": [],
+      "company": "Shokouhejavid Iranian (SJI)"
     },
     {
       "slug": "enterprise-performance",
       "title": "Performance & 360° Evaluation",
       "category": "Enterprise",
       "cover": "sji-performance",
-      "role": "Product Owner · SJI",
-      "summary": "Performance evaluation, feedback, scoring and employee leaderboards.",
+      "role": "Product Owner — Evaluation & HR Workflows",
+      "summary": "Performance reviews, 360-degree feedback, scoring and employee leaderboards.",
       "images": [
         "sji-performance",
         "sji-evaluation-workflow"
-      ]
+      ],
+      "company": "Shokouhejavid Iranian (SJI)"
     },
     {
       "slug": "sji-portals",
       "title": "MySJI & Internal Portals",
       "category": "Enterprise",
       "cover": "sji-internal-portal",
-      "role": "Product Owner · SJI / supplied work samples",
-      "summary": "Organizational services and internal workflow touchpoints.",
+      "role": "SJI Enterprise Product Context",
+      "summary": "Internal service portals connecting employees with organizational tools and workflows.",
       "images": [
         "sji-internal-portal",
         "mysji-portal"
-      ]
+      ],
+      "company": "Shokouhejavid Iranian (SJI)"
     },
     {
       "slug": "plan-chin",
       "title": "Plan Chin",
       "category": "Consumer",
       "cover": "plan-chin",
-      "role": "SJI team work · contribution details pending",
-      "summary": "A Persian consumer app for trip and event cost splitting.",
+      "role": "Consumer Product Work",
+      "summary": "A Persian consumer app for sharing trip and event costs and calculating budgets.",
       "images": [
         "plan-chin"
-      ]
+      ],
+      "company": "SJI Team Project"
     },
     {
       "slug": "culture-knowledge",
       "title": "Culture & Knowledge",
       "category": "Enterprise",
       "cover": "culture-knowledge",
-      "role": "SJI team work · contribution details pending",
-      "summary": "An internal digital product supporting culture and knowledge-sharing.",
+      "role": "Internal Digital Product Work",
+      "summary": "An internal product for cultural content, learning and knowledge-sharing.",
       "images": [
         "culture-knowledge"
-      ]
+      ],
+      "company": "SJI Team Project"
     },
     {
       "slug": "deltafx-website",
       "title": "DeltaFX Website",
       "category": "Websites",
       "cover": "deltafx-website-home",
-      "role": "Company website example · role scope pending",
-      "summary": "Brokerage website examples, distinct from the CRM and risk applications.",
+      "role": "Brokerage Website Work",
+      "summary": "Brokerage website experiences for exploring trading services and account access.",
       "images": [
         "deltafx-website-home",
         "deltafx-website-trading",
         "deltafx-website-alternate"
-      ]
+      ],
+      "company": "DeltaFX"
     },
     {
       "slug": "topfast-website",
       "title": "TopFast Website",
       "category": "Websites",
       "cover": "topfast-website-home",
-      "role": "Company website example · role scope pending",
-      "summary": "Technology ecosystem and partnership website examples.",
+      "role": "Technology Website Work",
+      "summary": "Customer and partner journeys introducing TopFast’s brokerage technology ecosystem.",
       "images": [
         "topfast-website-home",
         "topfast-website-partners"
-      ]
+      ],
+      "company": "Top Fast Technology"
     }
   ],
   "excluded": [],
   "privacy": "Phase 3: owner explicitly approves originals for the public portfolio; this supersedes the Phase 2 masking request. All 32 current assets preserve full original pixels and composition via lossless WebP conversion. CV DOCX and reference PDF are not committed.",
   "pending": [
-    "No CV PDF (DOCX only)",
-    "Plan Chin / Culture & Knowledge / portal dates and individual roles",
-    "Website-specific role scope",
-    "Publication/book citations and earlier degree years/ranks"
+    "Exact individual roles and dates for Plan Chin, Culture & Knowledge and portal examples",
+    "Website-specific responsibilities and delivery dates",
+    "Detailed employer, dates and scope for Smart Feeder and payment initiatives",
+    "Sales CRM-specific discovery, capabilities and outcomes",
+    "Full citation of the previously mentioned book; degree years/ranks not in the Master CV",
+    "Product-specific release/adoption metrics beyond the documented CRM and HR MVP outcomes"
   ],
   "composite_context": "SJI composites are now shown intact as supplied. Captions identify the relevant tile. The Academic Match AI tile remains visible in the original composite but is not attributed to SJI portal work or used for AI Market Analyst.",
   "restoration": {
