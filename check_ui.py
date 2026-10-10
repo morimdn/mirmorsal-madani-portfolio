@@ -22,7 +22,7 @@ def inspect(text, context='base'):
         key = (context, selector)
         assert key not in rules, f'Duplicate rule: {key}'
         rules[key] = {}
-        if selector.startswith('@media'):
+        if selector.startswith(('@media','@keyframes')):
             inspect(body, selector)
         else:
             for declaration in body.split(';'):
@@ -46,12 +46,20 @@ assert '.project-art' not in css and 'Phase 2' not in css and 'Phase 3' not in c
 assert '@media(max-width:900px)' in css
 assert "min-width: 901px" in Path(__file__).with_name('ui.js').read_text(encoding='utf-8')
 assert '@media(prefers-reduced-motion:reduce)' in css
+assert rules['@media(prefers-reduced-motion:reduce)', '.project-card,.project-image img,.case-link span']['transform'] == 'none!important'
+assert rules['base','.project-card']['overflow'] == 'hidden'
+assert rules['base','.project-image']['overflow'] == 'hidden'
+assert rules['@media(hover:hover) and (pointer:fine)', '.project-card:hover']['transform'] == 'translateY(-3px)'
+assert rules['@media(hover:hover) and (pointer:fine)', '.project-card:hover .project-image img']['transform'] == 'scale(1.025)'
+assert '275ms' in rules['base','.project-card']['transition']
+assert rules['base','.intro-entry .wordmark .brand-name']['animation'].endswith('300ms backwards')
+assert rules['base','.intro-entry .hero .identity > :not(h1)']['animation'].endswith('800ms backwards')
 assert ('base', '.filter:hover') not in rules
 assert ('base', '.filter:not([aria-pressed=true]):hover') in rules
 root = Path(__file__).parent
 for page in [root/'index.html', root/'projects.html', *sorted((root/'case-studies').glob('*.html'))]:
     html = page.read_text(encoding='utf-8')
-    assert 'styles.css?v=5-20261010.1' in html and 'ui.js?v=5-20261010.1' in html, page
+    assert 'styles.css?v=5-20261010.2' in html and 'ui.js?v=5-20261010.2' in html, page
 
 def luminance(color):
     rgb = [int(color[i:i+2],16)/255 for i in (1,3,5)]

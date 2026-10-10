@@ -15,6 +15,7 @@ python check_ui.py
 node --check main.js
 node --check ui.js
 node check_interactions.cjs
+node check_intro.cjs
 git diff --check
 ```
 

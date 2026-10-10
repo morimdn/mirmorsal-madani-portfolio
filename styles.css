@@ -161,6 +161,34 @@ p {
   letter-spacing: -.03em;
 }
 
+/* Entry-only reveal keeps the large heading and globe immediately visible. */
+.intro-entry .wordmark .monogram {
+  animation: logo-reveal 300ms ease-out backwards;
+}
+
+.intro-entry .wordmark .brand-name {
+  animation: name-reveal 500ms cubic-bezier(.22,1,.36,1) 300ms backwards;
+}
+
+.intro-entry .hero .identity > :not(h1) {
+  animation: hero-settle 400ms cubic-bezier(.22,1,.36,1) 800ms backwards;
+}
+
+@keyframes logo-reveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes name-reveal {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes hero-settle {
+  from { opacity: .96; transform: translateY(3px); }
+  to { opacity: 1; transform: none; }
+}
+
 .nav-links {
   display: flex;
   gap: var(--space-6);
@@ -509,7 +537,7 @@ p {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: border-color .2s, box-shadow .2s;
+  transition: transform 275ms cubic-bezier(.22,1,.36,1), border-color 275ms ease, box-shadow 275ms ease;
 }
 
 .project-body {
@@ -553,10 +581,19 @@ p {
   align-items: center;
   gap: var(--space-3);
   border-top: 1px solid #e1e6ed;
+  transition: color 275ms ease;
 }
 
-.case-link:hover {
+.case-link span {
+  transition: transform 275ms cubic-bezier(.22,1,.36,1);
+}
+
+.case-link:focus-visible {
   color: #2456b7;
+}
+
+.case-link:focus-visible span {
+  transform: translate(2px,-2px);
 }
 
 .case-link:focus-visible,.projects .filter:focus-visible {
@@ -875,6 +912,7 @@ p {
   overflow: hidden;
   padding: var(--space-4) var(--space-4) 44px;
   padding-bottom: 38px;
+  transition: background 275ms ease;
 }
 
 .project-image img {
@@ -883,10 +921,13 @@ p {
   height: 100%;
   object-fit: scale-down;
   object-position: center;
+  /* Reserve zoom space so full-bleed illustrations retain their edges. */
+  padding: 1.25%;
+  transition: transform 275ms cubic-bezier(.22,1,.36,1);
 }
 
-.project-image:hover {
-  background: #dde5f0;
+.project-image:focus-visible img {
+  transform: scale(1.025);
 }
 
 .artifact-label {
@@ -1172,9 +1213,33 @@ p {
   border-color: #2456b7;
 }
 
-.project-card:hover,.project-card:focus-within {
+.project-card:focus-within {
   border-color: #7b889c;
-  box-shadow: 0 4px 16px #0e1a2b0a;
+  box-shadow: 0 10px 24px #0e1a2b10;
+}
+
+@media(hover:hover) and (pointer:fine) {
+  .project-card:hover {
+    transform: translateY(-3px);
+    border-color: #7b889c;
+    box-shadow: 0 10px 24px #0e1a2b10;
+  }
+
+  .project-card:hover .project-image img {
+    transform: scale(1.025);
+  }
+
+  .project-image:hover {
+    background: #dde5f0;
+  }
+
+  .case-link:hover {
+    color: #2456b7;
+  }
+
+  .case-link:hover span {
+    transform: translate(2px,-2px);
+  }
 }
 
 .project-image:focus-visible {
@@ -1467,5 +1532,9 @@ p {
   *,*::before,*::after {
     transition: none!important;
     animation: none!important;
+  }
+
+  .project-card,.project-image img,.case-link span {
+    transform: none!important;
   }
 }

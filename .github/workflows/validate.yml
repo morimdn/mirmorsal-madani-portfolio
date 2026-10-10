@@ -19,5 +19,6 @@ jobs:
           node --check main.js
           node --check ui.js
           node check_interactions.cjs
+          node check_intro.cjs
       - name: Check whitespace
         run: git diff --check
