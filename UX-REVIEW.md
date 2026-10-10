@@ -1,7 +1,7 @@
 # Portfolio V4 UI/UX review
 
 Baseline: main `1376aa8`. Scope: presentation and navigation feedback only.
-All HTML, factual copy, metadata, routes, contacts, original assets and Three.js code are preserved.
+HTML structure, factual copy, metadata, routes, contacts, original assets and Three.js code are preserved. Existing HTML pages version their shared CSS/UI asset URLs to avoid stale browser/CDN copies after publication.
 
 ## Findings before implementation
 
