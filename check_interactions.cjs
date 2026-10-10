@@ -13,7 +13,10 @@ class Element {
 const menu=new Element({'aria-expanded':'false'}),nav=new Element(),filters=new Element(),count=new Element();
 const categories=['All','FinTech','Enterprise','AI','Consumer','Websites'];
 const buttons=categories.map(category=>{const element=new Element();element.dataset.filter=category;return element;});
-const cards=['FinTech','FinTech','FinTech','FinTech','FinTech','Enterprise','AI','FinTech','Enterprise','Enterprise','FinTech','FinTech','Enterprise','Enterprise','Enterprise','Enterprise','Consumer','Enterprise','Websites','Websites'].map(category=>{const element=new Element();element.dataset.category=category;return element;});
+const productMapping=JSON.parse(fs.readFileSync(__dirname+'/ASSET-MAPPING.json','utf8'));
+assert.equal(productMapping.projects.length,17);
+const cards=productMapping.projects.map(({category})=>{const element=new Element();element.dataset.category=category;return element;});
+assert.deepEqual(categories.map(category=>cards.filter(card=>category==='All'||card.dataset.category===category).length),[17,7,6,1,1,2]);
 filters.querySelectorAll=()=>buttons;
 const nodes={'.menu-toggle':menu,'.nav-links':nav,'.filters':filters,'.project-count':count,'.site-header':new Element()};
 const document={listeners:{},querySelector:selector=>nodes[selector],querySelectorAll:()=>cards,addEventListener(type,fn){this.listeners[type]=fn;}};

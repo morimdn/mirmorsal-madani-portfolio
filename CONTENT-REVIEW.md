@@ -40,3 +40,13 @@ SJI composites stay intact. Captions identify the relevant tile; the adjacent Ac
 ## Publication
 
 V3 explicitly authorizes validated publication to the existing main branch and existing GitHub Pages URL. All twenty case routes, six selected cards, twenty collection cards, contact destinations and Google Scholar integration remain. Editorial review notes live in this document, not in visitor-facing pages. Git history is preserved; no force push.
+
+## V5 decisions (supersede V3 counts and allocations above)
+
+The owner's V5 brief removes Saman Shahr, Smart Feeder Tools and Kiakooshyar HR PWA from public cards, routes and sitemap. Unrelated employment history, including Kiakooshyar delivery experience, remains. There are now seventeen projects and nineteen HTML pages.
+
+IB uses its dedicated insights cover. Payment Gateway uses the specifically supplied BEP20/TRC20 illustration and describes managed portfolio scope without unsupported metrics or protocols. Enterprise onboarding uses reference_05, performance evaluation uses reference_06 and Plan Chin uses only reference_07 for travel budgeting and shared expenses. Corporate website titles and responsive/administrative capabilities follow the owner's brief without attributing all implementation to one person.
+
+The owner subsequently assigned three Desktop/crm originals to mobile CRM: image 39.png, image 47 (1).png and iPhone 14 & 15 Pro - 18.png. This explicitly supersedes the earlier separate wallet/Finanpay allocation. The native files replace the lower-resolution ZIP copies and the temporary PDF mobile selections. Two portrait screens and the intact three-phone composition appear together; captions distinguish interface/design exploration from delivery claims. Thirty-three WebP slots preserve source dimensions and every decoded pixel. The largest composition remains 7208 × 5400 (9.86 MB) to preserve the requested original fidelity; it loads lazily. Source documents and private filesystem paths are not published.
+
+The approved career dates, Riskotik ownership, publication links, globe implementation and personal Senior Product Manager positioning remain. Employer website links, readable research titles, B2B delivery service and accessible contact SVG links follow the V5 brief. Static content/style/interaction checks and the optional private-source fidelity check pass before publication; browser verification follows confirmed Pages deployment. Git history is preserved by a normal main-branch fast-forward.

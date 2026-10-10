@@ -1,5 +1,5 @@
 {
-  "primary_source": "Master CV; owner-provided V3 corrections; TopFast product presentation; existing portfolio and product images. Research citations checked against publisher records.",
+  "primary_source": "Master CV; owner-provided V3 corrections; TopFast product presentation; existing portfolio and product images. Research citations checked against publisher records. Owner V5 corrections and portfolio_final_images_for_codex.zip (ASSET_MAP_README.txt).",
   "projects": [
     {
       "slug": "brokerage-crm",
@@ -49,12 +49,12 @@
       "slug": "ib-referral",
       "title": "IB & Referral Platform",
       "category": "FinTech",
-      "cover": "ib-dashboard",
+      "cover": "ib-insights",
       "role": "Product Roadmaps, Partner Workflows & Team Leadership",
       "summary": "Partner networks, multi-level IB structures, commissions and performance analytics.",
       "images": [
-        "ib-dashboard",
         "ib-insights",
+        "ib-dashboard",
         "ib-profile-sharing",
         "ib-wallet-transfer"
       ],
@@ -114,70 +114,45 @@
       "role": "Hands-on Product Manager — Native Mobile CRM",
       "summary": "Native brokerage workflows shaped through close product collaboration with a Flutter developer.",
       "images": [
-        "crm-native-mobile"
+        "crm-native-mobile",
+        "supplied-wallet-mobile",
+        "supplied-finanpay"
       ],
       "company": "Top Fast Technology"
     },
     {
-      "slug": "saman-shahr",
-      "title": "Saman Shahr",
-      "category": "Enterprise",
-      "cover": null,
-      "role": "Product Roadmaps & Platform Strategy",
-      "summary": "Municipal smart-city services shaped around customer needs and platform priorities.",
-      "images": [],
-      "company": "SJI Holding"
-    },
-    {
-      "slug": "smart-feeder",
-      "title": "Smart Feeder Tools",
-      "category": "FinTech",
-      "cover": null,
-      "role": "Product & Development Initiatives",
-      "summary": "Smart feeder tooling within my financial-market product work.",
-      "images": [],
-      "company": "Financial-market Product Work"
-    },
-    {
       "slug": "payments",
-      "title": "Multi-platform Payments",
+      "title": "Payment Gateway",
       "category": "FinTech",
-      "cover": null,
-      "role": "Product & Development Initiatives",
-      "summary": "Payment-related product and development work across financial-market platforms.",
-      "images": [],
+      "cover": "payment-gateway",
+      "role": "Managed Product Portfolio",
+      "summary": "Payment gateway workflows for BEP20 and TRC20 transactions within my managed product portfolio.",
+      "images": [
+        "payment-gateway"
+      ],
       "company": "Financial-market Product Work"
-    },
-    {
-      "slug": "kiakooshyar",
-      "title": "Kiakooshyar HR PWA",
-      "category": "Enterprise",
-      "cover": null,
-      "role": "Contract Product Lead & Hands-on Builder",
-      "summary": "An independently designed and built HR PWA, with an MVP delivered and in use by the client HR team.",
-      "images": [],
-      "company": "Independent Contract Product"
     },
     {
       "slug": "enterprise-onboarding",
       "title": "Organizational Onboarding",
       "category": "Enterprise",
-      "cover": null,
+      "cover": "sji-onboarding",
       "role": "Product Owner — Enterprise Onboarding",
       "summary": "Employee onboarding workflows defined with HR stakeholders and users.",
-      "images": [],
+      "images": [
+        "sji-onboarding"
+      ],
       "company": "Shokouhejavid Iranian (SJI)"
     },
     {
       "slug": "enterprise-performance",
       "title": "Performance & 360° Evaluation",
       "category": "Enterprise",
-      "cover": "sji-performance",
+      "cover": "sji-performance-dashboard",
       "role": "Product Owner — Evaluation & HR Workflows",
       "summary": "Performance reviews, 360-degree feedback, scoring and employee leaderboards.",
       "images": [
-        "sji-performance",
-        "sji-evaluation-workflow"
+        "sji-performance-dashboard"
       ],
       "company": "Shokouhejavid Iranian (SJI)"
     },
@@ -185,10 +160,11 @@
       "slug": "sji-portals",
       "title": "MySJI & Internal Portals",
       "category": "Enterprise",
-      "cover": "sji-internal-portal",
+      "cover": "sji-onboarding",
       "role": "SJI Enterprise Product Context",
       "summary": "Internal service portals connecting employees with organizational tools and workflows.",
       "images": [
+        "sji-onboarding",
         "sji-internal-portal",
         "mysji-portal"
       ],
@@ -200,7 +176,7 @@
       "category": "Consumer",
       "cover": "plan-chin",
       "role": "Consumer Product Work",
-      "summary": "A Persian consumer app for sharing trip and event costs and calculating budgets.",
+      "summary": "Travel budgeting, shared expenses and individual contributions and balances.",
       "images": [
         "plan-chin"
       ],
@@ -220,11 +196,11 @@
     },
     {
       "slug": "deltafx-website",
-      "title": "DeltaFX Website",
+      "title": "FinTech Corporate Web Experience",
       "category": "Websites",
       "cover": "deltafx-website-home",
       "role": "Brokerage Website Work",
-      "summary": "Brokerage website experiences for exploring trading services and account access.",
+      "summary": "Responsive brokerage web journeys connecting trading information, account actions and managed site content.",
       "images": [
         "deltafx-website-home",
         "deltafx-website-trading",
@@ -234,11 +210,11 @@
     },
     {
       "slug": "topfast-website",
-      "title": "TopFast Website",
+      "title": "Interactive Corporate Website & Admin Platform",
       "category": "Websites",
       "cover": "topfast-website-home",
       "role": "Technology Website Work",
-      "summary": "Customer and partner journeys introducing TopFast’s brokerage technology ecosystem.",
+      "summary": "A responsive corporate website with interactive customer journeys and administrative content management.",
       "images": [
         "topfast-website-home",
         "topfast-website-partners"
@@ -246,27 +222,34 @@
       "company": "Top Fast Technology"
     }
   ],
-  "excluded": [],
-  "privacy": "Phase 3: owner explicitly approves originals for the public portfolio; this supersedes the Phase 2 masking request. All 32 current assets preserve full original pixels and composition via lossless WebP conversion. CV DOCX and reference PDF are not committed.",
+  "excluded": [
+    {
+      "slug": "kiakooshyar",
+      "reason": "Removed from public project listing and case routes at owner request (V5)."
+    },
+    {
+      "slug": "saman-shahr",
+      "reason": "Removed from public project listing and case routes at owner request (V5)."
+    },
+    {
+      "slug": "smart-feeder",
+      "reason": "Removed from public project listing and case routes at owner request (V5)."
+    }
+  ],
+  "privacy": "Owner-approved originals; no masking, cropping, reconstructed UI or screenshot overlays.",
   "pending": [
     "Exact individual roles and dates for Plan Chin, Culture & Knowledge and portal examples",
     "Website-specific responsibilities and delivery dates",
-    "Detailed employer, dates and scope for Smart Feeder and payment initiatives",
     "Sales CRM-specific discovery, capabilities and outcomes",
     "Full citation of the previously mentioned book; degree years/ranks not in the Master CV",
     "Product-specific release/adoption metrics beyond the documented CRM and HR MVP outcomes"
   ],
   "composite_context": "SJI composites are now shown intact as supplied. Captions identify the relevant tile. The Academic Match AI tile remains visible in the original composite but is not attributed to SJI portal work or used for AI Market Analyst.",
   "restoration": {
-    "slots": 32,
-    "unique_sources": 28,
+    "slots": 33,
     "encoding": "Lossless WebP at native dimensions",
-    "ai_source": "TopFast presentation page 11, original embedded Image89.jpg",
     "masked_assets_remaining": 0,
-    "zip_image_coverage": "27/27 original ZIP raster images, plus the original PDF page-11 AI image."
+    "v5_mapping": "Owner-assigned native mobile originals; explicit V5 enterprise references, payment illustration and IB insights."
   },
-  "supplementary_images": [
-    "supplied-wallet-mobile",
-    "supplied-finanpay"
-  ]
+  "supplementary_images": []
 }

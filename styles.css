@@ -677,29 +677,90 @@ p {
 }
 
 .contact-links {
-  display: grid;
-  gap: 0;
+  max-width: 384px;
+  align-self: center;
 }
 
 .contact-links a {
-  padding: 18px 0;
-  border-bottom: 1px solid var(--line);
+  padding: 20px;
+  min-height: 72px;
+  border: 1px solid var(--control-border);
+  border-radius: 10px;
   text-decoration: none;
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
   font-size: var(--type-card);
-  overflow-wrap: anywhere;
+  transition: color .2s, background .2s, border-color .2s;
 }
 
 .contact-links a:hover {
   color: #91b2ff;
+  background: var(--surface);
+  border-color: #91b2ff;
 }
 
-.channel-label {
+.contact-links svg {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.contact-links .contact-phone {
+  width: 100%;
+  min-height: 64px;
+  margin-bottom: var(--space-6);
+  font-size: 1.125rem;
+}
+
+.contact-icon-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.company-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 32px;
+  font-size: var(--type-small);
   color: var(--muted);
-  font-size: var(--type-label);
-  min-width: 68px;
+  margin-bottom: var(--space-2);
+}
+
+.company-link:hover {
+  color: #91b2ff;
+}
+
+.project-image.illustration-cover {
+  aspect-ratio: 4 / 3;
+  padding: 0;
+  background: var(--bg);
+}
+
+.case-cover.illustration-cover {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.screenshot-gallery.mobile-gallery {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+}
+
+.mobile-gallery .gallery-item img {
+  height: 520px;
+}
+
+.mobile-gallery .gallery-item.landscape {
+  grid-column: 1 / -1;
+}
+
+.mobile-gallery .gallery-item.landscape img {
+  height: auto;
 }
 
 .footer-inner {
@@ -1170,6 +1231,9 @@ p {
 }
 
 @media(max-width:1050px) {
+  .screenshot-gallery.mobile-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .nav-links {
     gap: 16px;
   }
@@ -1352,13 +1416,17 @@ p {
 }
 
 @media(max-width:480px) {
+  .screenshot-gallery.mobile-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .mobile-gallery .gallery-item img {
+    height: min(70dvh, 640px);
+  }
   .project-grid,.services-grid,.cap-grid {
     grid-template-columns: 1fr;
   }
 
-  .contact-links a {
-    flex-wrap: wrap;
-  }
 
   .hero-visual {
     height: 260px;

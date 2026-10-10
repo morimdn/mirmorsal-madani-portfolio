@@ -56,14 +56,14 @@ for path,p in pages.items():
         assert target.exists(),f'{path}: broken local link {href}'
         if u.fragment:assert target in pages and unquote(u.fragment) in pages[target].ids,f'{path}: broken anchor {href}'
         links+=1
-assert len(pages)==22
+assert len(pages)==19
 home=(ROOT/'index.html').read_text(encoding='utf-8')
 for contact in ('mailto:mirmorsal.madani1361@gmail.com','tel:+48452984012','https://wa.me/48452984012','https://t.me/mirmorsal','https://github.com/morimdn','https://www.linkedin.com/in/mirmorsal-madani/'):
     assert contact in home
-for slug in ('brokerage-crm','risk-management','ib-referral','social-trading','loyalty-club','sales-crm','ai-market-analyst','trading-plugins','mobile-crm','saman-shahr','smart-feeder','payments','enterprise-onboarding','enterprise-performance','kiakooshyar','sji-portals','plan-chin','culture-knowledge','deltafx-website','topfast-website'):
+for slug in ('brokerage-crm','risk-management','ib-referral','social-trading','loyalty-club','sales-crm','ai-market-analyst','trading-plugins','mobile-crm','payments','enterprise-onboarding','enterprise-performance','sji-portals','plan-chin','culture-knowledge','deltafx-website','topfast-website'):
     assert (ROOT/'case-studies'/f'{slug}.html').exists()
 sitemap=ET.parse(ROOT/'sitemap.xml')
-assert len(sitemap.getroot())==22
+assert len(sitemap.getroot())==19
 assert 'Jan 2026' not in home and 'Sep 2024–Dec 2025' not in home
 for date in ('May 2023–May 2024','May 2024–Present','August 2020 — March 2023','July 2019 — August 2020','Dec 2010–Jul 2022','Aug 2022–Sep 2024','Dec 2010–Apr 2022'):
     assert date in home,f'Missing corrected CV date: {date}'
@@ -71,7 +71,7 @@ assert home.count('class="project-card"')==6
 assert './projects.html' in home
 assert 'https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C5&amp;q=mirmorsal+madani&amp;oq=' in home
 collection=(ROOT/'projects.html').read_text(encoding='utf-8')
-assert collection.count('class="project-card"')==20
+assert collection.count('class="project-card"')==17
 assert './case-studies/ai-market-analyst.html' in collection and 'AI Market Analyst' in collection
 for p in pages:
     text=p.read_text(encoding='utf-8')
@@ -92,7 +92,7 @@ for project in mapping['projects']:
         cards=re.findall(r'<article class="project-card".*?</article>',listing,re.S)
         card=next((c for c in cards if f'case-studies/{project["slug"]}.html' in c),None)
         if card:assert project['role'] in unescape(card) and project['summary'] in unescape(card),f'{project["slug"]}: stale project card'
-major=('brokerage-crm','risk-management','mobile-crm','loyalty-club','ib-referral','social-trading','ai-market-analyst','trading-plugins','enterprise-onboarding','enterprise-performance','kiakooshyar')
+major=('brokerage-crm','risk-management','mobile-crm','loyalty-club','ib-referral','social-trading','ai-market-analyst','trading-plugins','enterprise-onboarding','enterprise-performance')
 for slug in major:
     case=pages[ROOT/'case-studies'/f'{slug}.html']
     assert {'product-overview','business-problem','target-users','role','discovery','workflows','delivery','evidence'}.issubset(case.ids),f'{slug}: incomplete major case'
@@ -104,21 +104,22 @@ assert 'under eight months' in home and 'under eight months' in (ROOT/'case-stud
 ai=(ROOT/'case-studies/ai-market-analyst.html').read_text(encoding='utf-8')
 assert 'without automated trade execution' in ai and 'Top Fast Technology' in ai
 assert 'https://doi.org/10.1002/spy2.264' in home and 'https://doi.org/10.1007/s11227-022-04851-3' in home
-print('Content consistency: 20 company/context and role mappings, 11 major cases, correct Riskotik ownership, delivery milestones and publication links passed.')
+print('Content consistency: 17 company/context and role mappings, 10 major cases, correct Riskotik ownership, delivery milestones and publication links passed.')
 assert not list(ROOT.rglob('*.docx')) and not list(ROOT.rglob('*.pdf')),'CV/reference documents should not be committed'
 manifest=json.loads((ROOT/'assets/manifest.json').read_text())
-assert len(manifest)==32
+assert len(manifest)==33
 assert len({a['id'] for a in manifest})==len(manifest)
 for asset in manifest:
     image=ROOT/asset['file']
     assert image.is_file() and image.stat().st_size==asset['bytes']
-    assert image.suffix=='.webp' and 0<asset['width']<=4096 and 0<asset['height']<=4096
-    assert asset['alt'] and asset['caption'] and asset['bytes']<2_000_000
+    native_mobile=asset['source_archive']=='owner_mobile_crm_originals'
+    assert image.suffix=='.webp' and 0<asset['width']<=(7208 if native_mobile else 4096) and 0<asset['height']<=(5400 if native_mobile else 4096)
+    assert asset['alt'] and asset['caption'] and asset['bytes']<(10_000_000 if native_mobile else 2_000_000)
     assert asset['redacted'] is False and asset['lossless'] is True
     assert hashlib.sha256(image.read_bytes()).hexdigest()==asset['sha256'],f'Asset checksum mismatch: {asset["id"]}'
     assert len(asset['pixel_sha256'])==64 and len(asset['source_sha256'])==64
     assert any(asset['file'] in page.path.read_text(encoding='utf-8') for page in pages.values()),f'Unused asset: {asset["id"]}'
-assert sum(a['bytes'] for a in manifest)<16_000_000
+assert sum(a['bytes'] for a in manifest)<24_000_000
 assert {p.relative_to(ROOT).as_posix() for p in (ROOT/'assets/projects').iterdir()}=={a['file'] for a in manifest},'Unexpected or obsolete image derivative remains'
 print(f'Asset manifest: {len(manifest)} WebP files; {sum(a["bytes"] for a in manifest):,} bytes; image dimensions, paths, budget and usage passed.')
 def luminance(hex):
