@@ -694,13 +694,9 @@ p {
   height: 56px;
   padding: 12px;
   object-fit: contain;
-  background: #fff;
-  border-radius: 6px;
-}
-
-.publisher-logos img[src$="wiley.svg"],.publisher-logos img[src$="world-scientific.png"] {
   background: var(--bg);
   border: 1px solid var(--line);
+  border-radius: 6px;
 }
 
 .research-group {
