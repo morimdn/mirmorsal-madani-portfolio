@@ -1,0 +1,32 @@
+[
+  {
+    "id": "springer",
+    "alt": "Springer",
+    "source": "https://link.springer.com/oscar-static/images/brand-hubs/springer_logo-33a769fac2.svg",
+    "file": "assets/publishers/springer.svg",
+    "width": 411,
+    "height": 110,
+    "bytes": 5722,
+    "sha256": "3d37f117c2f8fbd05ac8bbf56c3c87d7cc581eda51cf368e2f032ba6bb48747f"
+  },
+  {
+    "id": "wiley",
+    "alt": "Wiley",
+    "source": "https://www.wiley.com/",
+    "file": "assets/publishers/wiley.svg",
+    "width": 145,
+    "height": 40,
+    "bytes": 3290,
+    "sha256": "5168b5a29abfe63b36250562bbbfa9a61ba2a61bc7de0007ef7156b2f0347d63"
+  },
+  {
+    "id": "world-scientific",
+    "alt": "World Scientific Europe",
+    "source": "https://europe.worldscientific.com/images/WS_EU_rw_bold.png",
+    "file": "assets/publishers/world-scientific.png",
+    "width": 400,
+    "height": 97,
+    "bytes": 10259,
+    "sha256": "e6cdaa99f3518b7ace953cf27820a8a64ae16d517449f34fec806d6c01ea3733"
+  }
+]

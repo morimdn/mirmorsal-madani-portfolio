@@ -11,6 +11,8 @@ from html import unescape
 ROOT = Path(__file__).resolve().parent
 BASE = 'https://morimdn.github.io/mirmorsal-madani-portfolio/'
 MANIFEST=json.loads((ROOT/'assets/manifest.json').read_text())
+PUBLISHERS=json.loads((ROOT/'assets/publishers.json').read_text())
+MANIFEST+=PUBLISHERS
 class Page(HTMLParser):
     def __init__(self, path):
         super().__init__(convert_charrefs=True)
@@ -104,10 +106,27 @@ assert 'under eight months' in home and 'under eight months' in (ROOT/'case-stud
 ai=(ROOT/'case-studies/ai-market-analyst.html').read_text(encoding='utf-8')
 assert 'without automated trade execution' in ai and 'Top Fast Technology' in ai
 assert 'https://doi.org/10.1002/spy2.264' in home and 'https://doi.org/10.1007/s11227-022-04851-3' in home
+research=home.split('id="research"',1)[1].split('</section>',1)[0]
+topics=re.findall(r'<li>.*?<span>(.*?)</span></li>',research,re.S)
+assert topics==['Privacy-Preserving Data Mining','Text Mining','Imbalanced Data Classification','Anomaly Detection','Fraud Detection','Deep Learning','Natural Language Processing (NLP)','Feature Engineering']
+assert re.findall(r'<h3>(.*?)</h3>',research)==['Core Research','Intelligent Detection','AI &amp; Machine Learning']
+topic_grid=research.split('<div class="research-grid"',1)[1].split('<p class="research-publications"',1)[0]
+assert topic_grid.count('<svg ')==8 and topic_grid.count('aria-hidden="true"')==8
+assert research.count('scholar.google.com')==1 and research.count('assets/publishers/')==3
+assert 'A research foundation.<br>An applied perspective.' in research
+assert home.count('class="service')==6  # service grid and five offerings
+assert 'AI-Augmented<br>Product Management' in home and 'End-to-End B2B<br>Product Delivery' in home
+assert 'while keeping product decisions and quality under human control.' in home
+assert 'lead Product Owners and Product Designers' in home and 'Product Manager for the native Flutter CRM' in home
+print('V6: eight topics, three groups, decorative icons, three publisher logos, single research Scholar CTA, B2B/AI offerings and hands-on leadership passed.')
 print('Content consistency: 17 company/context and role mappings, 10 major cases, correct Riskotik ownership, delivery milestones and publication links passed.')
 assert not list(ROOT.rglob('*.docx')) and not list(ROOT.rglob('*.pdf')),'CV/reference documents should not be committed'
 manifest=json.loads((ROOT/'assets/manifest.json').read_text())
 assert len(manifest)==33
+assert len(PUBLISHERS)==3
+for logo in PUBLISHERS:
+    data=(ROOT/logo['file']).read_bytes()
+    assert len(data)==logo['bytes'] and hashlib.sha256(data).hexdigest()==logo['sha256']
 assert len({a['id'] for a in manifest})==len(manifest)
 for asset in manifest:
     image=ROOT/asset['file']
