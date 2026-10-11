@@ -13,7 +13,7 @@ home_v9 = (ROOT/'index.html').read_text(encoding='utf-8')
 about_v9 = re.search(r'<section[^>]+id="about".*?</section>', home_v9, re.S).group()
 assert all(company not in about_v9 for company in ('Top Fast','DeltaFX','SJI'))
 assert home_v9.count('class="capability-node"') == 8
-assert 'Product Manager &amp; Product Leader' in home_v9
+assert 'Product Manager | PhD in Software Engineering' in home_v9
 assert 'Wrocław, Poland — Open to product opportunities across Europe' in home_v9
 for slug, title, role in [
     ('risk-management','Risk Management Platform','Product Owner — End-to-End Product Ownership'),
@@ -59,6 +59,10 @@ class Page(HTMLParser):
 
 pages={}
 for path in ROOT.rglob('*.html'):
+    # Search Console tokens are verification resources, not portfolio pages.
+    if path.parent == ROOT and re.fullmatch(r'google[0-9a-f]+\.html', path.name):
+        assert path.read_text(encoding='utf-8').strip() == f'google-site-verification: {path.name}', f'{path}: invalid verification token'
+        continue
     p=Page(path);p.feed(path.read_text(encoding='utf-8'));pages[path]=p
     assert len(p.ids)==len(set(p.ids)),f'{path}: duplicate IDs'
     assert p.h1==1 and p.title and p.description,f'{path}: incomplete page metadata'
@@ -77,6 +81,10 @@ for path,p in pages.items():
         links+=1
 assert len(pages)==15
 home=(ROOT/'index.html').read_text(encoding='utf-8')
+assert '<h3>SamanShahr</h3>' in home and 'href="https://samanshahr.com/"' in home
+assert 'href="https://gorgan.iau.ir/"' in home and 'Islamic Azad University, Gorgan Branch' in home
+assert home.count('class="job-title"') == 8
+assert 'Research-driven, data-informed, AI-enabled product management' in home
 for contact in ('mailto:mirmorsal.madani1361@gmail.com','tel:+48452984012','https://wa.me/48452984012','https://t.me/mirmorsal','https://github.com/morimdn','https://www.linkedin.com/in/mirmorsal-madani/'):
     assert contact in home
 for slug in ('brokerage-crm','risk-management','ib-referral','social-trading','loyalty-club','ai-market-analyst','mobile-crm','payments','enterprise-onboarding','enterprise-performance','plan-chin','deltafx-website','topfast-website'):
