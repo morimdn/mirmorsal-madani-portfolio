@@ -153,8 +153,8 @@ p {
 
 .portrait-trigger { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0; border: 0; background: transparent; color: inherit; font: inherit; text-align: left; }
 .portrait-card { position: absolute; left: 0; top: 100%; z-index: 5; width: min(200px,calc(100vw - 32px)); padding-top: 12px; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(6px); transition: opacity 275ms ease, transform 275ms ease, visibility 275ms; }
-.portrait-frame { padding: 8px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); box-shadow: 0 14px 32px #00000030; }
-.portrait-frame img { display: block; width: 100%; height: auto; border-radius: 7px; }
+.portrait-frame { padding: 6px; border: 1px solid var(--gold); border-radius: 50%; background: var(--surface); box-shadow: 0 12px 28px #00000030; }
+.portrait-frame img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; object-position: 50% 42%; border-radius: 50%; }
 .wordmark.portrait-open .portrait-card { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
 
 .monogram {
