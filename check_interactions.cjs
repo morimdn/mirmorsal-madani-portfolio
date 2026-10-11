@@ -12,7 +12,8 @@ for (const reduced of [false, true]) {
   assert.equal(observed, !reduced);
   if (!reduced) {
     callback([{isIntersecting:false}]); assert.equal(diagram.classList.value, undefined);
-    callback([{isIntersecting:true}]); assert(disconnected); assert.equal(diagram.classList.value, 'is-visible');
+    callback([{isIntersecting:true,intersectionRatio:.2}]); assert.equal(diagram.classList.value, undefined);
+    callback([{isIntersecting:true,intersectionRatio:.5}]); assert(disconnected); assert.equal(diagram.classList.value, 'is-visible');
     diagram.listeners.animationend({animationName:'capability-reveal',target:{style:{getPropertyValue:()=> '7'}}});
     assert.equal(diagram.dataset.motionState,'complete');
   }

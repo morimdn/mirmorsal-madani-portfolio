@@ -8,11 +8,11 @@ if (leadershipDiagram && typeof IntersectionObserver === 'function' && !matchMed
     if (event.animationName === 'capability-reveal' && event.target.style.getPropertyValue('--order') === '7') leadershipDiagram.dataset.motionState = 'complete';
   });
   const observer = new IntersectionObserver(entries => {
-    if (entries.some(entry => entry.isIntersecting)) {
+    if (entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= .45)) {
       leadershipDiagram.classList.add('is-visible');
       observer.disconnect();
     }
-  }, { threshold: .2 });
+  }, { threshold: .45 });
   observer.observe(leadershipDiagram);
 }
 

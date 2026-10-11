@@ -24,8 +24,8 @@ for(const options of [{},{type:'reload'},{referrer:'https://example.com/'}]) {
   state.frames.shift()();state.frames.shift()();
   assert(state.classes.has('intro-entry')&&!state.classes.has('intro-pending'));
   assert.equal(state.dataset.introState,'running');
-  for(const animationName of ['logo-reveal','name-reveal','hero-settle']) state.events.animationstart({animationName});
-  assert.equal(state.dataset.introStarted.trim(),'logo-reveal name-reveal hero-settle');
+  for(const animationName of ['logo-reveal','signature-draw','name-reveal','hero-settle']) state.events.animationstart({animationName});
+  assert.equal(state.dataset.introStarted.trim(),'logo-reveal signature-draw name-reveal hero-settle');
   state.events.animationend({animationName:'hero-settle'});
   assert.equal(state.dataset.introState,'complete');
 }

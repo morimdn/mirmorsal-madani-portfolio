@@ -53,14 +53,14 @@ assert rules['@media(hover:hover) and (pointer:fine)', '.project-card:hover']['t
 assert rules['@media(hover:hover) and (pointer:fine)', '.project-card:hover .project-image img']['transform'] == 'scale(1.025)'
 assert '275ms' in rules['base','.project-card']['transition']
 assert rules['base','.intro-entry .wordmark .brand-name']['animation'].endswith('300ms backwards')
-assert rules['base','.intro-entry .hero .identity > :not(h1)']['animation'].endswith('800ms backwards')
+assert rules['base','.intro-entry .hero .identity > :not(h1):not(.hero-signature)']['animation'].endswith('800ms backwards')
 assert ('base', '.filter:hover') not in rules
 assert ('base', '.filter:not([aria-pressed=true]):hover') in rules
 root = Path(__file__).parent
 for page in [root/'index.html', root/'projects.html', *sorted((root/'case-studies').glob('*.html'))]:
     html = page.read_text(encoding='utf-8')
-    version='10-20261011'
-    assert f'styles.css?v={version}' in html and 'ui.js?v=10-20261011' in html, page
+    version='11-20261011'
+    assert f'styles.css?v={version}' in html and 'ui.js?v=11-20261011' in html, page
 
 def luminance(color):
     rgb = [int(color[i:i+2],16)/255 for i in (1,3,5)]
