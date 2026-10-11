@@ -1,4 +1,29 @@
 // Navigation and filters stay independent of WebGL and the external Three.js module.
+const portrait = document.querySelector('.wordmark');
+const portraitTrigger = document.querySelector('.portrait-trigger');
+if (portrait && portraitTrigger) {
+  const card = portrait.querySelector('.portrait-card');
+  let pinned = false;
+  const showPortrait = open => {
+    portrait.classList.toggle('portrait-open', open);
+    portraitTrigger.setAttribute('aria-expanded', String(open));
+    card.setAttribute('aria-hidden', String(!open));
+  };
+  portrait.addEventListener('pointerenter', event => { if (event.pointerType === 'mouse') showPortrait(true); });
+  portrait.addEventListener('pointerleave', () => { if (!pinned && document.activeElement !== portraitTrigger) showPortrait(false); });
+  portraitTrigger.addEventListener('focus', () => showPortrait(true));
+  portraitTrigger.addEventListener('click', () => { pinned = !pinned; showPortrait(pinned); });
+  portrait.addEventListener('focusout', event => {
+    if (!portrait.contains(event.relatedTarget)) { pinned = false; showPortrait(false); }
+  });
+  document.addEventListener('click', event => {
+    if (!portrait.contains(event.target)) { pinned = false; showPortrait(false); }
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') { pinned = false; showPortrait(false); }
+  });
+}
+
 // A short, one-time map reveal. Static content is the fallback for reduced motion
 // and browsers without IntersectionObserver; no continuous animation runs.
 const leadershipDiagram = document.querySelector('.leadership-diagram');

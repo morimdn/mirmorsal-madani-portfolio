@@ -85,3 +85,6 @@ V10 updates only the Hero professional title, snapshot support typography/fourth
 
 
 Motion refinement: the existing header-only intro was easy to miss. A small gold MM signature beside the always-readable Hero name now draws its outline during the existing entry sequence; it reserves no extra layout space and does not block interactions. Internal navigation/history still skips the intro, and reduced motion is static. The capability map waits for 45% visibility, reveals nodes in a clearer 1.46-second sequence, draws connectors over 1.5 seconds and adds restrained 275 ms hover feedback. One keyboard focus stop provides a clear whole-map outline; nodes remain non-interactive labels. No looping motion, extra WebGL, imagery or content changes are introduced.
+
+
+Owner follow-up: remove logo motion and the floating Hero MM signature entirely. Static header branding now acts as a portrait disclosure on all pages. The owner-provided 775x719 JPEG is copied byte-for-byte, displayed without cropping or distortion in a 200px anchored card. Mouse hover/focus previews it, click or mobile tap pins/toggles it, and Escape, outside click or focus departure closes it. Opacity/6px translation use 275 ms transitions with a static reduced-motion mode. The image stays outside normal layout flow, and the Hero content, globe and capability-map transitions are preserved.

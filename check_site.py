@@ -53,6 +53,9 @@ class Page(HTMLParser):
                 assert a.get('width') and a.get('height'),f'{self.path}: missing intrinsic image dimensions'
                 assert a.get('loading') in ('lazy','eager'),f'{self.path}: missing image loading strategy'
                 asset=next((x for x in MANIFEST if a['src'].endswith(x['file'])),None)
+                if a['src'].endswith('assets/mirmorsal-madani.jpg'):
+                    assert (a['width'],a['height'],a['alt']) == ('775','719','Portrait of Mirmorsal Madani')
+                    return
                 assert asset and int(a['width'])==asset['width'] and int(a['height'])==asset['height'],f'{self.path}: incorrect native image dimensions'
                 assert a['alt']==asset['alt'],f'{self.path}: image alt differs from provenance manifest'
         if a.get('target')=='_blank':assert 'noopener' in a.get('rel',''),f'{self.path}: unsafe new tab'

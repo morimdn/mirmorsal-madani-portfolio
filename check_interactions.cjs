@@ -28,6 +28,23 @@ class Element {
   get classList(){return {add:key=>this.classes.add(key),remove:key=>this.classes.delete(key),contains:key=>this.classes.has(key),toggle:(key,on)=>on?this.classes.add(key):this.classes.delete(key)};}
 }
 const menu=new Element({'aria-expanded':'false'}),nav=new Element(),filters=new Element(),count=new Element();
+// Photo previews must work without hover and dismiss without trapping focus.
+{
+  const trigger=new Element(), card=new Element(), wrapper=new Element(), events={};
+  wrapper.querySelector=()=>card;
+  wrapper.contains=target=>target===trigger||target===card;
+  const doc={activeElement:null,querySelector:selector=>({'.wordmark':wrapper,'.portrait-trigger':trigger}[selector]),querySelectorAll:()=>[],addEventListener:(name,fn)=>events[name]=fn};
+  vm.runInNewContext(fs.readFileSync(__dirname+'/ui.js','utf8'),{document:doc});
+  wrapper.listeners.pointerenter({pointerType:'mouse'}); assert.equal(trigger.getAttribute('aria-expanded'),'true');
+  wrapper.listeners.pointerleave(); assert.equal(card.getAttribute('aria-hidden'),'true');
+  wrapper.listeners.pointerenter({pointerType:'touch'}); assert.equal(trigger.getAttribute('aria-expanded'),'false');
+  trigger.listeners.click(); assert.equal(trigger.getAttribute('aria-expanded'),'true');
+  events.keydown({key:'Escape'}); assert.equal(trigger.getAttribute('aria-expanded'),'false');
+  trigger.listeners.focus(); assert.equal(trigger.getAttribute('aria-expanded'),'true');
+  wrapper.listeners.focusout({relatedTarget:null}); assert.equal(trigger.getAttribute('aria-expanded'),'false');
+  trigger.listeners.click(); events.click({target:null}); assert.equal(trigger.getAttribute('aria-expanded'),'false');
+  console.log('PASS: portrait mouse preview, touch/click, keyboard focus, Escape, focus departure and outside dismissal.');
+}
 const categories=['All','FinTech','Enterprise','AI','Consumer','Websites'];
 const buttons=categories.map(category=>{const element=new Element();element.dataset.filter=category;return element;});
 const productMapping=JSON.parse(fs.readFileSync(__dirname+'/ASSET-MAPPING.json','utf8'));

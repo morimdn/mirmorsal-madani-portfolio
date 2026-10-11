@@ -141,6 +141,7 @@ p {
 }
 
 .wordmark {
+  position: relative;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -149,6 +150,12 @@ p {
   font-weight: 600;
   white-space: nowrap;
 }
+
+.portrait-trigger { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0; border: 0; background: transparent; color: inherit; font: inherit; text-align: left; }
+.portrait-card { position: absolute; left: 0; top: 100%; z-index: 5; width: min(200px,calc(100vw - 32px)); padding-top: 12px; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(6px); transition: opacity 275ms ease, transform 275ms ease, visibility 275ms; }
+.portrait-frame { padding: 8px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); box-shadow: 0 14px 32px #00000030; }
+.portrait-frame img { display: block; width: 100%; height: auto; border-radius: 7px; }
+.wordmark.portrait-open .portrait-card { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
 
 .monogram {
   border: 1px solid var(--gold);
@@ -159,40 +166,6 @@ p {
   place-items: center;
   font-size: .8rem;
   letter-spacing: -.03em;
-}
-
-/* Entry-only reveal keeps the large heading and globe immediately visible. */
-.hero .identity { position: relative; }
-.hero-signature { position: absolute; top: 8px; right: 0; width: 44px; height: 44px; color: var(--gold); pointer-events: none; }
-.signature-frame { stroke-dasharray: 1; }
-.intro-entry .hero-signature svg { animation: logo-reveal 300ms ease-out backwards; }
-.intro-entry .signature-frame { animation: signature-draw 800ms cubic-bezier(.22,1,.36,1) backwards; }
-@keyframes signature-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
-.intro-entry .wordmark .monogram {
-  animation: logo-reveal 300ms ease-out backwards;
-}
-
-.intro-entry .wordmark .brand-name {
-  animation: name-reveal 500ms cubic-bezier(.22,1,.36,1) 300ms backwards;
-}
-
-.intro-entry .hero .identity > :not(h1):not(.hero-signature) {
-  animation: hero-settle 400ms cubic-bezier(.22,1,.36,1) 800ms backwards;
-}
-
-@keyframes logo-reveal {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes name-reveal {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: none; }
-}
-
-@keyframes hero-settle {
-  from { opacity: .96; transform: translateY(3px); }
-  to { opacity: 1; transform: none; }
 }
 
 .nav-links {
@@ -1668,9 +1641,7 @@ p {
   }
 }
 
-@media(prefers-reduced-motion:no-preference) {
-  .intro-pending .wordmark .monogram,.intro-pending .wordmark .brand-name { opacity: 0; }
-}
+
 .menu-icon { flex-shrink: 0; }
 .footer-inner a,.case-block a {
   display: inline-flex;
@@ -1755,4 +1726,5 @@ p {
   }
   .case-cover img,.gallery-item a,.gallery-item img { transform: none!important; }
   .capability-node { transform: none!important; }
+  .portrait-card { transform: none!important; }
 }
