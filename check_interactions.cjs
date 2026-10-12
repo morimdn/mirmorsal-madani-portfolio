@@ -73,7 +73,7 @@ for (const button of buttons){
 console.log('PASS: menu open/close, Escape + focus return, navigation close, outside close, breakpoint close; all six project filters and live result count.');
 
 // Scrollspy updates exactly one current section and excludes cross-page navigation.
-const navLinks = ['#home','#about','#projects','#contact'].map(href => new Element({href}));
+const navLinks = ['#home','#work','#projects','#contact'].map(href => new Element({href}));
 navLinks.forEach(link => {link.removeAttribute=key=>delete link.attrs[key];});
 nav.querySelectorAll=()=>navLinks;
 const hero=new Element();

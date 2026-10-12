@@ -14,8 +14,9 @@ python check_site.py
 python check_ui.py
 node --check main.js
 node --check ui.js
-node --check product-scenes.js
-node check_product_scenes.cjs
+node --check product-images.js
+node --check product-network.js
+node check_product_images.cjs
 node check_interactions.cjs
 node check_intro.cjs
 git diff --check
@@ -25,7 +26,7 @@ GitHub Actions runs the static and interaction checks on main and pull requests.
 
 The optional original-image check requires Pillow, pypdf and the private source ZIP:
 `python verify_original_assets.py --source-zip "PATH/portfolio_final_images_for_codex.zip" --legacy-source-zip "PATH/portfolio_v2_complete_inputs.zip" --mobile-source-dir "PATH/crm"`.
-The source documents are not published in the repository.
+Private reference documents are not published; the owner-approved CV PDF is public.
 
 ## Site structure
 
@@ -43,7 +44,7 @@ The source documents are not published in the repository.
 
 Portfolio V3 positions Mirmorsal as a hands-on Senior Product Manager and Product Leader across FinTech, B2B SaaS and AI. The Master CV supplies career dates and documented delivery outcomes; owner corrections establish Riskotik ownership at Top Fast Technology. Product capabilities are grounded in the product presentation and interface examples. Public copy distinguishes actual delivery outcomes from intended product value.
 
-V5 uses the specifically assigned ZIP references, retained original product assets and three owner-assigned CRM mobile originals. Lossless WebP conversion preserves every decoded pixel and native dimension. The 7208 × 5400 mobile composition is intentionally retained at full resolution (9.86 MB); gallery previews load lazily. No stock or reconstructed screenshots. No CV download button is shown because the available CV is DOCX, not PDF.
+V5 uses the specifically assigned ZIP references, retained original product assets and three owner-assigned CRM mobile originals. Lossless WebP conversion preserves every decoded pixel and native dimension. The 7208 × 5400 mobile composition is intentionally retained at full resolution (9.86 MB); gallery previews load lazily. No stock or reconstructed screenshots. The later owner-approved PDF is available through Download CV in the Hero.
 
 The Hero software architecture uses inline SVG, with no WebGL or external JavaScript dependency. Inter loads through Google Fonts with system fallbacks. Product appearance preferences are stored locally in the browser. There is no analytics or contact backend.
 
@@ -51,8 +52,10 @@ The Hero software architecture uses inline SVG, with no WebGL or external JavaSc
 
 Check mobile and desktop text flow, navigation, filters, direct case routes, gallery controls, keyboard behavior and globe pause/resume. Static and DOM tests validate structure and interactions; they do not replace browser rendering or assistive-technology checks. V5 is authorized for publication to the same GitHub Pages URL after validation.
 
-## Product interface previews
+## Original product images and motion
 
-`product-scenes.js` reconstructs the public interface references as responsive HTML/CSS/SVG previews with illustrative data. These are themeable portfolio demonstrations, not a pixel-identical export or the production applications. Three palettes change interface surfaces, text, charts and accents. Original images remain available through the appearance controls and full-size image links; their provenance hashes are unchanged. No CSS image filters are used to simulate recoloring.
+`product-images.js` adds Original, Blue tone and Gold tone controls to the actual product screenshots, including full-size viewing. CSS tonal effects alter the whole raster image; they do not independently recolor interface components or turn dark designs into genuine light themes. Original is the default, removes all filters, and every original image URL and byte remains intact. Reconstructed interfaces and Code preview have been removed.
 
-The homepage loads complete case-study content from the existing routes, rewrites relative URLs and scopes anchors without duplicating case content. Links remain normal standalone routes without JavaScript. CSS proximity snapping and Page Up/Down step through homepage sections; ordinary scrolling remains available inside long sections. Reduced motion disables snapping and transition effects. The former globe is replaced by a static SVG software-layer architecture with the eight leadership capabilities in readable glass panels.
+`product-network.js` makes the Hero leadership network draggable with mouse and touch, with live SVG connections, bounded node positions, keyboard arrow movement, Home/reset controls and pause/resume. Automatic movement is capped at 30 fps, stops offscreen/in background and is disabled for reduced motion; manual movement remains available.
+
+The homepage project explorer loads full content from the existing case-study routes. Its structure is preserved. Section boundaries use mandatory native CSS snapping with Page Up/Down support; tall sections retain internal reading space. About has been removed, navigation and section numbering updated. The owner-supplied original PDF is available through Download CV in the Hero.

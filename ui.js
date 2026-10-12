@@ -132,7 +132,7 @@ if (lightbox && typeof lightbox.showModal === 'function') {
     caption.textContent = link.dataset.caption;
     count.textContent = `${current + 1} / ${imageLinks.length}`;
     prev.hidden = next.hidden = imageLinks.length < 2;
-    if (typeof window !== 'undefined') window.ProductScenes?.renderLightbox(lightbox, link);
+    if (typeof window !== 'undefined') window.ProductImages?.applyLightbox(lightbox, link);
   };
   const move = direction => {
     current = (current + direction + imageLinks.length) % imageLinks.length;

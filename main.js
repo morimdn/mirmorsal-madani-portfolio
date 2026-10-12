@@ -33,7 +33,7 @@
       content.replaceChildren(...main.childNodes);
       const dialog=page.querySelector('#image-lightbox');if(dialog)content.append(dialog);
       choices.forEach(item=>{if(item===choice)item.setAttribute('aria-current','true');else item.removeAttribute('aria-current');});
-      window.ProductScenes?.enhance(content); document.dispatchEvent(new Event('portfolio:project'));
+      window.ProductImages?.enhance(content); document.dispatchEvent(new Event('portfolio:project'));
       content.classList.remove('is-entering');void content.offsetWidth;content.classList.add('is-entering');message.classList.add('project-status-only');message.textContent=choice.textContent.trim().replace('↗','')+' case study loaded.';
       if(updateHash)history.replaceState(null,'','#project-'+choice.dataset.project);
       if(scroll)stage.scrollIntoView({behavior:reduced()?'instant':'smooth',block:'start'});

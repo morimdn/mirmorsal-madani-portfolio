@@ -10,8 +10,7 @@ from html import unescape
 
 ROOT = Path(__file__).resolve().parent
 home_v9 = (ROOT/'index.html').read_text(encoding='utf-8')
-about_v9 = re.search(r'<section[^>]+id="about".*?</section>', home_v9, re.S).group()
-assert all(company not in about_v9 for company in ('Top Fast','DeltaFX','SJI'))
+assert 'id="about"' not in home_v9 and '#about' not in home_v9
 assert home_v9.count('class="capability-node"') == 8
 assert 'Product Manager | PhD in Software Engineering' in home_v9
 assert 'Wrocław, Poland — Open to product opportunities across Europe' in home_v9
@@ -99,6 +98,9 @@ for date in ('May 2023–May 2024','May 2024–Present','August 2020 — March 2
     assert date in home,f'Missing corrected CV date: {date}'
 assert home.count('class="project-choice"')==13
 assert './projects.html' in home
+assert 'Discover' in home and '<span>Develop</span>' in home and 'Product Development Approach' in home
+assert './assets/Mirmorsal-Madani-CV.pdf' in home
+assert (ROOT/'assets/Mirmorsal-Madani-CV.pdf').read_bytes().startswith(b'%PDF-')
 assert 'https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C5&amp;q=mirmorsal+madani&amp;oq=' in home
 collection=(ROOT/'projects.html').read_text(encoding='utf-8')
 assert collection.count('class="project-card"')==13
@@ -148,7 +150,9 @@ assert 'while keeping product decisions and quality under human control.' in hom
 assert 'Helped establish and develop the Product Management function' in home and 'native Flutter CRM' in home
 print('V6: eight topics, three groups, decorative icons, three publisher logos, single research Scholar CTA, B2B/AI offerings and hands-on leadership passed.')
 print('Content consistency: 13 company/context and role mappings, 9 major cases, correct Riskotik ownership, delivery milestones and publication links passed.')
-assert not list(ROOT.rglob('*.docx')) and not list(ROOT.rglob('*.pdf')),'CV/reference documents should not be committed'
+assert not list(ROOT.rglob('*.docx')), 'Private reference documents should not be committed'
+assert {p.relative_to(ROOT).as_posix() for p in ROOT.rglob('*.pdf')} == {'assets/Mirmorsal-Madani-CV.pdf'}, 'Only the owner-approved public CV PDF is allowed'
+assert hashlib.sha256((ROOT/'assets/Mirmorsal-Madani-CV.pdf').read_bytes()).hexdigest() == 'a802d1ea8df3dabb360b5abd5bcd1ab1d5e152953d76206cffca10d43b8646f9', 'Public CV must match the owner-provided original'
 manifest=json.loads((ROOT/'assets/manifest.json').read_text())
 assert len(manifest)==33
 native=(ROOT/'case-studies/mobile-crm.html').read_text(encoding='utf-8')
