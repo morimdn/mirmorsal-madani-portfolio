@@ -50,3 +50,16 @@ for(const reduced of [false,true]) {
   const [x,y]=nodes[1].style.translate.split(' ').map(parseFloat);assert(x<=320&&y<=318);
 }
 console.log('PASS: pointer dragging, edge updates, bounds, keyboard movement, reset and reduced-motion behavior.');
+
+// Gray UI pixels must stay neutral, while opposite chroma gets opposite accents.
+const paletteSource=fs.readFileSync(__dirname+'/product-images.js','utf8');
+for(const name of ['ocean','amber']) {
+  const matrix=paletteSource.match(new RegExp(name+": '([^']+)'"))[1].split(' ').map(Number);
+  assert.equal(matrix.length,20);
+  for(let row=0;row<3;row++) assert(Math.abs(matrix.slice(row*5,row*5+3).reduce((a,b)=>a+b,0)-1)<1e-8);
+  const apply=pixel=>[0,1,2].map(row=>pixel.reduce((sum,v,i)=>sum+v*matrix[row*5+i],0));
+  for(const gray of [0,.2,.5,.8,1]) apply([gray,gray,gray]).forEach(v=>assert(Math.abs(v-gray)<1e-8));
+  const warm=apply([.7,.5,.3]),cool=apply([.3,.5,.7]);
+  assert(warm[0]>warm[2]);assert(cool[2]>cool[0]);
+}
+console.log('PASS: neutral brightness preserved and opposite chroma receives complementary accents.');

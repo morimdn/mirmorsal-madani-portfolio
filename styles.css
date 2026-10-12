@@ -496,7 +496,7 @@ p {
 }
 
 .projects {
-  background: #F7F8FA;
+  background: linear-gradient(180deg,#d4deeb 0,#e5ebf3 420px);
   color: #0E1A2B;
   color-scheme: light;
 }
@@ -1810,8 +1810,8 @@ html.section-scroll { scroll-snap-type: y mandatory; scroll-padding-top: 84px; }
 .product-palette button:focus-visible { outline-color: #2456b7; }
 .palette-swatch { width: 30px; height: 16px; border-radius: 4px; border: 1px solid #8594aa; flex-shrink: 0; }
 .swatch-original { background: linear-gradient(135deg,#0e1a2b 50%,#f7f8fa 50%); }
-.swatch-ocean { background: linear-gradient(90deg,#0e1a2b 0 33.33%,#1e7c82 33.33% 66.66%,#f4f6f2 66.66%); }
-.swatch-amber { background: linear-gradient(90deg,#182231 0 33.33%,#b8863b 33.33% 66.66%,#fff5df 66.66%); }
+.swatch-ocean { background: linear-gradient(90deg,#142338 0 33.33%,#628bc7 33.33% 66.66%,#c78d62 66.66%); }
+.swatch-amber { background: linear-gradient(90deg,#182231 0 33.33%,#c8a96b 33.33% 66.66%,#8a6bc8 66.66%); }
 .project-stage-content .product-palette,.projects .product-palette { color: #536177; }
 [data-image-palette=original] { --image-palette-filter: none; }
 [data-image-palette=ocean] { --image-palette-filter: url(#product-palette-ocean); }
@@ -1835,6 +1835,7 @@ html.section-scroll { scroll-snap-type: y mandatory; scroll-padding-top: 84px; }
 
 .project-image img.product-image-palette,.case-cover img.product-image-palette,.gallery-item img.product-image-palette { transition: transform 275ms cubic-bezier(.22,1,.36,1), filter 275ms ease; }
 
-.image-palette-defs { position: absolute; width: 0; height: 0; pointer-events: none; }
-.case-content>.product-palette,.projects>.wrap>.product-palette { position: sticky; top: 92px; z-index: 12; padding: 12px; border: 1px solid #d7dfeb; border-radius: 10px; background: #f7f8fa; box-shadow: 0 6px 18px #0e1a2b10; color: #536177; }
+.case-content>.product-palette,.projects>.wrap>.product-palette { position: sticky; top: 92px; z-index: 12; padding: 12px; border: 1px solid #d7dfeb; border-radius: 10px; background: #e5ebf3; box-shadow: 0 6px 18px #0e1a2b10; color: #536177; }
 .image-lightbox>.product-palette { position: static; }
+
+.image-palette-defs { position: absolute; width: 0; height: 0; pointer-events: none; }
