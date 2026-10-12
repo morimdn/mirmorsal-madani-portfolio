@@ -54,8 +54,10 @@ Check mobile and desktop text flow, navigation, filters, direct case routes, gal
 
 ## Original product images and motion
 
-`product-images.js` adds Original, Blue tone and Gold tone controls to the actual product screenshots, including full-size viewing. CSS tonal effects alter the whole raster image; they do not independently recolor interface components or turn dark designs into genuine light themes. Original is the default, removes all filters, and every original image URL and byte remains intact. Reconstructed interfaces and Code preview have been removed.
+`product-images.js` adds Original, Ocean and Amber controls to the actual product screenshots, including full-size viewing. Coordinated three-stop SVG tonal maps alter the whole raster image; they do not independently recolor interface components or turn dark designs into genuine light themes. Original is the default, removes all filters, and every original image URL and byte remains intact. Reconstructed interfaces and Code preview have been removed.
 
 `product-network.js` makes the Hero leadership network draggable with mouse and touch, with live SVG connections, bounded node positions, keyboard arrow movement, Home/reset controls and pause/resume. Automatic movement is capped at 30 fps, stops offscreen/in background and is disabled for reduced motion; manual movement remains available.
 
 The homepage project explorer loads full content from the existing case-study routes. Its structure is preserved. Section boundaries use mandatory native CSS snapping with Page Up/Down support; tall sections retain internal reading space. About has been removed, navigation and section numbering updated. The owner-supplied original PDF is available through Download CV in the Hero.
+
+Palette controls stay pinned below the header while scrolling product case content or the project-card collection. Ocean maps luminance through navy/teal/ivory; Amber uses charcoal/amber/cream. Three-color swatches preview each scheme. Original bypasses filters. Previous Blue/Gold saved selections migrate to the corresponding new palettes.

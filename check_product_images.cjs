@@ -1,16 +1,17 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
-for(const blocked of [false,true]) {
+for(const {blocked,stored,expected} of [{blocked:false,stored:'invalid',expected:'original'},{blocked:true,stored:'invalid',expected:'original'},{blocked:false,stored:'blue',expected:'ocean'},{blocked:false,stored:'gold',expected:'amber'}]) {
   const handlers={},saved={};
   const image={dataset:{},classList:{add(value){this.value=value;}}};
   Object.defineProperty(image,'src',{get:()=> 'assets/projects/risk-overview.webp',set:()=>{throw Error('Original source mutated');}});
   const doc={
+    body:{prepend(){}},createElementNS:()=>({setAttribute(){},classList:{add(){}}}),
     querySelectorAll:selector=>selector==='img[src*="assets/projects/"]'||selector==='.product-image-palette'?[image]:[],
     addEventListener:(name,fn)=>{handlers[name]=fn;}
   };
-  const storage={getItem(){if(blocked)throw Error('Blocked');return 'invalid';},setItem(k,v){if(blocked)throw Error('Blocked');saved[k]=v;}};
+  const storage={getItem(){if(blocked)throw Error('Blocked');return stored;},setItem(k,v){if(blocked)throw Error('Blocked');saved[k]=v;}};
   vm.runInNewContext(fs.readFileSync(__dirname+'/product-images.js','utf8'),{document:doc,window:{},localStorage:storage});
-  assert.equal(image.dataset.imagePalette,'original');
-  for(const palette of ['blue','gold','original']) {
+  assert.equal(image.dataset.imagePalette,expected);
+  for(const palette of ['ocean','amber','original']) {
     handlers.click({target:{closest:()=>({dataset:{imagePaletteButton:palette}})}});
     assert.equal(image.dataset.imagePalette,palette);
     assert.equal(image.src,'assets/projects/risk-overview.webp');
