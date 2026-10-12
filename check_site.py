@@ -137,10 +137,10 @@ ai=(ROOT/'case-studies/ai-market-analyst.html').read_text(encoding='utf-8')
 assert 'without automated trade execution' in ai and 'Top Fast Technology' in ai
 assert 'https://doi.org/10.1002/spy2.264' in home and 'https://doi.org/10.1007/s11227-022-04851-3' in home
 research=home.split('id="research"',1)[1].split('</section>',1)[0]
-topics=re.findall(r'<li>.*?<span>(.*?)</span></li>',research,re.S)
+topics=re.findall(r'<li>.*?<span>(.*?)</span></li>',research.split('<div class="publication-list"',1)[0],re.S)
 assert topics==['Privacy-Preserving Data Mining','Text Mining','Imbalanced Data Classification','Anomaly Detection','Fraud Detection','Deep Learning','Natural Language Processing (NLP)','Feature Engineering']
-assert re.findall(r'<h3>(.*?)</h3>',research)==['Core Research','Intelligent Detection','AI &amp; Machine Learning']
-topic_grid=research.split('<div class="research-grid"',1)[1].split('<p class="research-publications"',1)[0]
+assert re.findall(r'<h3>(.*?)</h3>',research)[:3]==['Core Research','Intelligent Detection','AI &amp; Machine Learning']
+topic_grid=research.split('<div class="research-grid"',1)[1].split('<div class="publication-list"',1)[0]
 assert topic_grid.count('<svg ')==8 and topic_grid.count('aria-hidden="true"')==8
 assert research.count('scholar.google.com')==1 and research.count('assets/publishers/')==3
 assert 'A research foundation.<br>An applied perspective.' in research
@@ -205,5 +205,11 @@ for case in (ROOT/'case-studies').glob('*.html'):
     assert 'My role' in summary and 'Outcome / value' in summary, case
 for page in [ROOT/'index.html',ROOT/'projects.html',*(ROOT/'case-studies').glob('*.html')]:
     text=page.read_text(encoding='utf-8')
-    assert text.count('class="reading-progress" aria-hidden="true"')==1 and text.count('reading-progress.js?v=19-20261012')==1, page
+    assert text.count('class="reading-progress" aria-hidden="true"')==1 and text.count('reading-progress.js?v=20-20261012')==1, page
 print('PASS: thirteen concise project summaries and one decorative reading cue per public page.')
+
+assert '04 / Academic &amp; Research' in research
+assert research.count('<span class="publication-title">')==3
+for detail in ['10.1142/S0219622023500347','Principal Investigator (PI)','2018','Noroozi Publications','Makhtumgholi Publications','Privacy-Preserving Data Mining','English for Computer Engineering and IT Students','Cluster Computing','Journal of Big Data','Social Network Analysis and Mining','Scientific Reports','Cognitive Neurodynamics','Discover Computing','Vice Dean of Education']:
+    assert detail in research, detail
+print('PASS: three CV publications, 2018 PI grant, two authored books, six reviewing journals and academic leadership.')
