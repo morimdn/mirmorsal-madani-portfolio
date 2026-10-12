@@ -106,9 +106,10 @@ if (filters) {
 
 // Native modal semantics provide focus containment and Escape closing.
 // Without JavaScript/support, every thumbnail still links to the real image.
-const lightbox = document.querySelector('#image-lightbox');
+function initializeLightbox(root = document) {
+const lightbox = root.querySelector('#image-lightbox');
 if (lightbox && typeof lightbox.showModal === 'function') {
-  const imageLinks = [...document.querySelectorAll('[data-lightbox]')];
+  const imageLinks = [...root.querySelectorAll('[data-lightbox]')];
   const image = lightbox.querySelector('.lightbox-image');
   const caption = lightbox.querySelector('.lightbox-caption');
   const count = lightbox.querySelector('.lightbox-count');
@@ -131,6 +132,7 @@ if (lightbox && typeof lightbox.showModal === 'function') {
     caption.textContent = link.dataset.caption;
     count.textContent = `${current + 1} / ${imageLinks.length}`;
     prev.hidden = next.hidden = imageLinks.length < 2;
+    if (typeof window !== 'undefined') window.ProductScenes?.renderLightbox(lightbox, link);
   };
   const move = direction => {
     current = (current + direction + imageLinks.length) % imageLinks.length;
@@ -178,3 +180,7 @@ if (lightbox && typeof lightbox.showModal === 'function') {
     opener?.focus();
   });
 }
+
+}
+initializeLightbox();
+document.addEventListener('portfolio:project', () => initializeLightbox(document.querySelector('.project-stage-content')));

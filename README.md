@@ -14,6 +14,8 @@ python check_site.py
 python check_ui.py
 node --check main.js
 node --check ui.js
+node --check product-scenes.js
+node check_product_scenes.cjs
 node check_interactions.cjs
 node check_intro.cjs
 git diff --check
@@ -27,11 +29,11 @@ The source documents are not published in the repository.
 
 ## Site structure
 
-- `index.html`: positioning, experience, six selected products, expertise, research, education and contact.
+- `index.html`: positioning, experience, a thirteen-project in-place explorer, expertise, research, education and contact.
 - `projects.html`: thirteen product areas with category filters.
 - `case-studies/`: thirteen case routes; substantial cases for documented major products and shorter factual overviews for less-documented work.
 - `styles.css`: the approved navy/light gallery design and responsive layouts.
-- `main.js`: the unchanged Three.js globe and motion controls.
+- `main.js`: section keyboard stepping and progressive case-study loading.
 - `ui.js`: navigation, filters and accessible native image dialogs with full-size links.
 - `assets/manifest.json`: thirty-three original image slots, native dimensions, descriptive captions and provenance hashes.
 - `ASSET-MAPPING.json`: company, role, product summary and image assignments.
@@ -43,8 +45,14 @@ Portfolio V3 positions Mirmorsal as a hands-on Senior Product Manager and Produc
 
 V5 uses the specifically assigned ZIP references, retained original product assets and three owner-assigned CRM mobile originals. Lossless WebP conversion preserves every decoded pixel and native dimension. The 7208 × 5400 mobile composition is intentionally retained at full resolution (9.86 MB); gallery previews load lazily. No stock or reconstructed screenshots. No CV download button is shown because the available CV is DOCX, not PDF.
 
-Three.js uses the existing pinned CDN version. Inter loads through Google Fonts with system fallbacks. There is no analytics, visitor-data storage or contact backend.
+The Hero software architecture uses inline SVG, with no WebGL or external JavaScript dependency. Inter loads through Google Fonts with system fallbacks. Product appearance preferences are stored locally in the browser. There is no analytics or contact backend.
 
 ## Browser review
 
 Check mobile and desktop text flow, navigation, filters, direct case routes, gallery controls, keyboard behavior and globe pause/resume. Static and DOM tests validate structure and interactions; they do not replace browser rendering or assistive-technology checks. V5 is authorized for publication to the same GitHub Pages URL after validation.
+
+## Product interface previews
+
+`product-scenes.js` reconstructs the public interface references as responsive HTML/CSS/SVG previews with illustrative data. These are themeable portfolio demonstrations, not a pixel-identical export or the production applications. Three palettes change interface surfaces, text, charts and accents. Original images remain available through the appearance controls and full-size image links; their provenance hashes are unchanged. No CSS image filters are used to simulate recoloring.
+
+The homepage loads complete case-study content from the existing routes, rewrites relative URLs and scopes anchors without duplicating case content. Links remain normal standalone routes without JavaScript. CSS proximity snapping and Page Up/Down step through homepage sections; ordinary scrolling remains available inside long sections. Reduced motion disables snapping and transition effects. The former globe is replaced by a static SVG software-layer architecture with the eight leadership capabilities in readable glass panels.

@@ -95,9 +95,9 @@ for slug in ('brokerage-crm','risk-management','ib-referral','social-trading','l
 sitemap=ET.parse(ROOT/'sitemap.xml')
 assert len(sitemap.getroot())==15
 assert 'Jan 2026' not in home and 'Sep 2024–Dec 2025' not in home
-for date in ('May 2023–May 2024','May 2024–Present','August 2020 — March 2023','July 2019 — August 2020','Dec 2010–Jul 2022','Aug 2022–Sep 2024','Dec 2010–Apr 2022'):
+for date in ('May 2023–May 2024','May 2024–Present','August 2020 — March 2023','July 2018 — August 2020','Dec 2010–Jul 2022','Aug 2022–Sep 2024','Dec 2010–Apr 2022'):
     assert date in home,f'Missing corrected CV date: {date}'
-assert home.count('class="project-card"')==6
+assert home.count('class="project-choice"')==13
 assert './projects.html' in home
 assert 'https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C5&amp;q=mirmorsal+madani&amp;oq=' in home
 collection=(ROOT/'projects.html').read_text(encoding='utf-8')

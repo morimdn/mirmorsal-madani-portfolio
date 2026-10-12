@@ -115,7 +115,7 @@ for (const numberOfImages of [1,3]) {
     link.dataset.caption=`Caption ${index}`;
     link.querySelector=()=>({alt:`Alt ${index}`,getAttribute:key=>key==='width'?'786':index===0?'3562':'500'});return link;
   });
-  const galleryDocument={querySelector:key=>key==='#image-lightbox'?modal:null,querySelectorAll:()=>links};
+  const galleryDocument={querySelector:key=>key==='#image-lightbox'?modal:null,querySelectorAll:()=>links,addEventListener(){}};
   vm.runInNewContext(fs.readFileSync(__dirname+'/ui.js','utf8'),{document:galleryDocument});
   let prevented=false;
   links[0].listeners.click({preventDefault:()=>{prevented=true;}});
