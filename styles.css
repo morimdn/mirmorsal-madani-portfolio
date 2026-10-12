@@ -1734,7 +1734,7 @@ p {
 
 /* Product architecture, chronological experience and in-place case studies. */
 html.section-scroll { scroll-snap-type: y mandatory; scroll-padding-top: 84px; }
-.section-scroll .hero,.section-scroll main>.section { scroll-snap-align: start; scroll-snap-stop: always; }
+.section-scroll .hero,.section-scroll main>.section,.section-scroll main>.contact { scroll-snap-align: start; scroll-snap-stop: always; }
 .hero.product-hero { grid-template-columns: minmax(0,1fr) minmax(0,1.12fr); }
 .product-architecture.hero-visual { height: auto; min-height: 520px; overflow: visible; display: grid; align-content: center; gap: 20px; }
 .product-architecture::before { display: none; }

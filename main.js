@@ -1,7 +1,7 @@
 // Progressive case studies and section stepping; no WebGL dependency.
 (() => {
   const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const sections = [...document.querySelectorAll('main .hero, main > .section')];
+  const sections = [...document.querySelectorAll('main .hero, main > .section, main > .contact')];
   document.addEventListener('keydown', event => {
     if (!['PageDown','PageUp'].includes(event.key) || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
     if (event.target.closest('input,textarea,select,[contenteditable],dialog[open],.native-screen-preview,.project-stage')) return;

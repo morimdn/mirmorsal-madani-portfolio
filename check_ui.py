@@ -57,8 +57,8 @@ assert ('base', '.filter:not([aria-pressed=true]):hover') in rules
 root = Path(__file__).parent
 for page in [root/'index.html', root/'projects.html', *sorted((root/'case-studies').glob('*.html'))]:
     html = page.read_text(encoding='utf-8')
-    version='18-20261012'
-    assert f'styles.css?v={version}' in html and 'ui.js?v=18-20261012' in html, page
+    version='19-20261012'
+    assert f'styles.css?v={version}' in html and 'ui.js?v=19-20261012' in html, page
 
 def luminance(color):
     rgb = [int(color[i:i+2],16)/255 for i in (1,3,5)]
@@ -80,3 +80,5 @@ for foreground, background, minimum in [
     assert ratio >= minimum, (foreground,background,ratio)
     print(f'Contrast {foreground} on {background}: {ratio:.2f}:1 (minimum {minimum})')
 print(f'PASS: {len(rules)} unique style rules; responsive/type/spacing tokens; uncropped images; prominent H1; targets; reduced motion; gallery and control contrast.')
+
+assert '.section-scroll main>.contact' in css, 'Final Contact section must be a reachable scroll snap target'
