@@ -205,7 +205,7 @@ for case in (ROOT/'case-studies').glob('*.html'):
     assert 'My role' in summary and 'Outcome / value' in summary, case
 for page in [ROOT/'index.html',ROOT/'projects.html',*(ROOT/'case-studies').glob('*.html')]:
     text=page.read_text(encoding='utf-8')
-    assert text.count('class="reading-progress" aria-hidden="true"')==1 and text.count('reading-progress.js?v=20-20261012')==1, page
+    assert text.count('class="reading-progress" aria-hidden="true"')==1 and text.count('reading-progress.js?v=21-20261012')==1, page
 print('PASS: thirteen concise project summaries and one decorative reading cue per public page.')
 
 assert '04 / Academic &amp; Research' in research

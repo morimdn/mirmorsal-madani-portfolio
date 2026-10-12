@@ -2,7 +2,21 @@
 (() => {
   const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
   const sections = [...document.querySelectorAll('main .hero, main > .section, main > .contact')];
+  // Restore a requested section once the initial asynchronous case has sized the page.
+  const entryHash = location.hash, entryTarget = sections.find(section => '#'+section.id === entryHash);
+  let entryPending = !!entryTarget;
+  const cancelEntry = () => { entryPending = false; };
+  window.addEventListener('wheel', cancelEntry, {passive:true,once:true});
+  window.addEventListener('touchmove', cancelEntry, {passive:true,once:true});
+  const settleEntryAnchor = () => {
+    if (!entryPending) return;
+    entryPending = false;
+    requestAnimationFrame(() => {
+      if (location.hash === entryHash) entryTarget.scrollIntoView({behavior:'instant',block:'start'});
+    });
+  };
   document.addEventListener('keydown', event => {
+    if (['PageDown','PageUp','ArrowDown','ArrowUp','Home','End',' '].includes(event.key)) cancelEntry();
     if (!['PageDown','PageUp'].includes(event.key) || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
     if (event.target.closest('input,textarea,select,[contenteditable],dialog[open],.native-screen-preview,.project-stage')) return;
     const target = event.key === 'PageDown' ? sections.find(s => s.getBoundingClientRect().top > 100)
@@ -38,7 +52,7 @@
       if(updateHash)history.replaceState(null,'','#project-'+choice.dataset.project);
       if(scroll)stage.scrollIntoView({behavior:reduced()?'instant':'smooth',block:'start'});
     }catch(error){if(token===request){message.classList.remove('project-status-only');const fallback=document.createElement('a');fallback.href=choice.href;fallback.textContent='Open full case study ↗';message.replaceChildren('Unable to load this preview. ',fallback);}}
-    finally{if(token===request)stage.setAttribute('aria-busy','false');}
+    finally{if(token===request){stage.setAttribute('aria-busy','false');settleEntryAnchor();}}
   }
   selector.addEventListener('click',event=>{const choice=event.target.closest('[data-project]');if(!choice||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;event.preventDefault();selectProject(choice,{scroll:matchMedia('(max-width: 650px)').matches});});
   const fromHash=choices.find(c=>location.hash==='#project-'+c.dataset.project);

@@ -185,7 +185,7 @@ console.log('PASS: reading progress, overscroll clamps, frame batching, project 
   const contact={getBoundingClientRect:()=>({top:800}),scrollIntoView:options=>selected=options};
   const earlier=Array.from({length:5},(_,i)=>({getBoundingClientRect:()=>({top:(i-4)*1000}),scrollIntoView(){}}));
   const doc={querySelectorAll:selector=>selector.includes('main > .contact')?[...earlier,contact]:earlier,querySelector:()=>null,addEventListener:(n,f)=>{if(n==='keydown')keydown=f;}};
-  vm.runInNewContext(fs.readFileSync(__dirname+'/main.js','utf8'),{document:doc,matchMedia:()=>({matches:false})});
+  vm.runInNewContext(fs.readFileSync(__dirname+'/main.js','utf8'),{document:doc,matchMedia:()=>({matches:false}),location:{hash:''},window:{addEventListener(){}},requestAnimationFrame:f=>f()});
   let prevented=false;
   keydown({key:'PageDown',target:{closest:()=>null},preventDefault(){prevented=true;}});
   assert(prevented);assert.equal(selected.block,'start');assert.equal(selected.behavior,'smooth');
