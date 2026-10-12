@@ -99,3 +99,5 @@ Palette follow-up: retain original raster screenshots, replacing arbitrary hue s
 
 
 Final implementation: SVG chromatic matrices replace the grayscale luminance maps. Each RGB row sums to one so neutral pixels retain their brightness. Colored pixels map into opposing blue/copper or gold/violet accents, preserving image geometry and original assets. This is a whole-image color transformation, not independent semantic component theming.
+
+Professional polish: all thirteen existing cases include a concise three-part summary above the detail content. Nine use Problem / My role / Outcome or value; four context-focused products use Product focus without implying direct ownership or measured results. A decorative 2 px gold reading line sits below the header, updates via a batched frame and ResizeObserver, and leaves layout untouched. Summary spacing, link underline offsets and focus rings share existing tokens. Product structure, source images, palette transforms, network, portrait, CV and research content remain intact.

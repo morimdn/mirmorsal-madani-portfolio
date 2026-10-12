@@ -157,3 +157,24 @@ for (const numberOfImages of [1,3]) {
   assert(links[numberOfImages-1].focused);
 }
 console.log('PASS: single/multiple-image lightboxes, captions, alt text, arrow wrapping, next/previous, close/backdrop and opener focus restoration.');
+
+// Reading cue clamps overscroll and remeasures after responsive/project changes.
+{
+  const bar={style:{}},events={},docEvents={},frames=[];
+  const doc={documentElement:{scrollHeight:2000},body:{},querySelector:()=>bar,addEventListener:(n,f)=>docEvents[n]=f};
+  const win={innerHeight:500,scrollY:0,addEventListener:(n,f)=>events[n]=f};
+  let resize;
+  vm.runInNewContext(fs.readFileSync(__dirname+'/reading-progress.js','utf8'),{
+    document:doc,window:win,requestAnimationFrame:f=>frames.push(f),
+    ResizeObserver:class{constructor(fn){resize=fn;}observe(){}}
+  });
+  const flush=()=>{while(frames.length)frames.shift()();};
+  flush();assert.equal(bar.style.transform,'scaleX(0)');
+  win.scrollY=750;events.scroll();events.scroll();assert.equal(frames.length,1);flush();assert.equal(bar.style.transform,'scaleX(0.5)');
+  win.scrollY=3000;events.scroll();flush();assert.equal(bar.style.transform,'scaleX(1)');
+  win.scrollY=-20;events.scroll();flush();assert.equal(bar.style.transform,'scaleX(0)');
+  win.scrollY=750;doc.documentElement.scrollHeight=3500;docEvents['portfolio:project']();flush();assert.equal(bar.style.transform,'scaleX(0.25)');
+  doc.documentElement.scrollHeight=500;resize();flush();assert.equal(bar.style.transform,'scaleX(0)');
+  doc.documentElement.scrollHeight=2000;win.scrollY=1500;events.pageshow();flush();assert.equal(bar.style.transform,'scaleX(1)');
+}
+console.log('PASS: reading progress, overscroll clamps, frame batching, project resize and history restoration.');

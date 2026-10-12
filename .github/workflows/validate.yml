@@ -20,6 +20,7 @@ jobs:
           node --check ui.js
           node --check product-images.js
           node --check product-network.js
+          node --check reading-progress.js
           node check_product_images.cjs
           node check_interactions.cjs
           node check_intro.cjs

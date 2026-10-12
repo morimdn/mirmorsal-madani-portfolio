@@ -196,3 +196,14 @@ for fg,bg in pairs:
     print(f'Contrast {fg} on {bg}: {ratio:.2f}:1')
 print(f'PASS: {len(pages)} HTML pages; {links} local references/anchors; heading hierarchy; metadata; contact links; sitemap; core text contrast.')
 
+
+for case in (ROOT/'case-studies').glob('*.html'):
+    text=case.read_text(encoding='utf-8')
+    assert text.count('class="case-summary"')==1, case
+    summary=text.split('class="case-summary"',1)[1].split('</dl>',1)[0]
+    assert summary.count('<dt>')==3 and summary.count('<dd>')==3, case
+    assert 'My role' in summary and 'Outcome / value' in summary, case
+for page in [ROOT/'index.html',ROOT/'projects.html',*(ROOT/'case-studies').glob('*.html')]:
+    text=page.read_text(encoding='utf-8')
+    assert text.count('class="reading-progress" aria-hidden="true"')==1 and text.count('reading-progress.js?v=18-20261012')==1, page
+print('PASS: thirteen concise project summaries and one decorative reading cue per public page.')
