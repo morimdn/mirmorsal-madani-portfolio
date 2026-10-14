@@ -1,4 +1,4 @@
-// Progressive case studies and section stepping; no WebGL dependency.
+// Progressive case studies and native document scrolling; no WebGL dependency.
 (() => {
   const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
   const sections = [...document.querySelectorAll('main .hero, main > .section, main > .contact')];
@@ -17,12 +17,6 @@
   };
   document.addEventListener('keydown', event => {
     if (['PageDown','PageUp','ArrowDown','ArrowUp','Home','End',' '].includes(event.key)) cancelEntry();
-    if (!['PageDown','PageUp'].includes(event.key) || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
-    if (event.target.closest('input,textarea,select,[contenteditable],dialog[open],.native-screen-preview,.project-stage')) return;
-    const target = event.key === 'PageDown' ? sections.find(s => s.getBoundingClientRect().top > 100)
-      : [...sections].reverse().find(s => s.getBoundingClientRect().top < -10);
-    if (!target) return;
-    event.preventDefault(); target.scrollIntoView({behavior:reduced()?'instant':'smooth',block:'start'});
   });
   const selector = document.querySelector('.project-selector');
   if (!selector) return;

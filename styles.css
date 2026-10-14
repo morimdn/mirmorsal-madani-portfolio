@@ -1668,7 +1668,7 @@ p {
   position: absolute;
   inset: 0 0 30px;
   overflow-y: auto;
-  overscroll-behavior: contain;
+  overscroll-behavior: auto;
   scrollbar-width: thin;
   scrollbar-color: #70829d #f8f9fa;
   background: #f8f9fa;
@@ -1737,8 +1737,7 @@ p {
 }
 
 /* Product architecture, chronological experience and in-place case studies. */
-html.section-scroll { scroll-snap-type: y mandatory; scroll-padding-top: 84px; }
-.section-scroll .hero,.section-scroll main>.section,.section-scroll main>.contact { scroll-snap-align: start; scroll-snap-stop: always; }
+html.section-scroll { scroll-snap-type: none; scroll-padding-top: 84px; }
 .hero.product-hero { grid-template-columns: minmax(0,1fr) minmax(0,1.12fr); }
 .product-architecture.hero-visual { height: auto; min-height: 520px; overflow: visible; display: grid; align-content: center; gap: 20px; }
 .product-architecture::before { display: none; }

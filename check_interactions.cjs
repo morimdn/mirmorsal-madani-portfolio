@@ -179,15 +179,16 @@ console.log('PASS: single/multiple-image lightboxes, captions, alt text, arrow w
 }
 console.log('PASS: reading progress, overscroll clamps, frame batching, project resize and history restoration.');
 
-// The final Contact section participates in keyboard section stepping as well as snap.
+
+// Native paging must not skip a long section or consume browser keyboard scrolling.
 {
-  let keydown,selected;
-  const contact={getBoundingClientRect:()=>({top:800}),scrollIntoView:options=>selected=options};
-  const earlier=Array.from({length:5},(_,i)=>({getBoundingClientRect:()=>({top:(i-4)*1000}),scrollIntoView(){}}));
-  const doc={querySelectorAll:selector=>selector.includes('main > .contact')?[...earlier,contact]:earlier,querySelector:()=>null,addEventListener:(n,f)=>{if(n==='keydown')keydown=f;}};
+  let keydown,prevented=false,moved=false;
+  const section={id:'research',getBoundingClientRect:()=>({top:84}),scrollIntoView(){moved=true;}};
+  const doc={querySelectorAll:()=>[section],querySelector:()=>null,addEventListener:(n,f)=>{if(n==='keydown')keydown=f;}};
   vm.runInNewContext(fs.readFileSync(__dirname+'/main.js','utf8'),{document:doc,matchMedia:()=>({matches:false}),location:{hash:''},window:{addEventListener(){}},requestAnimationFrame:f=>f()});
-  let prevented=false;
-  keydown({key:'PageDown',target:{closest:()=>null},preventDefault(){prevented=true;}});
-  assert(prevented);assert.equal(selected.block,'start');assert.equal(selected.behavior,'smooth');
+  for(const key of ['PageDown','PageUp','ArrowDown','ArrowUp','Home','End',' ']) {
+    keydown({key,target:{closest:()=>null},preventDefault(){prevented=true;}});
+    assert.equal(prevented,false);assert.equal(moved,false);
+  }
 }
-console.log('PASS: PageDown from Research can reach Contact.');
+console.log('PASS: PageDown, PageUp, arrows, Home, End and Space retain native browser scrolling.');
