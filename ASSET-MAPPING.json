@@ -172,6 +172,21 @@
         "topfast-website-partners"
       ],
       "company": "Top Fast Technology"
+    },
+    {
+      "slug": "techosoul-ui",
+      "title": "Techosoul UI",
+      "category": "Enterprise",
+      "cover": "techosoul-foundations",
+      "role": "Product Definition & Delivery",
+      "summary": "An open-source React and TypeScript design system for modern software products, financial interfaces, and data-intensive applications. Published on npm as @techosoul/ui.",
+      "images": [
+        "techosoul-foundations",
+        "techosoul-components-dark",
+        "techosoul-iconography",
+        "techosoul-financial-ui"
+      ],
+      "company": "Open-source design system"
     }
   ],
   "excluded": [
