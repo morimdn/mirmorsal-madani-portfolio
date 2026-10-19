@@ -10,6 +10,7 @@ parser=argparse.ArgumentParser()
 parser.add_argument('--source-zip',required=True)
 parser.add_argument('--legacy-source-zip',required=True)
 parser.add_argument('--mobile-source-dir',required=True)
+parser.add_argument('--techosoul-source-dir',help='Directory containing the original Techosoul UI PNG attachments')
 args=parser.parse_args()
 root=Path(__file__).resolve().parent
 manifest=json.loads((root/'assets/manifest.json').read_text())
@@ -18,7 +19,12 @@ with ExitStack() as stack:
     archives={'portfolio_final_images_for_codex.zip':stack.enter_context(zipfile.ZipFile(args.source_zip)), 'portfolio_v2_complete_inputs.zip':stack.enter_context(zipfile.ZipFile(args.legacy_source_zip))}
     for item in manifest:
         source=item['source']
-        if item['source_archive']=='owner_mobile_crm_originals':
+        if item['source_archive']=='owner_techosoul_ui_screenshots':
+            assert args.techosoul_source_dir, '--techosoul-source-dir is required for the Techosoul screenshots'
+            data=(Path(args.techosoul_source_dir)/source).read_bytes()
+            for duplicate in item.get('duplicate_sources',[]):
+                assert (Path(args.techosoul_source_dir)/duplicate).read_bytes()==data
+        elif item['source_archive']=='owner_mobile_crm_originals':
             assert source in ('image 39.png','image 47 (1).png','iPhone 14 & 15 Pro - 18.png')
             data=(Path(args.mobile_source_dir)/source).read_bytes()
         else:

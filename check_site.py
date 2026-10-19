@@ -81,7 +81,7 @@ for path,p in pages.items():
         assert target.exists(),f'{path}: broken local link {href}'
         if u.fragment:assert target in pages and unquote(u.fragment) in pages[target].ids,f'{path}: broken anchor {href}'
         links+=1
-assert len(pages)==15
+assert len(pages)==16
 home=(ROOT/'index.html').read_text(encoding='utf-8')
 assert '<h3>SamanShahr</h3>' in home and 'href="https://samanshahr.com/"' in home
 assert 'href="https://gorgan.iau.ir/"' in home and 'Islamic Azad University, Gorgan Branch' in home
@@ -92,18 +92,18 @@ for contact in ('mailto:mirmorsal.madani1361@gmail.com','tel:+48452984012','http
 for slug in ('brokerage-crm','risk-management','ib-referral','social-trading','loyalty-club','ai-market-analyst','mobile-crm','payments','enterprise-onboarding','enterprise-performance','plan-chin','deltafx-website','topfast-website'):
     assert (ROOT/'case-studies'/f'{slug}.html').exists()
 sitemap=ET.parse(ROOT/'sitemap.xml')
-assert len(sitemap.getroot())==15
+assert len(sitemap.getroot())==16
 assert 'Jan 2026' not in home and 'Sep 2024–Dec 2025' not in home
 for date in ('May 2023–May 2024','May 2024–Present','August 2020 — March 2023','July 2018 — August 2020','Dec 2010–Jul 2022','Aug 2022–Sep 2024','Dec 2010–Apr 2022'):
     assert date in home,f'Missing corrected CV date: {date}'
-assert home.count('class="project-choice"')==13
+assert home.count('class="project-choice"')==14
 assert './projects.html' in home
 assert 'Discover' in home and '<span>Develop</span>' in home and 'Product Development Approach' in home
 assert './assets/Mirmorsal-Madani-CV.pdf' in home
 assert (ROOT/'assets/Mirmorsal-Madani-CV.pdf').read_bytes().startswith(b'%PDF-')
 assert 'https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C5&amp;q=mirmorsal+madani&amp;oq=' in home
 collection=(ROOT/'projects.html').read_text(encoding='utf-8')
-assert collection.count('class="project-card"')==13
+assert collection.count('class="project-card"')==14
 assert './case-studies/ai-market-analyst.html' in collection and 'AI Market Analyst' in collection
 for p in pages:
     text=p.read_text(encoding='utf-8')
@@ -149,12 +149,12 @@ assert 'AI-Augmented<br>Product Management' in home and 'End-to-End B2B<br>Produ
 assert 'while keeping product decisions and quality under human control.' in home
 assert 'Helped establish and develop the Product Management function' in home and 'native Flutter CRM' in home
 print('V6: eight topics, three groups, decorative icons, three publisher logos, single research Scholar CTA, B2B/AI offerings and hands-on leadership passed.')
-print('Content consistency: 13 company/context and role mappings, 9 major cases, correct Riskotik ownership, delivery milestones and publication links passed.')
+print('Content consistency: 14 company/context and role mappings, 9 major cases, correct Riskotik ownership, delivery milestones and publication links passed.')
 assert not list(ROOT.rglob('*.docx')), 'Private reference documents should not be committed'
 assert {p.relative_to(ROOT).as_posix() for p in ROOT.rglob('*.pdf')} == {'assets/Mirmorsal-Madani-CV.pdf'}, 'Only the owner-approved public CV PDF is allowed'
-assert hashlib.sha256((ROOT/'assets/Mirmorsal-Madani-CV.pdf').read_bytes()).hexdigest() == 'a802d1ea8df3dabb360b5abd5bcd1ab1d5e152953d76206cffca10d43b8646f9', 'Public CV must match the owner-provided original'
+assert hashlib.sha256((ROOT/'assets/Mirmorsal-Madani-CV.pdf').read_bytes()).hexdigest() == '9d53cd6fba37ecec5987f6974e1a19a667bc66c42b22e18b0ec0c4e8e076dc6d', 'Public CV must match the owner-provided original'
 manifest=json.loads((ROOT/'assets/manifest.json').read_text())
-assert len(manifest)==33
+assert len(manifest)==37
 native=(ROOT/'case-studies/mobile-crm.html').read_text(encoding='utf-8')
 assert native.count('data-lightbox ')==1 and 'native-gallery' in native
 assert 'crm-mobile-finance-original' not in native and 'crm-mobile-wallet-original' not in native
@@ -169,12 +169,12 @@ retired_images={image for project in retired for image in project['images']}
 for project in retired:
     assert not (ROOT/'case-studies'/f'{project["slug"]}.html').exists()
     assert all(f'case-studies/{project["slug"]}.html' not in page.path.read_text(encoding='utf-8') for page in pages.values())
-assert len(mapping['projects'])==13
+assert len(mapping['projects'])==14
 for asset in manifest:
     image=ROOT/asset['file']
     assert image.is_file() and image.stat().st_size==asset['bytes']
     native_mobile=asset['source_archive']=='owner_mobile_crm_originals'
-    assert image.suffix=='.webp' and 0<asset['width']<=(7208 if native_mobile else 4096) and 0<asset['height']<=(5400 if native_mobile else 4096)
+    assert image.suffix==('.png' if asset['source_archive']=='owner_techosoul_ui_screenshots' else '.webp') and 0<asset['width']<=(7208 if native_mobile else 4096) and 0<asset['height']<=(5400 if native_mobile else 4096)
     assert asset['alt'] and asset['caption'] and asset['bytes']<(10_000_000 if native_mobile else 2_000_000)
     assert asset['redacted'] is False and asset['lossless'] is True
     assert hashlib.sha256(image.read_bytes()).hexdigest()==asset['sha256'],f'Asset checksum mismatch: {asset["id"]}'
@@ -182,7 +182,7 @@ for asset in manifest:
     assert asset['id'] in retired_images or any(asset['file'] in page.path.read_text(encoding='utf-8') for page in pages.values()),f'Unused asset: {asset["id"]}'
 assert sum(a['bytes'] for a in manifest)<24_000_000
 assert {p.relative_to(ROOT).as_posix() for p in (ROOT/'assets/projects').iterdir()}=={a['file'] for a in manifest},'Unexpected or obsolete image derivative remains'
-print(f'Asset manifest: {len(manifest)} WebP files; {sum(a["bytes"] for a in manifest):,} bytes; image dimensions, paths, budget and usage passed.')
+print(f'Asset manifest: {len(manifest)} original product images; {sum(a["bytes"] for a in manifest):,} bytes; image dimensions, paths, budget and usage passed.')
 def luminance(hex):
     values=[int(hex[i:i+2],16)/255 for i in (1,3,5)]
     values=[v/12.92 if v<=.04045 else ((v+.055)/1.055)**2.4 for v in values]
@@ -206,10 +206,33 @@ for case in (ROOT/'case-studies').glob('*.html'):
 for page in [ROOT/'index.html',ROOT/'projects.html',*(ROOT/'case-studies').glob('*.html')]:
     text=page.read_text(encoding='utf-8')
     assert text.count('class="reading-progress" aria-hidden="true"')==1 and text.count('reading-progress.js?v=22-20261014')==1, page
-print('PASS: thirteen concise project summaries and one decorative reading cue per public page.')
+print('PASS: fourteen concise project summaries and one decorative reading cue per public page.')
 
 assert '04 / Academic &amp; Research' in research
 assert research.count('<span class="publication-title">')==3
 for detail in ['10.1142/S0219622023500347','Principal Investigator (PI)','2018','Noroozi Publications','Makhtumgholi Publications','Privacy-Preserving Data Mining','English for Computer Engineering and IT Students','Cluster Computing','Journal of Big Data','Social Network Analysis and Mining','Scientific Reports','Cognitive Neurodynamics','Discover Computing','Vice Dean of Education']:
     assert detail in research, detail
 print('PASS: three CV publications, 2018 PI grant, two authored books, six reviewing journals and academic leadership.')
+
+# Techosoul UI must resolve from both existing project entry points.
+techosoul=(ROOT/'case-studies/techosoul-ui.html').read_text(encoding='utf-8')
+assert home.count('data-project="techosoul-ui"')==1
+assert collection.count('<h2>Techosoul UI</h2>')==1
+for detail in ('@techosoul/ui','0.3.0','Ant Design 6','Inter Variable','Lucide Icons','Light/Dark','Comfortable/Compact'):
+    assert detail in techosoul, detail
+for link in ('https://morimdn.github.io/Techosoul-UI/','https://github.com/morimdn/Techosoul-UI','https://www.npmjs.com/package/@techosoul/ui'):
+    assert link in techosoul, link
+assert not re.search(r'founder.{0,30}techosoul',techosoul,re.I)
+assert 'download="Mirmorsal-Madani-CV.pdf"' in home
+assert BASE+'case-studies/techosoul-ui.html' in {node.text for node in sitemap.getroot().iter() if node.tag.endswith('loc')}
+print('PASS: Techosoul UI entry points, release details, project links, sitemap and preserved CV download filename.')
+
+techosoul_assets=[a for a in manifest if a['source_archive']=='owner_techosoul_ui_screenshots']
+assert len(techosoul_assets)==4
+assert techosoul.count('data-lightbox ')==4
+for asset in techosoul_assets:
+    assert asset['source_sha256']==asset['sha256'], 'Techosoul screenshots must remain byte-for-byte originals'
+    assert asset['file'] in techosoul
+assert techosoul_assets[0]['file'] in collection
+assert 'Private preview' in techosoul
+print('PASS: four distinct original Techosoul PNGs, authentic cover, gallery and full-size lightbox links.')
