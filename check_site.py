@@ -148,12 +148,12 @@ assert 'A research foundation.<br>An applied perspective.' in research
 assert home.count('class="service')==6  # service grid and five offerings
 assert 'AI-Augmented<br>Product Management' in home and 'End-to-End B2B<br>Product Delivery' in home
 assert 'while keeping product decisions and quality under human control.' in home
-assert 'Helped establish and develop the Product Management function' in home and 'hands-on Technical Product Ownership' in home
+assert 'Led and strengthened the Product Management function' in home and 'hands-on Technical Product Ownership' in home
 print('V6: eight topics, three groups, decorative icons, three publisher logos, single research Scholar CTA, B2B/AI offerings and hands-on leadership passed.')
 print('Content consistency: 14 company/context and role mappings, 9 major cases, correct Riskotik ownership, delivery milestones and publication links passed.')
 assert not list(ROOT.rglob('*.docx')), 'Private reference documents should not be committed'
 assert {p.relative_to(ROOT).as_posix() for p in ROOT.rglob('*.pdf')} == {'assets/Mirmorsal-Madani-CV.pdf'}, 'Only the owner-approved public CV PDF is allowed'
-assert hashlib.sha256((ROOT/'assets/Mirmorsal-Madani-CV.pdf').read_bytes()).hexdigest() == '1cc99229dd13cbf82a47320f89a6deb02374015958206038cc7f1cb00af5f8e7', 'Public CV must match the owner-provided original'
+assert hashlib.sha256((ROOT/'assets/Mirmorsal-Madani-CV.pdf').read_bytes()).hexdigest() == '244e5993086a7fb76a4ab5fabdfa7842493a5706ad844c418b84cd19aa38f4ec', 'Public CV must match the owner-provided original'
 manifest=json.loads((ROOT/'assets/manifest.json').read_text())
 assert len(manifest)==37
 native=(ROOT/'case-studies/mobile-crm.html').read_text(encoding='utf-8')
@@ -239,12 +239,12 @@ assert 'Private preview' in techosoul
 print('PASS: four distinct original Techosoul PNGs, authentic cover, gallery and full-size lightbox links.')
 
 # Owner-approved experience descriptions and cache-versioned CV download.
-assert 'Helped establish and develop the Product Management function, introducing structured discovery, clearer product ownership, prioritized backlogs, and stronger collaboration across Product, Design, Engineering, and QA.' in home
+assert 'Led and strengthened the Product Management function, introducing structured discovery, clearer product ownership, prioritized backlogs, and stronger collaboration across Product, Design, Engineering, and QA.' in home
 assert 'As Product Manager, also took on hands-on Product Owner responsibilities across Brokerage CRM, IB &amp; Referral, Social Trading, and Loyalty Club, covering system analysis, stakeholder discussions, functional requirements, and phased feature delivery. Led the redesign and launch of a replacement brokerage CRM in under eight months with the existing engineering team.' in home
 assert 'After moving into the CPO role, continued leading product strategy and cross-functional teams while retaining hands-on Technical Product Ownership of selected products through subsequent development phases, releases, and improvements, alongside new mobile product initiatives.' in home
 assert 'Worked as a hands-on Product Owner on enterprise HR and internal workflow systems, leading stakeholder discussions, system analysis, functional requirements, user flows, and iterative delivery in collaboration with engineering teams.' in home
 assert 'Independently led stakeholder discovery, requirements, workflow design, and Figma prototyping, then built and delivered an AI-assisted HR PWA MVP covering onboarding, performance reviews, 360-degree feedback, and employee leaderboards. The product is currently in use by the client HR team.' in home
-assert 'href="./assets/Mirmorsal-Madani-CV.pdf?v=1cc99229dd13"' in home
+assert 'href="./assets/Mirmorsal-Madani-CV.pdf?v=244e5993086a"' in home
 experience_articles=re.findall(r'<article>.*?</article>',home,re.S)
 sji_experience=next(a for a in experience_articles if '<h3>Shokouhejavid Iranian (SJI)</h3>' in a)
 assert 'July 2018 — August 2020' in sji_experience and 'Product Owner' in sji_experience
