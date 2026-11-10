@@ -32,27 +32,13 @@
     }
     return `<path class="ticks-minor" d="${minor}"/><path class="ticks-major" d="${major}"/>${nums}`;
   };
-  const gauge = (variant, rest, index) => {
-    let face;
-    if (variant === 0) {
-      face = `<path class="green-arc" d="${arc(46.5, Math.max(-135, rest - 55), Math.min(135, rest + 50))}"/>${scale(-135, 135, 40, 5, n => n)}`;
-    } else if (variant === 1) {
-      let sub = '';
-      for (let i = 0; i <= 24; i++) sub += seg(27, i % 6 === 0 ? 23 : 25, -120 + i * 10);
-      face = `<path class="band" d="${arc(46.5, -120, -40)}"/><path class="green-arc" d="${arc(46.5, -40, 80)}"/>
-        ${scale(-120, 120, 24, 6, n => n * 10)}<path class="ticks-sub" d="${sub}"/>`;
-    } else {
-      face = `<path class="green-arc" d="${arc(46.5, rest - 40, Math.min(135, rest + 70))}"/>${scale(-135, 135, 54, 9, n => n * 2)}
-        <rect class="drum" x="47" y="73" width="26" height="12" rx="1.5"/><text class="drum-digits" x="60" y="79.4">${String(index).padStart(2, '0')}</text>`;
-    }
-    return `
-    <circle class="bezel" cx="60" cy="60" r="58"/><circle class="bezel-ring" cx="60" cy="60" r="51.5"/>${screws}
-    <circle class="face" cx="60" cy="60" r="50"/><circle class="face-light" cx="60" cy="60" r="50"/>
-    ${face}
-    <g class="needle"><path d="M60 60L60 17"/><path class="tail" d="M60 60L60 71"/></g>
-    <circle class="hub" cx="60" cy="60" r="4.6"/>
-    <circle class="glass" cx="60" cy="60" r="50"/>`;
-  };
+  // Plain gauges: bezel, face, one tick scale, a needle. Only the attitude indicator carries detail.
+  const gauge = () => `
+    <circle class="bezel" cx="60" cy="60" r="58"/>
+    <circle class="face" cx="60" cy="60" r="50"/>
+    ${scale(-135, 135, 18, 3)}
+    <g class="needle"><path d="M60 60L60 19"/></g>
+    <circle class="hub" cx="60" cy="60" r="4"/>`;
   let bank = '';
   [-60, -45, -30, -20, -10, 10, 20, 30, 45, 60].forEach(deg => { bank += seg(50, Math.abs(deg) % 30 === 0 ? 42 : 45.5, deg); });
   const attitude = `
