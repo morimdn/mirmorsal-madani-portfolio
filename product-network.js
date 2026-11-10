@@ -149,10 +149,15 @@
           if (phase < .16) rev = Math.min(125, item.rest + 95) - item.rest;
           else if (phase < .24) rev = (Math.min(125, item.rest + 95) - item.rest) * .55;
         }
-        const target = selfTest ? 135 : clamp(item.rest + rev + clamp((item.vx + item.vy) * 3, -70, 70) + wobble, -135, 135);
+        // the needle only ever reads at or above its resting mark; dragging can push it, never below rest
+        const push = drag?.item === item ? Math.abs(clamp((item.vx + item.vy) * 3, -70, 70)) : 0;
+        const target = selfTest ? 135 : clamp(item.rest + rev + push + Math.abs(wobble), -135, 135);
         if (reduced.matches) { item.angle = target; return; }
         const s = dt / 1000;
-        item.av += ((target - item.angle) * 140 - item.av * 13) * s; item.angle += item.av * s;
+        // lively on the way up, critically damped on the way down so it settles without undershooting
+        const damping = target < item.angle ? 24 : 13;
+        item.av += ((target - item.angle) * 140 - item.av * damping) * s; item.angle += item.av * s;
+        if (!selfTest && item.angle < item.rest) { item.angle = item.rest; if (item.av < 0) item.av = 0; }
         active ||= Math.abs(item.av) > .02 || Math.abs(target - item.angle) > .05;
       }
     });
