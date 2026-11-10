@@ -426,8 +426,9 @@ p { text-wrap: pretty; }
   content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: clamp(36px, 4.4vw, 56px);
   /* engraved scale cut into the panel: a dark groove with a lit lower lip */
   background:
-    repeating-linear-gradient(to bottom, #000 0 1px, #ffffff12 1px 2px, transparent 2px 12px) right 0 top 0 / 10px 100% no-repeat,
-    repeating-linear-gradient(to bottom, #000 0 2px, #ffffff17 2px 3px, transparent 3px 60px) right 0 top 0 / 20px 100% no-repeat;
+    repeating-linear-gradient(to bottom, #000 0 1px, #ffffff5c 1px 2px, transparent 2px 12px) right 2px top 0 / 10px 100% no-repeat,
+    repeating-linear-gradient(to bottom, #000 0 2px, #ffffffb3 2px 3px, transparent 3px 60px) right 2px top 0 / 22px 100% no-repeat,
+    linear-gradient(90deg, #000 0 1px, #ffffff2e 1px 2px) right 0 top 0 / 2px 100% no-repeat;
 }
 .timeline > article {
   position: relative;
