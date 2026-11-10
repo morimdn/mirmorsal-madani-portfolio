@@ -41,6 +41,15 @@ if (leadershipDiagram && typeof IntersectionObserver === 'function' && !matchMed
   observer.observe(leadershipDiagram);
 }
 
+// Altitude-tape bug: the role nearest the reading line lights its pointer.
+const tapeRoles = [...document.querySelectorAll('.timeline > article')];
+if (tapeRoles.length && typeof IntersectionObserver === 'function') {
+  const tapeObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => entry.target.classList.toggle('is-current', entry.isIntersecting));
+  }, { rootMargin: '-35% 0px -55% 0px' });
+  tapeRoles.forEach(role => tapeObserver.observe(role));
+}
+
 const menu = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.nav-links');
 if (menu && nav) {

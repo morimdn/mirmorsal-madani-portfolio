@@ -35,7 +35,7 @@
       main.querySelectorAll('h1,h2').forEach(h=>{const replacement=document.createElement(h.tagName==='H1'?'h3':'h4');replacement.innerHTML=h.innerHTML;h.replaceWith(replacement);});
       main.querySelectorAll('[id]').forEach(node=>{node.id=prefix+node.id;});
       main.querySelectorAll('[src],[href]').forEach(node=>{for(const attr of ['src','href']){const value=node.getAttribute(attr);if(value)node.setAttribute(attr,value.startsWith('#')?'#'+prefix+value.slice(1):new URL(value,url).href);}});
-      main.querySelectorAll('.breadcrumb').forEach(link=>{link.href=url.href;link.textContent='Open standalone case study ↗';});
+      main.querySelectorAll('.breadcrumb').forEach(link=>{link.href=url.href;link.innerHTML='Open standalone case study <span class="i i-ne" aria-hidden="true"></span>';});
       main.querySelectorAll('.actions').forEach(node=>node.remove());
       main.querySelectorAll('img').forEach(img=>{img.loading='lazy';});
       content.replaceChildren(...main.childNodes);
@@ -45,7 +45,7 @@
       content.classList.remove('is-entering');void content.offsetWidth;content.classList.add('is-entering');message.classList.add('project-status-only');message.textContent=choice.textContent.trim().replace('↗','')+' case study loaded.';
       if(updateHash)history.replaceState(null,'','#project-'+choice.dataset.project);
       if(scroll)stage.scrollIntoView({behavior:reduced()?'instant':'smooth',block:'start'});
-    }catch(error){if(token===request){message.classList.remove('project-status-only');const fallback=document.createElement('a');fallback.href=choice.href;fallback.textContent='Open full case study ↗';message.replaceChildren('Unable to load this preview. ',fallback);}}
+    }catch(error){if(token===request){message.classList.remove('project-status-only');const fallback=document.createElement('a');fallback.href=choice.href;fallback.innerHTML='Open full case study <span class="i i-ne" aria-hidden="true"></span>';message.replaceChildren('Unable to load this preview. ',fallback);}}
     finally{if(token===request){stage.setAttribute('aria-busy','false');settleEntryAnchor();}}
   }
   selector.addEventListener('click',event=>{const choice=event.target.closest('[data-project]');if(!choice||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;event.preventDefault();selectProject(choice,{scroll:matchMedia('(max-width: 650px)').matches});});

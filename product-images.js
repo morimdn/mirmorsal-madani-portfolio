@@ -45,7 +45,7 @@
     const image = dialog.querySelector('.lightbox-image');
     image.classList.add('product-image-palette'); image.hidden = false;
     toolbar(dialog, dialog.querySelector('figure'));
-    dialog.querySelector('.lightbox-original').textContent = 'Open original image ↗';
+    dialog.querySelector('.lightbox-original').innerHTML = 'Open original image <span class="i i-ne" aria-hidden="true"></span>';
     sync(dialog);
   }
   document.addEventListener('click', event => {
