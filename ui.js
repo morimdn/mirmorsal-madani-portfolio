@@ -41,6 +41,40 @@ if (leadershipDiagram && typeof IntersectionObserver === 'function' && !matchMed
   observer.observe(leadershipDiagram);
 }
 
+// Scroll reveal: each section's content powers on as it enters the viewport.
+// Content is visible by default; the hidden start state exists only once JS opts in.
+(() => {
+  if (typeof IntersectionObserver !== 'function' || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const groups = [
+    '.snapshot > div', '.section-heading > div > *, .section-heading > p', '.timeline > article',
+    '.project-explorer', '.projects-footer', '.service', '.capabilities > *', '.publisher-logos img',
+    '.research-group', '.publication-list h3, .research-publications li', '.research .actions',
+    '.academic-contributions article', '.education', '.contact-grid > div:first-child > *', '.contact-links > *',
+    '.case-hero > *', '.case-cover', '.case-block', '.case-gallery-section h2, .case-gallery-section > .artifact-note',
+    '.gallery-item', '.project-card', '.filters, .project-count'
+  ];
+  const targets = new Set();
+  groups.forEach(selector => {
+    const found = [...document.querySelectorAll(selector)].filter(el => !el.closest('.project-stage-content'));
+    found.forEach((el, i) => { el.dataset.reveal = ''; el.style.setProperty('--reveal-i', i % 6); targets.add(el); });
+  });
+  if (!targets.size) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-revealed');
+      io.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: .12 });
+  document.documentElement.classList.add('reveal-ready');
+  targets.forEach(el => {
+    // anything already on screen at load shows immediately, no flash
+    const box = el.getBoundingClientRect();
+    if (box.top < innerHeight * .92 && box.bottom > 0) el.classList.add('is-revealed', 'no-delay');
+    else io.observe(el);
+  });
+})();
+
 // Altitude-tape bug: the role nearest the reading line lights its pointer.
 const tapeRoles = [...document.querySelectorAll('.timeline > article')];
 if (tapeRoles.length && typeof IntersectionObserver === 'function') {

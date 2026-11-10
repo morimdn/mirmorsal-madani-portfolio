@@ -769,7 +769,7 @@ p { text-wrap: pretty; }
   font-family: var(--mono); font-size: var(--type-small); color: var(--radium); padding-top: 3px;
 }
 .publication-title { font-size: clamp(1rem, .95rem + .3vw, 1.1875rem); font-weight: 700; line-height: 1.4; transition: color .2s ease; }
-.publication-title span { color: var(--radium); }
+.publication-title .i { color: var(--radium); }
 .publication-meta { font-size: .8125rem; color: var(--dim); line-height: 1.6; }
 .research-publications a:hover .publication-title { color: var(--radium); }
 
@@ -975,6 +975,14 @@ footer { background: var(--panel-deep); border-top: 1px solid #000; box-shadow: 
   .lightbox-image { height: min(52dvh, 480px); }
   .publisher-logos img { height: 22px; }
 }
+
+/* ---------- scroll reveal: a module's backlight warming up ---------- */
+.reveal-ready [data-reveal]:not(.is-revealed) { opacity: 0; translate: 0 22px; filter: brightness(.3) blur(3px); }
+.reveal-ready [data-reveal].is-revealed {
+  transition: opacity .7s var(--ease-out), translate .9s var(--ease-out), filter .9s var(--ease-out);
+  transition-delay: calc(var(--reveal-i, 0) * 80ms);
+}
+.reveal-ready [data-reveal].is-revealed.no-delay { transition: none; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
