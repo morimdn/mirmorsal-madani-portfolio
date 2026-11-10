@@ -65,7 +65,7 @@ if (leadershipDiagram && typeof IntersectionObserver === 'function' && !matchMed
       entry.target.classList.add('is-revealed');
       io.unobserve(entry.target);
     });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: .12 });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0 });
   document.documentElement.classList.add('reveal-ready');
   targets.forEach(el => {
     // anything already on screen at load shows immediately, no flash
