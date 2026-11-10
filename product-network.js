@@ -141,7 +141,15 @@
         item.pv += ((targetPitch - item.pitch) * 90 - item.pv * 11) * s; item.pitch += item.pv * s;
         active ||= Math.abs(item.av) > .02 || Math.abs(targetBank - item.angle) > .05;
       } else {
-        const target = selfTest ? 135 : clamp(item.rest + clamp((item.vx + item.vy) * 3, -70, 70) + wobble, -135, 135);
+        // throttle: each gauge revs up on its own cycle, then drops back and settles on the spring
+        let rev = 0;
+        if (!paused && !reduced.matches) {
+          const period = 4200 + item.index * 530;
+          const phase = ((time + item.index * 1700) % period) / period;
+          if (phase < .16) rev = Math.min(125, item.rest + 95) - item.rest;
+          else if (phase < .24) rev = (Math.min(125, item.rest + 95) - item.rest) * .55;
+        }
+        const target = selfTest ? 135 : clamp(item.rest + rev + clamp((item.vx + item.vy) * 3, -70, 70) + wobble, -135, 135);
         if (reduced.matches) { item.angle = target; return; }
         const s = dt / 1000;
         item.av += ((target - item.angle) * 140 - item.av * 13) * s; item.angle += item.av * s;
