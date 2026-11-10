@@ -36,7 +36,7 @@
   const gauge = () => `
     <circle class="bezel" cx="60" cy="60" r="58"/>
     <circle class="face" cx="60" cy="60" r="50"/>
-    ${scale(-135, 135, 18, 3)}
+    ${scale(-135, 135, 24, 3, n => n)}
     <g class="needle"><path d="M60 60L60 19"/></g>
     <circle class="hub" cx="60" cy="60" r="4"/>`;
   let bank = '';
